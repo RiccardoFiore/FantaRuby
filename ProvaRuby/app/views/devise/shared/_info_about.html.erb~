@@ -1,0 +1,1 @@
+<%= link_to "non sei registrato? leggi le informazioni riguardanti il sito", new_password_path(resource_name) %><br />

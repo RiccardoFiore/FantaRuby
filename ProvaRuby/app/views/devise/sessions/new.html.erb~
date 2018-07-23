@@ -29,7 +29,7 @@
   <nav>
     <ul>
       <li><%= link_to "About", about_path  %></li>
-     <li><%= link_to "contact", contact_path %></li>
+     <%= link_to "contact", contact_path %>
     </ul>
   </nav>
 </footer>
