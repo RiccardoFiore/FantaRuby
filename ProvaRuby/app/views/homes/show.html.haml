@@ -1,15 +1,19 @@
 %h1 FantaRuby
-%h4 Cerca lega
-%input{:type => "text"}
+%h2 Details about #{@lega.name}
+%table
+  %thead
+  %h3 Montepremi:
+  %tr
+    %td Primo
+    %td 400$
+  %tr
+    %td Secondo
+    %td 200$
+  %tr
+    %td Terzo
+    %td 100$
 %br
 %br
-%button Cerca Lega
-%br
-%br
-%table{:border => "1"}
-%th Nome
-%th Presidente
-%th Partecipanti
-%br
+#{link_to 'Torna a "Selezione Lega"', homes_path}
 %br
 

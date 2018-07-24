@@ -16,7 +16,7 @@
 
 
 
-table th {
+table th td tr {
   border: 2px solid black;
   font-weight: bold;
   background-color: wheat;

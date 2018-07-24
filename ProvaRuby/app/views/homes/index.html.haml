@@ -1,0 +1,31 @@
+%h1 FantaRuby
+%h4 Cerca lega
+%input{:type => "text"}
+%br
+%br
+%button Cerca Lega
+%br
+%br
+%table
+  %thead
+    %tr
+      %th Nome
+      %th Status
+      %th Presidente
+
+  %tbody
+    - @leghe.each do |lega|
+      %tr
+        %td= lega.name
+        - if lega.status == 1
+          %td Aperta
+        - else
+          %td Chiusa
+        - u = User.find_by_id(lega.president_id)
+        %td= u.email
+        %td= link_to "Details", home_path(lega)
+%br
+%br
+
+
+
