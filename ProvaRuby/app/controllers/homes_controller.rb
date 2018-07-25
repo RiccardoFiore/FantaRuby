@@ -11,6 +11,6 @@ class HomesController < ApplicationController
     end
 
     def new
-        authorize! :read, Home, :message => "Non puoi accedere alla risorsa selezionata"
+
     end
 end

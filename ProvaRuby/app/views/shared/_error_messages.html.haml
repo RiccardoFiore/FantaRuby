@@ -1,0 +1,7 @@
+- if @league.errors.any?
+  #error_explanation
+    .alert.alert-danger
+      The form contains #{pluralize(@league.errors.count, "error")}.
+    %ul
+      - @league.errors.full_messages.each do |msg|
+        %li= msg
