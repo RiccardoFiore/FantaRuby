@@ -20,6 +20,8 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+  <br />
+  <%= render partial: "devise/shared/fields_form", locals: { f: f } %>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

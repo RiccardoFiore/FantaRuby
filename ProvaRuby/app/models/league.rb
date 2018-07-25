@@ -5,4 +5,5 @@ class League < ApplicationRecord
     validates_presence_of :status
     validates_uniqueness_of :name
 
+    has_many :users
 end

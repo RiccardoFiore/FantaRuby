@@ -12,7 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
    def create
     super do |resource|
+      params.require(:user).permit(:roles_mask, :favourite_team)
       resource.roles_mask = "3"
+      resource.favourite_team = params[:user][:favourite_team]
     end
    end
 

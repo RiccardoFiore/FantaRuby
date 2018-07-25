@@ -16,7 +16,16 @@
 %br
 %br
 
-= form_tag leagues_path, :method => :get do
+%table
+  %thead
+    %tr
+      %th Players email
+  %tbody
+    - @players.each do |player|
+      %tr
+        %td= player.email
+
+= form_tag home_path(@lega), :method => :put do
   = submit_tag 'Partecipa'
 #{link_to 'Torna a "Selezione Lega"', homes_path}
 %br
