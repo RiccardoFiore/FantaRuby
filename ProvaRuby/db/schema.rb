@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2018_07_25_092702) do
+ActiveRecord::Schema.define(version: 2018_07_25_145937) do
 
   create_table "formazionis", force: :cascade do |t|
     t.integer "player_id"
@@ -62,11 +61,12 @@ ActiveRecord::Schema.define(version: 2018_07_25_092702) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.boolean "favourite_team"
-    t.integer "roles_mask"
+    t.integer "roles_mask", default: 4
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
+    t.integer "league_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   #Canard roles:
 
-  acts_as_user :roles => [ :president, :player, :admin ]
+  acts_as_user :roles => [ :president, :player, :notdefined, :admin ]
 
 
     def self.from_omniauth(auth)
