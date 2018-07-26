@@ -1,0 +1,21 @@
+<h1>Profile</h1>
+
+<h3>Email: </h3><%= @user.email %>
+
+<h3>Favourite team: </h3><%= @user.favourite_team %>
+
+<% if @league == -1 %>
+	<h3>League name: </h3>
+	"Non fai parte di nessuna lega"
+<% else %>
+	<h3>League name: </h3><%= @league.name %>
+<% end %>
+
+<br/>
+<br/>
+<%= link_to "Settings", edit_user_registration_path(current_user) %>
+
+<br/>
+<br/>
+<br/>
+<br/>

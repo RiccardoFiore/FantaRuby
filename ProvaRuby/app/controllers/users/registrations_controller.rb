@@ -18,15 +18,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
    end
 
-  # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  # GET /resource/edit	
+	def edit
+		super do |resource|
+			@user = User.find(resource.id)
+		end
+	end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+	def update
+		super
+			#params.require(:user).permit(:favourite_team)
+			#resource.favourite_team = params[:user][:favourite_team]
+			@user = User.find(resource.id)
+			@user.email = params[:user][:email]
+			@user.favourite_team = params[:user][:favourite_team]
+			@user.save
+		
+	end
 
   # DELETE /resource
   # def destroy
