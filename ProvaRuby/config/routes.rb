@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+    resources :admins
 
     devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", registrations: 'users/registrations' }
 

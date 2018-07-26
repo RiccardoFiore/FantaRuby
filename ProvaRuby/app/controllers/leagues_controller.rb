@@ -1,17 +1,19 @@
 class LeaguesController < ApplicationController
     before_action :authenticate_user!
 
-
-
+    def index
+        authorize! :new, League, :message => "Fai già parte di una lega"
+    end
 
     def new
+        authorize! :new, League, :message => "Fai già parte di una lega"
         @league = League.new
     end
 
     def create
+        authorize! :create, League, :message => "Fai già parte di una lega"
         @user = current_user
 		@league = League.new(params[:league].permit(:name, :players, :status, :description, :user))
-		#authorize! :create, @league, :message => "BEWARE: You are not authorized to create new movies."
         @league.president_id = @user.id
         @league.status = "Aperta"
         if current_user.roles_mask == 3                                         #notdefined
