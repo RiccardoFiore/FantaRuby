@@ -8,10 +8,13 @@ class ApplicationController < ActionController::Base
     end
 
     def after_sign_in_path_for(resource)
-        if current_user.roles_mask != 3
+        if current_user.roles_mask == 1 || current_user.roles_mask == 2
             leagues_path
-        else
+        elsif current_user.roles_mask == 3
             homes_path
+        else
+            id = resource[:id]
+            admin_path(id)
         end
     end
 
@@ -28,6 +31,6 @@ class ApplicationController < ActionController::Base
 
 
     rescue_from CanCan::AccessDenied do |exception|
-        redirect_to root_path, :alert => exception.message
+        redirect_to admins_path, :alert => exception.message
     end
 end
