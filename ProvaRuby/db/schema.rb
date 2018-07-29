@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2018_07_25_194824) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.integer "roles_mask", default: 3
+    t.integer "roles_mask"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
