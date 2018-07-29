@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_25_194824) do
+ActiveRecord::Schema.define(version: 2018_07_29_074811) do
 
   create_table "formazionis", force: :cascade do |t|
     t.integer "player_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2018_07_25_194824) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.integer "roles_mask"
+    t.integer "roles_mask", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
