@@ -39,7 +39,8 @@ class LeaguesController < ApplicationController
         id=params[:id]
         @lega=League.find(id)
         @lega.update_attributes!(params[:league].permit(:president_id))
-        redirect_to admins_path(@movie)
+        @lega.update_attributes!(params[:league].permit(:status))
+        redirect_to edit_league_path(@lega)
     end
 
 

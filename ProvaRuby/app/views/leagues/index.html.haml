@@ -1,3 +1,6 @@
 %h1 Home Page Lega
 
-#{link_to 'Impostazioni lega', edit_league_path}
+-if current_user.president?
+  #{link_to 'Impostazioni lega', edit_league_path(@lega.id)}
+%br
+%br
