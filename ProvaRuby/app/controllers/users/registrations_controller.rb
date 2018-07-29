@@ -12,33 +12,46 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
    def create
     super do |resource|
-      params.require(:user).permit(:roles_mask, :favourite_team)
+      params.require(:user).permit(:username, :roles_mask, :favourite_team)
       resource.roles_mask = 1
       resource.favourite_team = params[:user][:favourite_team]
+      if !params[:user][:username].blank?
+				resource.username = params[:user][:username]
+			else
+				resource.username = params[:user][:email].split("@")[0]+ "_" + params[:authenticity_token][14..16]
+			end
+			
     end
    end
 
   # GET /resource/edit
 	def edit
-		super do |resource|
-			@user = User.find(resource.id)
-		end
+		super
+		@user = User.find(resource.id)
 	end
 
   # PUT /resource
 	def update
-		super
-			#params.require(:user).permit(:favourite_team)
-			#resource.favourite_team = params[:user][:favourite_team]
+#		super #do |resource|
+#			params.require(:user).permit(:username, :email, :favourite_team)
+#			resource.favourite_team = params[:user][:favourite_team]					#se uso questo simile al create non applica i
+#			resource.email = params[:user][:email]														#cambiamenti non so ilperche
+#			if !params[:user][:username].blank?
+#				resource.username = params[:user][:username]
+#			end		
+#		end
+
+			super
 			@user = User.find(resource.id)
 			@user.email = params[:user][:email]
 			@user.favourite_team = params[:user][:favourite_team]
-			@user.save
-
-	end
-
-
-    #a quanto par non se la incula minimamente e dopo l'invio del form edit vede solo after_sign_in_path_for
+			if !params[:user][:username].blank?											#problema di questo è che se metto un username gia 
+				@user.username = params[:user][:username]							#preso va avanti ma non applica NESSUN cambiamento quindi
+			end																											#funziona ma l'utentenon sa che i cambiamenti non 
+			@user.save																							#sono stati effettuati per via dell'username già preso
+																															#se uso  l'error helper che c'è nelle shared views mi
+																															#servirebbe riindirizzarmi sulla stessa pagnia ma come
+	end																													#al solito va in conflitto con qualche porcoddio del device
 
   # DELETE /resource
   # def destroy
@@ -57,7 +70,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     protected
 
     def after_update_path_for(resource)
-        edit_user_registration_path
+			if resource.validate
+        users_path
+      else
+				edit_user_registration_path
+			end
     end
 
     protected

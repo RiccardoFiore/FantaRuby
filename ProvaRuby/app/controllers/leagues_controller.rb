@@ -29,4 +29,18 @@ class LeaguesController < ApplicationController
 		redirect_to leagues_path
 	end
 
+    def edit
+        lid=params[:id]
+        @lega=League.find(lid)
+        @users=User.where("league_id = ? and league_id != ?",lid,8)
+    end
+
+     def update
+        id=params[:id]
+        @lega=League.find(id)
+        @lega.update_attributes!(params[:league].permit(:president_id))
+        redirect_to admins_path(@movie)
+    end
+
+
 end

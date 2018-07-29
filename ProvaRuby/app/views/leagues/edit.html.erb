@@ -1,0 +1,12 @@
+<h2> Change President of  <%= @lega.name %> </h2>
+
+<%= form_for @lega do |f|%>
+    <%= f.label :president_id %>
+    <%= f.collection_select :president_id,@users.order(:email),:id ,:email,include_blank: false%>
+    <%= submit_tag 'Save Changes' %>
+<% end %>
+
+
+
+
+
