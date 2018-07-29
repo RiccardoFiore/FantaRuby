@@ -1,4 +1,6 @@
 Canard::Abilities.for(:president) do
+  can :new, League
+  can :index, League
   # Define abilities for the user role here. For example:
   #
   #   if user.admin?

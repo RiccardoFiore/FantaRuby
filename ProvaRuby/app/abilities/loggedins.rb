@@ -1,4 +1,9 @@
-Canard::Abilities.for(:unregistered) do
+Canard::Abilities.for(:loggedin) do
+  can :index, Home
+  can :new, League
+  can :update, Home
+  can :show, Home
+  can :create, League
   # Define abilities for the user role here. For example:
   #
   #   if user.admin?
