@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
-		
-		
+
+
 		#a quanto par non se la incula minimamente e dopo l'invio del form edit vede solo after_sign_in_path_for
-		def after_update_path_for(resource)
+    def after_update_path_for(resource)
         edit_user_registration_path
     end
 
@@ -21,9 +21,9 @@ class ApplicationController < ActionController::Base
     def after_sign_up_path_for(resource)
         homes_path
     end
-    
-  
-    
+
+
+
     def set_current_user
         @current_user |= User.where(:id => session[:id])
     end

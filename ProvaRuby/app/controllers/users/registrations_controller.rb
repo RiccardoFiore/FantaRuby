@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
    end
 
-  # GET /resource/edit	
+  # GET /resource/edit
 	def edit
 		super do |resource|
 			@user = User.find(resource.id)
@@ -34,8 +34,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 			@user.email = params[:user][:email]
 			@user.favourite_team = params[:user][:favourite_team]
 			@user.save
-		
+
 	end
+
+
+    #a quanto par non se la incula minimamente e dopo l'invio del form edit vede solo after_sign_in_path_for
 
   # DELETE /resource
   # def destroy
@@ -51,7 +54,31 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+    protected
+
+    def after_update_path_for(resource)
+        edit_user_registration_path
+    end
+
+    protected
+
+    def after_sign_in_path_for(resource)
+        if current_user.roles_mask == 4 || current_user.roles_mask == 2
+            leagues_path
+        elsif current_user.roles_mask == 1
+            homes_path
+        else
+            id = resource[:id]
+            admin_path(id)
+        end
+    end
+
+    protected
+
+    def after_sign_up_path_for(resource)
+        homes_path
+    end
+
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
