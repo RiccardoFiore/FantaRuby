@@ -2,11 +2,6 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
 
 
-		#a quanto par non se la incula minimamente e dopo l'invio del form edit vede solo after_sign_in_path_for
-    def after_update_path_for(resource)
-        edit_user_registration_path
-    end
-
     def after_sign_in_path_for(resource)
         if current_user.roles_mask == 4 || current_user.roles_mask == 2
             leagues_path

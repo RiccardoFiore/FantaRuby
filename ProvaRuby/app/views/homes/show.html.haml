@@ -1,5 +1,6 @@
 %h1 FantaRuby
 %h2 Details about #{@lega.name}
+%h3 Status lega #{@lega.status}
 %table
   %thead
   %h3 Montepremi:
@@ -25,8 +26,9 @@
       %tr
         %td= player.email
 
-= form_tag home_path(@lega), :method => :put do
-  = submit_tag 'Partecipa'
+-if @lega.status == "Chiusa"
+  = form_tag home_path(@lega), :method => :put do
+    = submit_tag 'Partecipa'
 #{link_to 'Torna a "Selezione Lega"', homes_path}
 %br
 

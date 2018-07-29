@@ -1,6 +1,8 @@
 class LeaguesController < ApplicationController
     before_action :authenticate_user!
     def index
+        id = current_user.league_id
+        @lega = League.find(current_user.league_id)
         #debugger
     end
 
