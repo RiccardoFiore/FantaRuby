@@ -1,0 +1,20 @@
+<h2> All Users </h2>
+
+<table border=1>
+	
+	<tr>
+		<td> Email </td>
+		<td> would you delete?  </td>
+	</tr>
+	
+	<% @users.each do |user| %>
+    <tr>
+      <td> <%= link_to user.username, '/users/'+user.id.to_s %> </td>  
+      <td align="center"> <%= link_to 'Delete', '/users/'+user.id.to_s+'/delete', method: :delete, data: { confirm: 'Are you sure?' } %> </td>
+    </tr>
+  <% end %>
+	
+</table>
+
+<br/>
+<br/>

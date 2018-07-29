@@ -12,30 +12,50 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
    def create
     super do |resource|
-      params.require(:user).permit(:roles_mask, :favourite_team)
+      params.require(:user).permit(:username, :roles_mask, :favourite_team)
       resource.roles_mask = "3"
       resource.favourite_team = params[:user][:favourite_team]
+      if !params[:user][:username].blank?
+				resource.username = params[:user][:username]
+			else
+				resource.username = params[:user][:email].split("@")[0]+ "_" + params[:authenticity_token][14..16]
+			end
+			
     end
    end
 
   # GET /resource/edit	
 	def edit
-		super do |resource|
-			@user = User.find(resource.id)
-		end
+		super
+		@user = User.find(resource.id)
 	end
 
   # PUT /resource
 	def update
-		super
-			#params.require(:user).permit(:favourite_team)
-			#resource.favourite_team = params[:user][:favourite_team]
+#		super do |resource|
+#			params.require(:user).permit(:username, :email, :favourite_team)
+#			resource.favourite_team = params[:user][:favourite_team]
+#			resource.email = params[:user][:email]
+#			if !params[:user][:username].blank?
+#				resource.username = params[:user][:username]
+#			end
+#			if !resource.validate
+#				render 'edit'
+#				next
+#			end			
+#		end
+
+			super
 			@user = User.find(resource.id)
 			@user.email = params[:user][:email]
 			@user.favourite_team = params[:user][:favourite_team]
-			@user.save
-		
-	end
+			if !params[:user][:username].blank?											#problema di questo è che se metto un username gia 
+				@user.username = params[:user][:username]							#preso va avanti ma non applica NESSUN cambiamento quindi
+			end																											#funziona ma l'utentenon sa che i cambiamenti non 
+			if !@user.save																					#sono stati effettuati per via dell'username già preso
+				#redirect_to 'edit'																		#se uso  l'error helper che c'è nelle shared views mi
+			end																											#servirebbe riindirizzarmi sulla stessa pagnia ma come
+	end																													#al solito va in conflitto con qualche porcoddio del device
 
   # DELETE /resource
   # def destroy
