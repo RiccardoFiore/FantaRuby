@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 2018_07_29_074811) do
+
   create_table "formazionis", force: :cascade do |t|
     t.integer "player_id"
     t.integer "giornata"

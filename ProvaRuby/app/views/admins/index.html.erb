@@ -9,6 +9,7 @@
       <th>President</th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +17,7 @@
         <% if user.roles_mask != 8 %>
       <tr>
         <td id="t">
-          <%= user.email %>
+					<%= link_to user.username, '/users/'+user.id.to_s %>
         </td>
         <% l=League.find_by_id(user.league_id) %>
         <td id= "t">
@@ -24,7 +25,7 @@
         </td>
         <% u = User.find_by_id(l.president_id) %>
         <td id="t">
-          <%= u.email %>
+          <%= link_to u.username, '/users/'+user.id.to_s %>
         </td>
         <td id="t">
             nientenienteniente
@@ -32,6 +33,9 @@
         <td id="t">
             <%= link_to 'Change President', edit_league_path(l.id) %>
         </td>
+				<td id="t">
+					<%= link_to 'Delete', '/users/'+user.id.to_s+'/delete', method: :delete, data: { confirm: 'Are you sure?' } %>
+				</td>
       </tr>
     <% end %>
     <% end %>
