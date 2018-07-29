@@ -32,17 +32,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
 	def update
-#		super do |resource|
+#		super #do |resource|
 #			params.require(:user).permit(:username, :email, :favourite_team)
-#			resource.favourite_team = params[:user][:favourite_team]
-#			resource.email = params[:user][:email]
+#			resource.favourite_team = params[:user][:favourite_team]					#se uso questo simile al create non applica i
+#			resource.email = params[:user][:email]														#cambiamenti non so ilperche
 #			if !params[:user][:username].blank?
 #				resource.username = params[:user][:username]
-#			end
-#			if !resource.validate
-#				render 'edit'
-#				next
-#			end			
+#			end		
 #		end
 
 			super
@@ -52,13 +48,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 			if !params[:user][:username].blank?											#problema di questo è che se metto un username gia 
 				@user.username = params[:user][:username]							#preso va avanti ma non applica NESSUN cambiamento quindi
 			end																											#funziona ma l'utentenon sa che i cambiamenti non 
-			if !@user.save																					#sono stati effettuati per via dell'username già preso
-				#redirect_to 'edit'																		#se uso  l'error helper che c'è nelle shared views mi
-			end																											#servirebbe riindirizzarmi sulla stessa pagnia ma come
+			@user.save																							#sono stati effettuati per via dell'username già preso
+																															#se uso  l'error helper che c'è nelle shared views mi
+																															#servirebbe riindirizzarmi sulla stessa pagnia ma come
 	end																													#al solito va in conflitto con qualche porcoddio del device
-
-
-    #a quanto par non se la incula minimamente e dopo l'invio del form edit vede solo after_sign_in_path_for
 
   # DELETE /resource
   # def destroy
@@ -77,7 +70,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     protected
 
     def after_update_path_for(resource)
-        edit_user_registration_path
+			if resource.validate
+        users_path
+      else
+				edit_user_registration_path
+			end
     end
 
     protected

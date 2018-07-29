@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     get 'contact' => 'static_pages#contact'
     
     #routes per la gestione dei playersda partedell'admin
-    get '/admins/player/settings' => 'admins#player_settings'
     match '/users/:id/delete', :to => 'users#destroy', :as => :destroy_user, :via => :delete
 		get '/users/:id' => 'users#show_by_id'
 
