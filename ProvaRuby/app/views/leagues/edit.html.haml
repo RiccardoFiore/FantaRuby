@@ -15,6 +15,9 @@
         = f.radio_button :status, "Aperta", checked: true
         Aperta
         \#{f.radio_button :status, "Chiusa"}Chiusa
+        %br/
+        %br/
+        = link_to "Torna all'Home Page della lega", leagues_path
       - else
         = f.label :status
         = f.radio_button :status, "Aperta"
@@ -24,7 +27,6 @@
   = submit_tag 'Save Changes'
 %br/
 %br/
-= link_to "Torna all'Home Page della lega", leagues_path
 %br/
 %br/
 

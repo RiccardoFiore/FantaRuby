@@ -1,17 +1,16 @@
 class LeaguesController < ApplicationController
     before_action :authenticate_user!
+
     def index
         id = current_user.league_id
         @lega = League.find(id)
         #debugger
     end
-def show
 
+    def show
 		id = params[:id]
 		@lega = League.find(id)
-               
-
-        end
+    end
 
     def new
         @league = League.new
@@ -43,30 +42,40 @@ def show
     end
 
      def update
+        @user=current_user
         id=params[:id]
         @lega=League.find(id)
         authorize! :update, @lega, :message => "Non hai i permessi per modificare la lega"
         #gestione cambio presidente
-        @lega.update_attributes!(params[:league].permit(:president_id))
-        new_president = User.find(params[:league][:president_id])
-        if new_president.id != current_user.id
+        if @user.admin?
+            old_president=User.find(@lega.president_id)
+            new_president = User.find(params[:league][:president_id])
             new_president.update_attributes!(:roles_mask => 2)
-            current_user.update_attributes!(:roles_mask => 4)
+            old_president.update_attributes!(:roles_mask => 4)
+            redirect_to admins_path
+         elsif @user.president?
+            new_president = User.find(params[:league][:president_id])
+            if new_president.id != current_user.id
+                new_president.update_attributes!(:roles_mask => 2)
+                current_user.update_attributes!(:roles_mask => 4)
+            end
+            redirect_to edit_league_path(@lega)
         end
+        @lega.update_attributes!(params[:league].permit(:president_id))
         ##
         #gestione cambio status lega
         @lega.update_attributes!(params[:league].permit(:status))
         @lega.update_attributes!(params[:league].permit(:description))
         ##
-        redirect_to edit_league_path(@lega)
-        
+
         ##
         #gestione descrizione lega
-        
-		
+
+
          ##
-		
+
          ##
+
 
     end
 
