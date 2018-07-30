@@ -9,5 +9,4 @@
 informazione della lega: 
 %td=@lega.description
 %br
-%br
 

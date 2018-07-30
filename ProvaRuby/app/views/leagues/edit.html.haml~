@@ -9,7 +9,7 @@
     - if current_user.president?
       = label :league, :description, 'Info di lega'
       %br
-      = text_area :league, :description
+  = text_area :league, :description
       - if @lega.status == "Aperta"
         = f.label :status
         = f.radio_button :status, "Aperta", checked: true

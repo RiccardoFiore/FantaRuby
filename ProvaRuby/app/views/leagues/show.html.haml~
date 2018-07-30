@@ -1,0 +1,16 @@
+%h2 Details about league: #{@lega.name}
+
+%h2 Details about president id: #{@lega.president_id}
+
+
+%h2 Details about info leg: #{@lega.description}
+= form_tag league_path(@lega.id), :method => :put do
+ 
+  = label :league, :description, 'Info di lega'
+  %br
+  = text_area :league, :description
+	 
+  = submit_tag 'Save Changes'
+
+%br
+%br
