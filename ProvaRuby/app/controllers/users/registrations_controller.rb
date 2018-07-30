@@ -16,11 +16,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.roles_mask = 1
       resource.favourite_team = params[:user][:favourite_team]
       if !params[:user][:username].blank?
-				resource.username = params[:user][:username]
-			else
-				resource.username = params[:user][:email].split("@")[0]+ "_" + params[:authenticity_token][14..16]
-			end
-			
+        resource.username = params[:user][:username]
+      else
+        resource.username = params[:user][:email].split("@")[0]+ "_" + params[:authenticity_token][14..16]
+      end
+
     end
    end
 
@@ -38,16 +38,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 #			resource.email = params[:user][:email]														#cambiamenti non so ilperche
 #			if !params[:user][:username].blank?
 #				resource.username = params[:user][:username]
-#			end		
+#			end
 #		end
 
 			super
 			@user = User.find(resource.id)
 			@user.email = params[:user][:email]
 			@user.favourite_team = params[:user][:favourite_team]
-			if !params[:user][:username].blank?											#problema di questo è che se metto un username gia 
+			if !params[:user][:username].blank?											#problema di questo è che se metto un username gia
 				@user.username = params[:user][:username]							#preso va avanti ma non applica NESSUN cambiamento quindi
-			end																											#funziona ma l'utentenon sa che i cambiamenti non 
+			end																											#funziona ma l'utentenon sa che i cambiamenti non
 			@user.save																							#sono stati effettuati per via dell'username già preso
 																															#se uso  l'error helper che c'è nelle shared views mi
 																															#servirebbe riindirizzarmi sulla stessa pagnia ma come

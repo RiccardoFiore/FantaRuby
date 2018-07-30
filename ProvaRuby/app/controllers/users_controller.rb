@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
   def show
 		@user = User.find(current_user.id)
 		if @user.league_id
@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 			@league = -1
 		end
   end
-  
+
   def show_by_id
 		@user = User.find(params[:id])
 		if @user.league_id
@@ -17,12 +17,12 @@ class UsersController < ApplicationController
 			@league = -1
 		end
   end
-  
+
   def destroy
 		User.find(params[:id]).destroy
-    flash[:success] = "User destroyed."
-    redirect_to '/admins'
+        flash[:success] = "User destroyed."
+        redirect_to '/admins'
   end
-  
-  
+
+
 end

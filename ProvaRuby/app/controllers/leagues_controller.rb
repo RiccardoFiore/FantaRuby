@@ -2,7 +2,7 @@ class LeaguesController < ApplicationController
     before_action :authenticate_user!
     def index
         id = current_user.league_id
-        @lega = League.find(current_user.league_id)
+        @lega = League.find(id)
         #debugger
     end
 
@@ -19,9 +19,9 @@ class LeaguesController < ApplicationController
         @league.status = "Aperta"
         if current_user.roles_mask == 1                                         #notdefined
             if @league.save!
-                flash[:notice] = "#{@league.name} was successfully created."
-                 current_user.update_attributes(:roles_mask => 2)               #diventa presidente
-                 current_user.update_attributes(:league_id => @league.id)
+                 flash[:notice] = "#{@league.name} was successfully created."
+                 current_user.update_attributes!(:roles_mask => 2)               #diventa presidente
+                 current_user.update_attributes!(:league_id => @league.id)
             else
                 render new_league_path
             end
