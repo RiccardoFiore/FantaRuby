@@ -26,7 +26,7 @@
       %tr
         %td= player.email
 
--if @lega.status == "Chiusa"
+-if @lega.status == "Aperta"
   = form_tag home_path(@lega), :method => :put do
     = submit_tag 'Partecipa'
 #{link_to 'Torna a "Selezione Lega"', homes_path}
