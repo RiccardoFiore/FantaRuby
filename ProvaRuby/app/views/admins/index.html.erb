@@ -38,3 +38,16 @@
     <% end %>
   </tbody>
 </table>
+
+<% if @players.count == 0 %>
+<p>
+    Download:
+
+    <%= form_tag import_soccers_players_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+    <% end %>
+</p>
+
+<% end %>
+

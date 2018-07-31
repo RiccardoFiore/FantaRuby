@@ -4,6 +4,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.4.1'
 
 
+
+gem "iconv", "~> 1.0.3"
+
+gem 'roo'
+gem 'roo-xls'
 #Added devise and canard gems to manage authentication and app roles
 gem 'devise'
 
