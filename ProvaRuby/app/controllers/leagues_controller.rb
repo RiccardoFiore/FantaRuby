@@ -2,6 +2,7 @@ class LeaguesController < ApplicationController
     before_action :authenticate_user!
 
     def index
+        authorize! :index, League, :message => "Non fai ancora parte di una lega"
         id = current_user.league_id
         @lega = League.find(id)
         #debugger

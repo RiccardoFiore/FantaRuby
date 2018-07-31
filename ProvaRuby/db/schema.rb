@@ -10,12 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_29_193741) do
+ActiveRecord::Schema.define(version: 2018_07_31_084325) do
+
+  create_table "admins", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "formazionis", force: :cascade do |t|
     t.integer "player_id"
     t.integer "giornata"
-    t.integer "soccers_player_id"
+    t.integer "portiere"
+    t.integer "difensore1"
+    t.integer "difensore2"
+    t.integer "difensore3"
+    t.integer "centrocampista1"
+    t.integer "centrocampista2"
+    t.integer "centrocampista3"
+    t.integer "centrocampista4"
+    t.integer "attaccante1"
+    t.integer "attaccante2"
+    t.integer "attaccante3"
+    t.integer "riservapor"
+    t.integer "riservadif"
+    t.integer "riservacen"
+    t.integer "riservaatt"
+    t.integer "punteggio", default: 0
   end
 
   create_table "homes", force: :cascade do |t|
@@ -35,9 +55,32 @@ ActiveRecord::Schema.define(version: 2018_07_29_193741) do
 
   create_table "roses", force: :cascade do |t|
     t.integer "player_id"
-    t.integer "soccers_player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "portiere1"
+    t.integer "portiere2"
+    t.integer "portiere3"
+    t.integer "difensore1"
+    t.integer "difensore2"
+    t.integer "difensore3"
+    t.integer "difensore4"
+    t.integer "difensore5"
+    t.integer "difensore6"
+    t.integer "difensore7"
+    t.integer "centrocampista1"
+    t.integer "centrocampista2"
+    t.integer "centrocampista3"
+    t.integer "centrocampista4"
+    t.integer "centrocampista5"
+    t.integer "centrocampista6"
+    t.integer "centrocampista7"
+    t.integer "centrocampista8"
+    t.integer "attaccante1"
+    t.integer "attaccante2"
+    t.integer "attaccante3"
+    t.integer "attaccante4"
+    t.integer "attaccante5"
+    t.integer "attaccante6"
   end
 
   create_table "soccers_players", force: :cascade do |t|
@@ -47,6 +90,7 @@ ActiveRecord::Schema.define(version: 2018_07_29_193741) do
     t.integer "quotazione"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "daily_score", default: 0
   end
 
   create_table "users", force: :cascade do |t|

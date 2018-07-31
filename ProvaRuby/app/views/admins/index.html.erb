@@ -25,10 +25,7 @@
         </td>
         <% u = User.find_by_id(l.president_id) %>
         <td id="t">
-          <%= link_to u.username, '/users/'+user.id.to_s %>
-        </td>
-        <td id="t">
-            nientenienteniente
+          <%= link_to u.username, '/users/'+u.id.to_s %>
         </td>
         <td id="t">
             <%= link_to 'Change President', edit_league_path(l.id) %>

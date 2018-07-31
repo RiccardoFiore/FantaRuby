@@ -8,25 +8,25 @@
   .field
     - if current_user.president?
       = label :league, :description, 'Info di lega'
-      %br
+      %br/
       = text_area :league, :description
       - if @lega.status == "Aperta"
         = f.label :status
         = f.radio_button :status, "Aperta", checked: true
         Aperta
-        \#{f.radio_button :status, "Chiusa"}Chiusa
-        %br/
-        %br/
-        = link_to "Torna all'Home Page della lega", leagues_path
+        = f.radio_button :status, "Chiusa"
+        Chiusa
       - else
         = f.label :status
         = f.radio_button :status, "Aperta"
         Aperta
-        \#{f.radio_button :status, "Chiusa", checked: true}Chiusa
+        = f.radio_button :status, "Chiusa", checked: true
+        Chiusa
   %br/
   = submit_tag 'Save Changes'
 %br/
 %br/
+= link_to "Torna all'Home Page della lega", leagues_path
 %br/
 %br/
 

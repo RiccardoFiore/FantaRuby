@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
         elsif current_user.roles_mask == 1
             homes_path
         else
-            id = resource[:id]
+            id = current_user.id
             admin_path(id)
         end
     end

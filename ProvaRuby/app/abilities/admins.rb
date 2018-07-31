@@ -1,5 +1,5 @@
 Canard::Abilities.for(:admin) do
-  can :index, Home
+  can :manage, Admin
   can :update, League
   # Define abilities for the user role here. For example:
   #

@@ -1,5 +1,4 @@
 Canard::Abilities.for(:player) do
-  can :new, League
   can :index, League
   # Define abilities for the user role here. For example:
   #
