@@ -4,6 +4,9 @@
 -if current_user.president?
   #{link_to 'Impostazioni lega', edit_league_path(@lega.id)}
 %br
+-if current_user.president?
+  #{link_to 'Calcola punteggi giornalieri', leagues_score_rate_path}
+%br
 %br
 Informazione della lega:
 %h4= @lega.description

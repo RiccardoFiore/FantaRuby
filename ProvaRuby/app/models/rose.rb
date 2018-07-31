@@ -1,0 +1,2 @@
+class Rose < ApplicationRecord
+end

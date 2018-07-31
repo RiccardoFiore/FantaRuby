@@ -1,0 +1,2 @@
+class Formazioni < ApplicationRecord
+end

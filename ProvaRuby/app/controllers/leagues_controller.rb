@@ -80,5 +80,91 @@ class LeaguesController < ApplicationController
 
     end
 
+		#@stringaBonus/Malus servono per far riapparire i bonus/malus preceddentemente
+		#messi nella tabella, senno ritornerebbero a 0
+		def rate_score
+
+			@currentDay = League.find(current_user.league_id).current_day
+			league = current_user.league_id
+			@allLeagueUsers = User.where(league_id: league)
+			@stringaBonus = ""
+			@stringaMalus = ""
+			
+			@allLeagueUsers.each do |user|
+				f = Formazioni.where( player_id: user.id, giornata: @currentDay).first
+				if params["b"+user.id.to_s]
+					@stringaBonus += params["b"+user.id.to_s]
+					@stringaMalus += params["m"+user.id.to_s]
+				else
+					@stringaBonus += "0"
+					@stringaMalus += "0"
+				end
+				@stringaBonus += ","
+				@stringaMalus += ","
+				#controllo presenzaformazione, in caso contrario 
+				if !f
+					next
+				end
+				f.punteggio = players_daily_score(user.id, @currentDay)
+				f.save
+				
+			end
+			@stringaBonus = @stringaBonus.split(",")
+			@stringaMalus = @stringaMalus.split(",")
+		end
+
+
+		def players_daily_score(id, day)
+			#calcolo totale punteggio giocatori in formazione
+			punteggio = 0
+			formazione = Formazioni.where( player_id: id, giornata: day).first
+			sp 	= SoccersPlayer.find(formazione.portiere).daily_score
+			sd1 = SoccersPlayer.find(formazione.difensore1).daily_score
+			sd2 = SoccersPlayer.find(formazione.difensore2).daily_score
+			sd3 = SoccersPlayer.find(formazione.difensore3).daily_score
+			sc1 = SoccersPlayer.find(formazione.centrocampista1).daily_score
+			sc2 = SoccersPlayer.find(formazione.centrocampista2).daily_score
+			sc3 = SoccersPlayer.find(formazione.centrocampista3).daily_score
+			sc4 = SoccersPlayer.find(formazione.centrocampista4).daily_score
+			sa1 = SoccersPlayer.find(formazione.attaccante1).daily_score
+			sa2 = SoccersPlayer.find(formazione.attaccante2).daily_score
+			sa3 = SoccersPlayer.find(formazione.attaccante3).daily_score
+			punteggio = sp+sd1+sd2+sd3+sc1+sc2+sc3+sc4+sa1+sa2+sa3
+			#aggiunta punteggio riserva se un giocatore in formaione non ha giocato
+			if( sp == 0 )
+				punteggio += SoccersPlayer.find(formazione.riservapor).daily_score
+			end
+			if( sd1 == 0 || sd2 == 0 || sd3 == 0 )
+				punteggio += SoccersPlayer.find(formazione.riservadif).daily_score
+			end
+			if( sc1 == 0 || sc2 == 0 || sc3 == 0 || sc4 == 0 )
+				punteggio += SoccersPlayer.find(formazione.riservacen).daily_score
+			end
+			if( sa1 == 0 || sa2 == 0 || sa3 == 0 )
+				punteggio += SoccersPlayer.find(formazione.riservaatt).daily_score
+			end
+			#aggiunta bonus o malus
+			if params["b"+id.to_s]
+				punteggio += params["b"+id.to_s].to_i
+				punteggio -= params["m"+id.to_s].to_i
+			end
+			punteggio
+		end
+		
+		#funzione per avanzare di giornata
+		def go_next
+			lega = League.find(current_user.league_id)
+			#controllo solo per evitare il doppio click su go next day, controlla
+			#che la differenza tra il giorno successivo e il giorno dell'ultima formazione
+			#creata dagli utenti non sia maggiore di uno
+			if( (lega.current_day+1)-(Formazioni.last.giornata) > 1)
+				flash[:danger] = "Warning u can't skip more than 2 days"
+				redirect_to '/leagues/score/rate'
+			else
+				lega.current_day += 1
+				lega.save
+				redirect_to '/leagues/score/rate'
+			end
+		end
 
 end

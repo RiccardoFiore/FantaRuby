@@ -17,4 +17,9 @@ Rails.application.routes.draw do
     match '/users/:id/delete', :to => 'users#destroy', :as => :destroy_user, :via => :delete
 		get '/users/:id' => 'users#show_by_id'
 
+		#routes per il calcolo dei daily score
+		get '/leagues/score/rate' => 'leagues#rate_score'
+		post '/leagues/score/rate' => 'leagues#rate_score'
+		get '/leagues/go/next' => 'leagues#go_next'
+
 end
