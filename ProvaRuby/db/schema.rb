@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2018_07_31_152201) do
     t.datetime "updated_at", null: false
     t.string "status"
     t.integer "players"
-    t.integer "current_day", default: 1
+    t.integer "current_day"
   end
 
   create_table "roses", force: :cascade do |t|

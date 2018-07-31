@@ -17,22 +17,37 @@
         <% if user.roles_mask != 8 %>
       <tr>
         <td id="t">
-					<%= link_to user.username, '/users/'+user.id.to_s %>
+            <%= link_to user.username, '/users/'+user.id.to_s %>
         </td>
-        <% l=League.find_by_id(user.league_id) %>
-        <td id= "t">
-          <%= l.name %>
-        </td>
-        <% u = User.find_by_id(l.president_id) %>
-        <td id="t">
-          <%= link_to u.username, '/users/'+u.id.to_s %>
-        </td>
-        <td id="t">
-            <%= link_to 'Change President', edit_league_path(l.id) %>
-        </td>
-				<td id="t">
-					<%= link_to 'Delete', '/users/'+user.id.to_s+'/delete', method: :delete, data: { confirm: 'Are you sure?' } %>
-				</td>
+        <% if user.league_id != nil %>
+            <% l=League.find_by_id(user.league_id) %>
+            <td id= "t">
+                <%= l.name %>
+            </td>
+            <% u = User.find_by_id(l.president_id) %>
+            <td id="t">
+                <%= link_to u.username, '/users/'+user.id.to_s %>
+            </td>
+            <td id="t">
+                <%= link_to 'Delete', '/users/'+user.id.to_s+'/delete', method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+            <td id="t">
+                <%= link_to 'Change President', edit_league_path(l.id) %>
+            </td>
+        <% else %>
+            <td id= "t">
+                "empty"
+            </td>
+            <td id= "t">
+                "empty"
+            </td>
+            <td id="t">
+                <%= link_to 'Delete', '/users/'+user.id.to_s+'/delete', method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+            <td id= "t">
+                "empty"
+            </td>
+        <% end %>
       </tr>
     <% end %>
     <% end %>

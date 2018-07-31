@@ -2,6 +2,7 @@ class LeaguesController < ApplicationController
     before_action :authenticate_user!
 
     def index
+        @uid=current_user.id
         authorize! :index, League, :message => "Non fai ancora parte di una lega"
         id = current_user.league_id
         @lega = League.find(id)
@@ -89,7 +90,7 @@ class LeaguesController < ApplicationController
 			@allLeagueUsers = User.where(league_id: league)
 			@stringaBonus = ""
 			@stringaMalus = ""
-			
+
 			@allLeagueUsers.each do |user|
 				f = Formazioni.where( player_id: user.id, giornata: @currentDay).first
 				if params["b"+user.id.to_s]
@@ -101,13 +102,13 @@ class LeaguesController < ApplicationController
 				end
 				@stringaBonus += ","
 				@stringaMalus += ","
-				#controllo presenzaformazione, in caso contrario 
+				#controllo presenzaformazione, in caso contrario
 				if !f
 					next
 				end
 				f.punteggio = players_daily_score(user.id, @currentDay)
 				f.save
-				
+
 			end
 			@stringaBonus = @stringaBonus.split(",")
 			@stringaMalus = @stringaMalus.split(",")
@@ -150,7 +151,7 @@ class LeaguesController < ApplicationController
 			end
 			punteggio
 		end
-		
+
 		#funzione per avanzare di giornata
 		def go_next
 			lega = League.find(current_user.league_id)
