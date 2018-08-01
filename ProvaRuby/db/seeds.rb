@@ -13,7 +13,7 @@ admin = {
     :username => "admin"
 }
 
-formaz = {
+/*formaz = {
 
     :player_id          => 1,
     :giornata           => 1,
@@ -44,7 +44,7 @@ sp = {
     :quotazione => 20
 
 }
-
+*//
 User.create!(admin)
-Formazioni.create!(formaz)
-SoccersPlayer.create!(sp)
+#Formazioni.create!(formaz)
+#SoccersPlayer.create!(sp)

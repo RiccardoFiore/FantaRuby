@@ -34,8 +34,8 @@
 					<input id= <%= "m"+user.id.to_s %> name=<%= "m"+user.id.to_s %> type="text" value=<%= @stringaMalus[i] %> size="1"/>
 				</td>
 				<td id="t">
-					<% if Formazioni.where( player_id: user.id, giornata: @currentDay).first %>
-						<%= Formazioni.where( player_id: user.id, giornata: @currentDay).first.punteggio %>
+					<% if Formazioni.where( user_id: user.id, giornata: @currentDay).first %>
+						<%= Formazioni.where( user_id: user.id, giornata: @currentDay).first.punteggio %>
 					<% else %>
 						0
 					<% end %>

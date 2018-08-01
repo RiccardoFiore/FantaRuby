@@ -84,7 +84,7 @@ class LeaguesController < ApplicationController
 			@stringaMalus = ""
 
 			@allLeagueUsers.each do |user|
-				f = Formazioni.where( player_id: user.id, giornata: @currentDay).first
+				f = Formazioni.where( user_id: user.id, giornata: @currentDay).first
 				if params["b"+user.id.to_s]
 					@stringaBonus += params["b"+user.id.to_s]
 					@stringaMalus += params["m"+user.id.to_s]
@@ -128,7 +128,7 @@ class LeaguesController < ApplicationController
 		def players_daily_score(id, day)
 			#calcolo totale punteggio giocatori in formazione
 			punteggio = 0
-			formazione = Formazioni.where( player_id: id, giornata: day).first
+			formazione = Formazioni.where( user_id: id, giornata: day).first
 			sp 	= SoccersPlayer.find(formazione.portiere).daily_score
 			sd1 = SoccersPlayer.find(formazione.difensore1).daily_score
 			sd2 = SoccersPlayer.find(formazione.difensore2).daily_score
