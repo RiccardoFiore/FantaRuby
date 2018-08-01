@@ -77,14 +77,14 @@ class LeaguesController < ApplicationController
 		#messi nella tabella, se no ritornerebbero a 0
 		def rate_score
 
-			@currentDay = League.find(current_user.league_id).current_day
-			league = current_user.league_id
-			@allLeagueUsers = User.where(league_id: league)
+			@currentDay = current_user.league.current_day
+			league = current_user.league
+			@allLeagueUsers = league.users
 			@stringaBonus = ""
 			@stringaMalus = ""
 
 			@allLeagueUsers.each do |user|
-				f = Formazioni.where( user_id: user.id, giornata: @currentDay).first
+				f = user.formazionis.find_by_giornata(@currentDay)
 				if params["b"+user.id.to_s]
 					@stringaBonus += params["b"+user.id.to_s]
 					@stringaMalus += params["m"+user.id.to_s]

@@ -1,6 +1,8 @@
 class User < ApplicationRecord
 
-  has_one :league
+  belongs_to :league
+  has_many :formazionis
+  has_one :rose
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
