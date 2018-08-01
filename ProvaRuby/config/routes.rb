@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
     #routes per la gestione dei playersda partedell'admin
     match '/users/:id/delete', :to => 'users#destroy', :as => :destroy_user, :via => :delete
-		get '/users/:id' => 'users#show_by_id'
+		
 
 		#routes per il calcolo dei daily score
 		get '/leagues/score/rate' => 'leagues#rate_score'
