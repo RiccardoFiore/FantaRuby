@@ -19,8 +19,8 @@
 				<th>Daily Score</th>
 			</tr>
 		</thead>
-		<tbody>		
-		
+		<tbody>
+
 		<% i=0 %>
 		<% @allLeagueUsers.each do |user| %>
 			<tr>
@@ -42,18 +42,18 @@
 				</td>
 			</tr>
 			<% i+=1 %>
-		<% end %>	
-		
+		<% end %>
+
 		</tbody>
 	</table>
 	<br/>
 
-	<input name="aggiungi" type="submit" value="Salva cambiamenti" /> - 
-	<%= link_to "Go to next day", '/leagues/go/next' %>
+	<input name="aggiungi" type="submit" value="Salva cambiamenti" /> -
+	<%= link_to "Vai alla prossima giornata", '/leagues/go/next' %>
 </form>
 
 <br/>
-<%= link_to "Go beck to league home", '/leagues' %>
+<%= link_to "Torna all' home page della lega", '/leagues' %>
 
 <br/>
 <br/>

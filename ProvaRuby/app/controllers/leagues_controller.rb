@@ -67,22 +67,14 @@ class LeaguesController < ApplicationController
         ##
         #gestione cambio status lega
         @lega.update_attributes!(params[:league].permit(:status))
-        @lega.update_attributes!(params[:league].permit(:description))
-        ##
-
         ##
         #gestione descrizione lega
-
-
+        @lega.update_attributes!(params[:league].permit(:description))
          ##
-
-         ##
-
-
     end
 
-		#@stringaBonus/Malus servono per far riapparire i bonus/malus preceddentemente
-		#messi nella tabella, senno ritornerebbero a 0
+		#@stringaBonus/Malus servono per far riapparire i bonus/malus precedentemente
+		#messi nella tabella, se no ritornerebbero a 0
 		def rate_score
 
 			@currentDay = League.find(current_user.league_id).current_day
@@ -114,6 +106,24 @@ class LeaguesController < ApplicationController
 			@stringaMalus = @stringaMalus.split(",")
 		end
 
+
+		#funzione per avanzare di giornata
+		def go_next
+			lega = League.find(current_user.league_id)
+			#controllo solo per evitare il doppio click su go next day, controlla
+			#che la differenza tra il giorno successivo e il giorno dell'ultima formazione
+			#creata dagli utenti non sia maggiore di uno
+			if( (lega.current_day + 1)-(Formazioni.last.giornata) > 1)
+				flash[:danger] = "Warning u can't skip more than 2 days"
+				redirect_to '/leagues/score/rate'
+			else
+				lega.current_day += 1
+				lega.save
+				redirect_to '/leagues/score/rate'
+			end
+		end
+
+        private
 
 		def players_daily_score(id, day)
 			#calcolo totale punteggio giocatori in formazione
@@ -152,20 +162,6 @@ class LeaguesController < ApplicationController
 			punteggio
 		end
 
-		#funzione per avanzare di giornata
-		def go_next
-			lega = League.find(current_user.league_id)
-			#controllo solo per evitare il doppio click su go next day, controlla
-			#che la differenza tra il giorno successivo e il giorno dell'ultima formazione
-			#creata dagli utenti non sia maggiore di uno
-			if( (lega.current_day+1)-(Formazioni.last.giornata) > 1)
-				flash[:danger] = "Warning u can't skip more than 2 days"
-				redirect_to '/leagues/score/rate'
-			else
-				lega.current_day += 1
-				lega.save
-				redirect_to '/leagues/score/rate'
-			end
-		end
+
 
 end

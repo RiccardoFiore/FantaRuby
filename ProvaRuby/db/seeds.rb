@@ -13,4 +13,38 @@ admin = {
     :username => "admin"
 }
 
+formaz = {
+
+    :player_id          => 1,
+    :giornata           => 1,
+    :portiere           => 1,
+    :difensore1        => 1,
+    :difensore2        => 1,
+    :difensore3       => 1,
+    :centrocampista1    => 1,
+    :centrocampista2   => 1,
+    :centrocampista3    => 1,
+    :centrocampista4    => 1,
+    :attaccante1       => 1,
+    :attaccante2       => 1,
+    :attaccante3      => 1,
+    :riservapor        => 1,
+    :riservadif        => 1,
+    :riservacen        => 1,
+    :riservaatt        => 1
+
+
+}
+
+
+sp = {
+    :cod => 1,
+    :cognome => "Messi",
+    :ruolo => "Att",
+    :quotazione => 20
+
+}
+
 User.create!(admin)
+Formazioni.create!(formaz)
+SoccersPlayer.create!(sp)
