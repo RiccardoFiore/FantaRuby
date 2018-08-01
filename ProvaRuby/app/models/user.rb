@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  belongs_to :league
+  has_one :league
   has_many :formazionis
   has_one :rose
 

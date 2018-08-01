@@ -76,9 +76,10 @@ class LeaguesController < ApplicationController
 		#@stringaBonus/Malus servono per far riapparire i bonus/malus precedentemente
 		#messi nella tabella, se no ritornerebbero a 0
 		def rate_score
-
-			@currentDay = current_user.league.current_day
-			league = current_user.league
+			
+			
+			league = League.find(current_user.league_id)
+			@currentDay = league.current_day
 			@allLeagueUsers = league.users
 			@stringaBonus = ""
 			@stringaMalus = ""
