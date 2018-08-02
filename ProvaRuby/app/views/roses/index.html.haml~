@@ -1,0 +1,20 @@
+%h2 controllo lega
+%td=@rose.portiere1
+-u=0
+%td=@rose.user_id
+-@socce.each do |socce|
+  -if ((socce.cod==@rose.portiere1 || socce.cod==@rose.portiere2|| socce.cod==@rose.portiere3)&&socce.ruolo!="portiere")||((socce.cod==@rose.difensore1||socce.cod==@rose.difensore2||socce.cod==@rose.difensore3||socce.cod==@rose.difensore4||socce.cod==@rose.difensore5||socce.cod==@rose.difensore6||socce.cod==@rose.difensore7)&&socce.ruolo!="difensore")||((socce.cod==@rose.centrocampista1||socce.cod==@rose.centrocampista2||socce.cod==@rose.centrocampista3||socce.cod==@rose.centrocampista4||socce.cod==@rose.centrocampista5||socce.cod==@rose.centrocampista6||socce.cod==@rose.centrocampista7||socce.cod==@rose.centrocampista8)&&socce.ruolo!="centrocampista")||((socce.cod==@rose.attaccante1||socce.cod==@rose.attaccante2||socce.cod==@rose.attaccante3||socce.cod==@rose.attaccante4||socce.cod==@rose.attaccante5||socce.cod==@rose.attaccante6)&&socce.ruolo!="attaccante")
+    -u=1
+    
+    
+  
+
+-if u==1
+  ATTENZIONE LA TUA ROSA INSERITA È SBAGLIATA
+  = form_tag rose_path(@rose.user_id), :method => :delete  
+  
+
+  
+
+  
+
