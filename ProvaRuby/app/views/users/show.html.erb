@@ -12,7 +12,11 @@
 <% else %>
 	<h3>League name: </h3><%= @league.name %>
 <% end %>
-
+<% if user.president? || user.player? %>
+    <%= form_tag user_path(current_user.id), :method => :put do %>
+      <%= submit_tag 'Esci dalla lega' %>
+    <% end %>
+<% end %>
 <br/>
 <br/>
 <%= link_to "Torna a impostazioni utenti", admins_path %>

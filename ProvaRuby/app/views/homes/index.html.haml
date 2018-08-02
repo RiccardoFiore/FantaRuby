@@ -1,6 +1,18 @@
 %h1 FantaRuby
 %br
 %br
+
+%h3 Cerca lega
+= form_tag homes_path, :method => :post do
+
+  = label :league, :name, 'Nome'
+  %br
+  = text_field :league, :name
+  %br
+  = submit_tag 'Cerca'
+
+%br
+%br
 %table
   %thead
     %tr

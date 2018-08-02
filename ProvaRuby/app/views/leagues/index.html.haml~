@@ -1,12 +1,15 @@
 %h1 Home Page Lega
-%td=current_user.roles_mask
-%td=@lega.id
-%td=@current_user.league_id
+#{link_to 'Profilo utente', users_path}
+%br
 -if current_user.president?
   #{link_to 'Impostazioni lega', edit_league_path(@lega.id)}
 %br
+-if current_user.president?
+  #{link_to 'Calcola punteggi giornalieri', leagues_score_rate_path}
 %br
-informazione della lega: 
-%td=@lega.description
+%br
+Informazione della lega:
+%h4= @lega.description
+%br
 %br
 

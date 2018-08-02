@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :homes
     resources :leagues
     resources :users
+    resources :roses
     resources :soccers_players do
     collection { post :import }
     end
