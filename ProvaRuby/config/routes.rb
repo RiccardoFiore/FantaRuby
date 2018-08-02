@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'formazionis/new'
     resources :admins
 
     devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", registrations: 'users/registrations' }
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
     resources :soccers_players do
     collection { post :import }
     end
+    resources :formazionis
     root :to => redirect('/users/sign_in')
     get 'about'   => 'static_pages#about'
     get 'contact' => 'static_pages#contact'
@@ -24,5 +26,8 @@ Rails.application.routes.draw do
 		get '/leagues/score/rate' => 'leagues#rate_score'
 		post '/leagues/score/rate' => 'leagues#rate_score'
 		get '/leagues/go/next' => 'leagues#go_next'
+		
+		#routes per l'inserimento dei giocatori in formazione
+		get '/formazionis/new/:id' => 'formazionis#new'
 
 end

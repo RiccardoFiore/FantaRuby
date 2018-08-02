@@ -1,0 +1,202 @@
+<h1>Inserisci la formazione per la giornata <%= @currentDay %></h1>
+
+<% flash.each do |key, value| %>
+	<div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
+<table id="tabella_formazioni1">
+	<caption><h2> Rosa </h2></caption>
+  <thead>
+    <tr id="col" >
+      <th width=50>Giocatore</th>
+      <th width=50>Ruolo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rose.each do |player| %>
+			<% if(@b.select { |v| v == player.id } == []) %>
+				<tr>
+					<td id="t">
+							<%= link_to player.cognome, '/formazionis/new/'+player.id.to_s %>
+					</td>
+					<td id="t">
+							<%= player.ruolo %>
+					</td>
+				</tr>
+			<% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<table id="tabella_formazioni2">
+	<caption><h2> Formazione </h2></caption>
+  <thead>
+    <tr id="col">
+      <th>Ruolo</th>
+      <th>Giocatore</th>
+    </tr>
+  </thead>
+  <tbody>
+		<tr>
+			<td id="t">
+					Portiere
+			</td>
+			<td id="t">
+				<% if @formazione.portiere %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.portiere }[0].cognome, '/formazionis/'+@formazione.portiere.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td id="t">
+					Difensore1
+			</td>
+			<td id="t">
+				<% if @formazione.difensore1 %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.difensore1 }[0].cognome, '/formazionis/'+@formazione.difensore1.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td id="t">
+					Difensore2
+			</td>
+			<td id="t">
+				<% if @formazione.difensore2 %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.difensore2 }[0].cognome, '/formazionis/'+@formazione.difensore2.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td id="t">
+					Difensore3
+			</td>
+			<td id="t">
+				<% if @formazione.difensore3 %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.difensore3 }[0].cognome, '/formazionis/'+@formazione.difensore3.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td id="t">
+					Centrocampista1
+			</td>
+			<td id="t">
+				<% if @formazione.centrocampista1 %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.centrocampista1 }[0].cognome, '/formazionis/'+@formazione.centrocampista1.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td id="t">
+					Centrocampista2
+			</td>
+			<td id="t">
+				<% if @formazione.centrocampista2 %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.centrocampista2 }[0].cognome, '/formazionis/'+@formazione.centrocampista2.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+				<tr>
+			<td id="t">
+					Centrocampista3
+			</td>
+			<td id="t">
+				<% if @formazione.centrocampista3 %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.centrocampista3 }[0].cognome, '/formazionis/'+@formazione.centrocampista3.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+				<tr>
+			<td id="t">
+					Centrocampista4
+			</td>
+			<td id="t">
+				<% if @formazione.centrocampista4 %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.centrocampista4 }[0].cognome, '/formazionis/'+@formazione.centrocampista4.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td id="t">
+					Attaccante1
+			</td>
+			<td id="t">
+				<% if @formazione.attaccante1 %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.attaccante1 }[0].cognome, '/formazionis/'+@formazione.attaccante1.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td id="t">
+					Attaccante2
+			</td>
+			<td id="t">
+				<% if @formazione.attaccante2 %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.attaccante2 }[0].cognome, '/formazionis/'+@formazione.attaccante2.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td id="t">
+					Attaccante3
+			</td>
+			<td id="t">
+				<% if @formazione.attaccante3 %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.attaccante3 }[0].cognome, '/formazionis/'+@formazione.attaccante3.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+		
+		<tr>
+			<td id="t">
+					Riserva portiere
+			</td>
+			<td id="t">
+				<% if @formazione.riservapor %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.riservapor }[0].cognome, '/formazionis/'+@formazione.riservapor.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td id="t">
+					Riserva difensore
+			</td>
+			<td id="t">
+				<% if @formazione.riservadif %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.riservadif }[0].cognome, '/formazionis/'+@formazione.riservadif.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+				<tr>
+			<td id="t">
+					Riserva centrocampista
+			</td>
+			<td id="t">
+				<% if @formazione.riservacen %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.riservacen }[0].cognome, '/formazionis/'+@formazione.riservacen.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+				<tr>
+			<td id="t">
+					Riserva attaccante
+			</td>
+			<td id="t">
+				<% if @formazione.riservaatt %>
+					<%= link_to  @rose.select { |v| v.id == @formazione.riservaatt }[0].cognome, '/formazionis/'+@formazione.riservaatt.to_s, method: :delete %>
+				<% end %>
+			</td>
+		</tr>
+  </tbody>
+</table>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<%= link_to 'Go to league home', '/leagues' %>
+<br/>
+<br/>
+
