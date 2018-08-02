@@ -18,6 +18,23 @@ class UsersController < ApplicationController
 		end
   end
 
+  def update
+    user = User.find(current_user.id)
+    lega = League.find(user.league_id)
+    user.update_attributes!(:league_id => nil)
+    if (user.president?)
+        if lega.users.size == 0
+            League.delete(lega.id)
+        else
+            next_president = lega.users.first
+            lega.update_attributes!(:president_id => next_president.id)
+            next_president.update_attributes!(:roles_mask => 2)
+        end
+    end
+    user.update_attributes!(:roles_mask => 1)
+    redirect_to homes_path
+  end
+
   def destroy
 		User.find(params[:id]).destroy
         flash[:success] = "User destroyed."

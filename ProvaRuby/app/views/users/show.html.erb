@@ -13,6 +13,10 @@
 	<h3>League name: </h3><%= @league.name %>
 <% end %>
 
+<%= form_tag user_path(current_user.id), :method => :put do %>
+  <%= submit_tag 'Esci dalla lega' %>
+<% end %>
+
 <br/>
 <br/>
 <%= link_to "Settings", '/users/edit' %>

@@ -14,6 +14,11 @@ class HomesController < ApplicationController
         @players = @lega.users
     end
 
+    def create
+        @lega = League.find_by(:name => params[:league][:name])
+        redirect_to home_path(@lega.id)
+    end
+
     def update
         authorize! :update, Home, :message => "Fai già parte di una lega"
         id = params[:id]
