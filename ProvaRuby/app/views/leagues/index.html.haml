@@ -7,13 +7,12 @@
 -if current_user.president?
   #{link_to 'Calcola punteggi giornalieri', leagues_score_rate_path}
 %br
--if current_user.president?
-  #{link_to 'Inserisci/modifica formazione', new_formazioni_path}
-%br
 %br
 Informazione della lega:
 %h4= @lega.description
 %br
 %br
+
 -if current_user.rose==nil
   #{link_to 'crea il tuo team', new_rose_path}
+
