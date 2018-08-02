@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  def show
+  def index
 		@user = User.find(current_user.id)
 		if @user.league_id
 			@league = League.find(@user.league_id)
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 		end
   end
 
-  def show_by_id
+  def show
 		@user = User.find(params[:id])
 		if @user.league_id
 			@league = League.find(@user.league_id)
