@@ -130,30 +130,82 @@ class LeaguesController < ApplicationController
 			#calcolo totale punteggio giocatori in formazione
 			punteggio = 0
 			formazione = Formazioni.where( user_id: id, giornata: day).first
-			sp 	= SoccersPlayer.find(formazione.portiere).daily_score
-			sd1 = SoccersPlayer.find(formazione.difensore1).daily_score
-			sd2 = SoccersPlayer.find(formazione.difensore2).daily_score
-			sd3 = SoccersPlayer.find(formazione.difensore3).daily_score
-			sc1 = SoccersPlayer.find(formazione.centrocampista1).daily_score
-			sc2 = SoccersPlayer.find(formazione.centrocampista2).daily_score
-			sc3 = SoccersPlayer.find(formazione.centrocampista3).daily_score
-			sc4 = SoccersPlayer.find(formazione.centrocampista4).daily_score
-			sa1 = SoccersPlayer.find(formazione.attaccante1).daily_score
-			sa2 = SoccersPlayer.find(formazione.attaccante2).daily_score
-			sa3 = SoccersPlayer.find(formazione.attaccante3).daily_score
+			if(formazione.portiere)
+				sp 	= SoccersPlayer.find(formazione.portiere).daily_score
+			else
+				so = 0
+			end
+			if(formazione.difensore1)
+				sd1 = SoccersPlayer.find(formazione.difensore1).daily_score
+			else
+				sd1 = 0
+			end
+			if(formazione.difensore2)
+				sd2 = SoccersPlayer.find(formazione.difensore2).daily_score
+			else
+				sd2 = 0
+			end
+			if(formazione.difensore3)
+				sd3 = SoccersPlayer.find(formazione.difensore3).daily_score
+			else
+				sd3 = 0
+			end
+			if(formazione.centrocampista1)
+				sc1 = SoccersPlayer.find(formazione.centrocampista1).daily_score
+			else
+				sc1 = 0
+			end
+			if(formazione.centrocampista2)
+				sc2 = SoccersPlayer.find(formazione.centrocampista2).daily_score
+			else
+				sc2 = 0
+			end
+			if(formazione.centrocampista3)
+				sc3 = SoccersPlayer.find(formazione.centrocampista3).daily_score
+			else
+				sc3 = 0
+			end
+			if(formazione.centrocampista4)
+				sc4 = SoccersPlayer.find(formazione.centrocampista4).daily_score
+			else
+				sc4 = 0
+			end
+			if(formazione.attaccante1)
+				sa1 = SoccersPlayer.find(formazione.attaccante1).daily_score
+			else
+				sa1 = 0
+			end
+			if(formazione.attaccante2)
+				sa2 = SoccersPlayer.find(formazione.attaccante2).daily_score
+			else
+				sa2 = 0
+			end
+			if(formazione.attaccante3)
+				sa3 = SoccersPlayer.find(formazione.attaccante3).daily_score
+			else
+				sa3 = 0
+			end
 			punteggio = sp+sd1+sd2+sd3+sc1+sc2+sc3+sc4+sa1+sa2+sa3
 			#aggiunta punteggio riserva se un giocatore in formaione non ha giocato
 			if( sp == 0 )
-				punteggio += SoccersPlayer.find(formazione.riservapor).daily_score
+				if(formazione.riservapor)
+					punteggio += SoccersPlayer.find(formazione.riservapor).daily_score
+				end
 			end
 			if( sd1 == 0 || sd2 == 0 || sd3 == 0 )
-				punteggio += SoccersPlayer.find(formazione.riservadif).daily_score
+				if(formazione.riservadif)
+					punteggio += SoccersPlayer.find(formazione.riservadif).daily_score
+				end
 			end
 			if( sc1 == 0 || sc2 == 0 || sc3 == 0 || sc4 == 0 )
-				punteggio += SoccersPlayer.find(formazione.riservacen).daily_score
+				if(formazione.riservacen)
+					punteggio += SoccersPlayer.find(formazione.riservacen).daily_score
+				end
 			end
 			if( sa1 == 0 || sa2 == 0 || sa3 == 0 )
-				punteggio += SoccersPlayer.find(formazione.riservaatt).daily_score
+				if(formazione.riservaatt)
+					punteggio += SoccersPlayer.find(formazione.riservaatt).daily_score
+				end
 			end
 			#aggiunta bonus o malus
 			if params["b"+id.to_s]
