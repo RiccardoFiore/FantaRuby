@@ -30,5 +30,6 @@ Rails.application.routes.draw do
 		
 		#routes per l'inserimento dei giocatori in formazione
 		get '/formazionis/new/:id' => 'formazionis#new'
-
+		#routes per la visualizzazioni di tutte le formazioni
+		get '/formazionis/day/:id' => 'formazionis#index'
 end

@@ -175,4 +175,115 @@ class FormazionisController < ApplicationController
 	  formazione.save
 	  redirect_to '/formazionis/new'
 	end
+	
+	def index
+		@lega = League.find(current_user.league_id)
+		if(params[:id])
+			@giornata = params[:id].to_i
+		else
+			@giornata = @lega.current_day
+		end
+		allPlayer = SoccersPlayer.all
+		arrayPlayer = [[]]
+		i = 0
+		n = 0
+		allPlayer.each do |x|
+			arrayPlayer[i] = [x.id, x.cognome, x.ruolo] 
+			i += 1
+		end
+		leghisti = @lega.users
+		@arrayFormazioni = Array.new(leghisti.length) { Array.new(15) { Array.new(4) } }
+		leghisti.each do |y|
+			fg = y.formazionis.find_by_giornata(@giornata)
+			if(fg)
+				for k in (0..(arrayPlayer.length-1))
+					if( arrayPlayer[k][0]==fg.portiere )
+						@arrayFormazioni[n][0][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][0][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][0][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][0][3] = "Portiere"
+					elsif( arrayPlayer[k][0]==fg.difensore1 )
+						@arrayFormazioni[n][1][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][1][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][1][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][1][3] = "Difensore1"					
+					elsif( arrayPlayer[k][0]==fg.difensore2 )
+						@arrayFormazioni[n][2][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][2][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][2][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][2][3] = "Difensore2"
+					elsif( arrayPlayer[k][0]==fg.difensore3 )
+						@arrayFormazioni[n][3][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][3][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][3][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][3][3] = "Difensore3"
+					elsif( arrayPlayer[k][0]==fg.centrocampista1 )
+						@arrayFormazioni[n][4][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][4][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][4][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][4][3] = "Centrocampista1"
+					elsif( arrayPlayer[k][0]==fg.centrocampista2 )
+						@arrayFormazioni[n][5][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][5][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][5][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][5][3] = "Centrocampista2"
+					elsif( arrayPlayer[k][0]==fg.centrocampista3 )
+						@arrayFormazioni[n][6][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][6][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][6][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][6][3] = "Centrocampista3"
+					elsif( arrayPlayer[k][0]==fg.centrocampista4 )
+						@arrayFormazioni[n][7][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][7][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][7][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][7][3] = "Centrocampista4"
+					elsif( arrayPlayer[k][0]==fg.attaccante1 )
+						@arrayFormazioni[n][8][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][8][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][8][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][8][3] = "Attaccante1"
+					elsif( arrayPlayer[k][0]==fg.attaccante2 )
+						@arrayFormazioni[n][9][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][9][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][9][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][9][3] = "Attaccante2"
+					elsif( arrayPlayer[k][0]==fg.attaccante3 )
+						@arrayFormazioni[n][10][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][10][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][10][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][10][3] = "Attaccante3"
+					elsif( arrayPlayer[k][0]==fg.riservapor )
+						@arrayFormazioni[n][11][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][11][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][11][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][11][3] = "Riserva portiere"
+					elsif( arrayPlayer[k][0]==fg.riservadif )
+						@arrayFormazioni[n][12][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][12][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][12][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][12][3] = "Riserva difensore"
+					elsif( arrayPlayer[k][0]==fg.riservacen )
+						@arrayFormazioni[n][13][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][13][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][13][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][13][3] = "Riserva centrocampista"
+					elsif( arrayPlayer[k][0]==fg.riservaatt )
+						@arrayFormazioni[n][14][0] = arrayPlayer[k][0]
+						@arrayFormazioni[n][14][1] = arrayPlayer[k][1]
+						@arrayFormazioni[n][14][2] = arrayPlayer[k][2]
+						@arrayFormazioni[n][14][3] = "Riserva attaccante"
+					end
+				end
+				for k in (0..14)
+					if(@arrayFormazioni[n][k]==nil)
+						@arrayFormazioni[n][k]=["","","",""]
+					end
+				end
+			else
+				@arrayFormazioni[n] = [["","","","Portiere"],["","","","Difensore1"],["","","","Difensore2"],["","","","Difensore3"],["","","","Centrocampista1"],["","","","Centrocampista2"],["","","","Centrocampista3"],["","","","Centrocampista4"],["","","","Attaccante1"],["","","","Attaccante2"],["","","","Attaccante3"],["","","","Riserva portiere"],["","","","Riserva difensore"],["","","","Riserva centrocampista"],["","","","Riserva attaccante"]]
+			end
+			n += 1
+		end
+	end
+	
 end
