@@ -32,26 +32,37 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
 	def update
-#		super #do |resource|
-#			params.require(:user).permit(:username, :email, :favourite_team)
-#			resource.favourite_team = params[:user][:favourite_team]					#se uso questo simile al create non applica i
-#			resource.email = params[:user][:email]														#cambiamenti non so ilperche
-#			if !params[:user][:username].blank?
-#				resource.username = params[:user][:username]
-#			end
-#		end
-
-			super
 			@user = User.find(resource.id)
+			fakeUserE = User.new(id: @user.id, email: @user.email, roles_mask: @user.roles_mask, created_at: @user.created_at, updated_at: @user.updated_at, provider: @user.provider, uid: @user.uid, league_id: @user.league_id, favourite_team: @user.favourite_team, username: @user.username, budget: @user.budget)
+			fakeUserU = User.new(id: @user.id, email: @user.email, roles_mask: @user.roles_mask, created_at: @user.created_at, updated_at: @user.updated_at, provider: @user.provider, uid: @user.uid, league_id: @user.league_id, favourite_team: @user.favourite_team, username: @user.username, budget: @user.budget)
 			@user.email = params[:user][:email]
+			fakeUserE.email = params[:user][:email]
 			@user.favourite_team = params[:user][:favourite_team]
-			if !params[:user][:username].blank?											#problema di questo è che se metto un username gia
-				@user.username = params[:user][:username]							#preso va avanti ma non applica NESSUN cambiamento quindi
-			end																											#funziona ma l'utentenon sa che i cambiamenti non
-			@user.save																							#sono stati effettuati per via dell'username già preso
-																															#se uso  l'error helper che c'è nelle shared views mi
-																															#servirebbe riindirizzarmi sulla stessa pagnia ma come
-	end																													#al solito va in conflitto con qualche porcoddio del device
+			if !params[:user][:username].blank?											
+				@user.username = params[:user][:username]
+				fakeUserU.username = params[:user][:username]
+			end																								
+			if(!@user.save)
+				if( (!fakeUserU.validate) && (!fakeUserE.validate) && (fakeUserE.email != fakeUserU.email) && (fakeUserE.username != fakeUserU.username) )
+					flash[:danger] = "Attenzione: Username e Email gia in uso!"
+					redirect_to '/users/edit'
+					return
+				elsif( (!fakeUserU.validate) && (fakeUserE.username != fakeUserU.username) )
+					flash[:danger] = "Attenzione: Username gia in uso!"
+					redirect_to '/users/edit'
+					return
+				else
+					flash[:danger] = "Attenzione: Email gia in uso!"
+					redirect_to '/users/edit'
+					return
+				end
+			end											
+			if(!@user.provider)
+				super
+			else
+				redirect_to '/users'
+			end																																																								
+	end																													
 
   # DELETE /resource
   def destroy
