@@ -183,10 +183,6 @@ class FormazionisController < ApplicationController
 		else
 			@giornata = @lega.current_day
 		end
-
-
-        @daily_score=Formazioni.where('user_id = ? and giornata = ?',current_user.id,@giornata).first.punteggio
-
 		allPlayer = SoccersPlayer.all
 		arrayPlayer = [[]]
 		i = 0
@@ -197,9 +193,11 @@ class FormazionisController < ApplicationController
 		end
 		leghisti = @lega.users
 		@arrayFormazioni = Array.new(leghisti.length) { Array.new(15) { Array.new(4) } }
+		@daily_score = []
 		leghisti.each do |y|
 			fg = y.formazionis.find_by_giornata(@giornata)
 			if(fg)
+				@daily_score[n] = fg.punteggio
 				for k in (0..(arrayPlayer.length-1))
 					if( arrayPlayer[k][0]==fg.portiere )
 						@arrayFormazioni[n][0][0] = arrayPlayer[k][0]
@@ -279,11 +277,42 @@ class FormazionisController < ApplicationController
 					end
 				end
 				for k in (0..14)
-					if(@arrayFormazioni[n][k]==nil)
-						@arrayFormazioni[n][k]=["","","",""]
+					if(@arrayFormazioni[n][k]==[nil,nil,nil,nil])
+						if(k==0)
+							@arrayFormazioni[n][k]=["","","","Portiere"]
+						elsif(k==1)
+							@arrayFormazioni[n][k]=["","","","Difensore1"]
+						elsif(k==2)
+							@arrayFormazioni[n][k]=["","","","Difensore2"]
+						elsif(k==3)
+							@arrayFormazioni[n][k]=["","","","Difensore3"]
+						elsif(k==4)
+							@arrayFormazioni[n][k]=["","","","Centrocampista1"]
+						elsif(k==5)
+							@arrayFormazioni[n][k]=["","","","Centrocampista2"]
+						elsif(k==6)
+							@arrayFormazioni[n][k]=["","","","Centrocampista3"]
+						elsif(k==7)
+							@arrayFormazioni[n][k]=["","","","Centrocampista4"]
+						elsif(k==8)
+							@arrayFormazioni[n][k]=["","","","Attaccante1"]
+						elsif(k==9)
+							@arrayFormazioni[n][k]=["","","","Attaccante2"]
+						elsif(k==10)
+							@arrayFormazioni[n][k]=["","","","Attaccante3"]
+						elsif(k==11)
+							@arrayFormazioni[n][k]=["","","","Riserva portiere"]
+						elsif(k==12)
+							@arrayFormazioni[n][k]=["","","","Riserva difensore"]
+						elsif(k==13)
+							@arrayFormazioni[n][k]=["","","","Riserva centrocampista"]
+						else(k==14)
+							@arrayFormazioni[n][k]=["","","","Riserva attaccante"]
+						end
 					end
 				end
 			else
+				@daily_score[n] = 0
 				@arrayFormazioni[n] = [["","","","Portiere"],["","","","Difensore1"],["","","","Difensore2"],["","","","Difensore3"],["","","","Centrocampista1"],["","","","Centrocampista2"],["","","","Centrocampista3"],["","","","Centrocampista4"],["","","","Attaccante1"],["","","","Attaccante2"],["","","","Attaccante3"],["","","","Riserva portiere"],["","","","Riserva difensore"],["","","","Riserva centrocampista"],["","","","Riserva attaccante"]]
 			end
 			n += 1

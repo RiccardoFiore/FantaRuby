@@ -22,11 +22,11 @@
 <% i=0 %>
 <% for k in (0..(@arrayFormazioni.length-1)) %>
 	<table id="tabella">
-		<caption><h2> <%= @lega.users[i].username %> &nbsp &nbsp &nbsp&nbsp DAILY SCORE: <%= @daily_score %> </h2></caption>
+		<caption><h2> USERNAME: <%= @lega.users[i].username %> &nbsp &nbsp &nbsp&nbsp DAILY SCORE: <%= @daily_score[k] %> </h2></caption>
 		<thead>
 			<tr id="col" >
-				<th>Posizione</th>
-				<th>Giocatore</th>
+				<th width=50%>Posizione</th>
+				<th width=50%>Giocatore</th>
 			</tr>
 		</thead>
 		<tbody>
