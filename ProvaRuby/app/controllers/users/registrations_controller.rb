@@ -54,9 +54,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	end																													#al solito va in conflitto con qualche porcoddio del device
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+		user = resource
+		lega = League.find(user.league_id)
+		user.update_attributes!(:league_id => nil)
+		if (user.president?)
+        if lega.users.size == 0
+            League.delete(lega.id)
+        else
+            next_president = lega.users.first
+            lega.update_attributes!(:president_id => next_president.id)
+            next_president.update_attributes!(:roles_mask => 2)
+        end
+    end
+    super
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
