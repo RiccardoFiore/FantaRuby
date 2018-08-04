@@ -6,21 +6,49 @@
 
 <h3>Favourite team: </h3><%= @user.favourite_team %>
 
-<% if @league == -1 %>
+
+<% if current_user.roles_mask == 2 || current_user.roles_mask == 4 %>
+
+
+    <% if @league == -1 %>
 	<h3>League name: </h3>
 	"Non fai parte di nessuna lega"
-<% else %>
+    <% else %>
 	<h3>League name: </h3><%= @league.name %>
-<% end %>
-<% if user.president? || user.player? %>
-    <%= form_tag user_path(current_user.id), :method => :put do %>
-      <%= submit_tag 'Esci dalla lega' %>
     <% end %>
-<% end %>
+
+    <br/>
+    <br/>
+
+
+    <%= link_to "Settings", '/users/edit' %>
+
+    <br/>
+    <br/>
+
+    <%= form_tag user_path(current_user.id), :method => :put do %>
+    <%= submit_tag 'Esci dalla lega' %>
+
+    <br/>
+    <br/>
+    <%= link_to "Torna all'home page della lega", leagues_path(@league.id) %>
+
+    <% end %>
+
+
+<% elsif current_user.roles_mask == 8 %>
+
+    <% if @league == -1 %>
+	<h3>League name: </h3>
+	"Non fa parte di nessuna lega"
+    <% else %>
+	<h3>League name: </h3><%= @league.name %>
+    <% end %>
 <br/>
 <br/>
 <%= link_to "Torna a impostazioni utenti", admins_path %>
 <br/>
 <br/>
+<% end %>
 <br/>
 <br/>

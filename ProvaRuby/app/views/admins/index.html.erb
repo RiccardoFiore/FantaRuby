@@ -25,7 +25,7 @@
             </td>
             <% u = User.find_by_id(l.president_id) %>
             <td id="t">
-                <%= link_to u.username, '/users/'+user.id.to_s %>
+                <%= link_to u.username, '/users/'+u.id.to_s %>
             </td>
             <td id="t">
                 <%= link_to 'Delete', '/users/'+user.id.to_s+'/delete', method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -62,6 +62,20 @@
     <%= submit_tag "Import" %>
     <% end %>
 </p>
+
+<%elsif @players.count > 1 %>
+
+    <p>
+    Download daily score:
+
+    <%= form_tag import_score_soccers_players_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+    <% end %>
+</p>
+
+
+
 
 <% end %>
 

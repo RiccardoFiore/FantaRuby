@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+    helper_method :help_formazioni
+
   def index
 		@user = User.find(current_user.id)
 		if @user.league_id
@@ -42,4 +44,19 @@ class UsersController < ApplicationController
   end
 
 
+  def ranking
+
+        all_Player=User.where('league_id = ?',current_user.league_id)
+        @formazioni = []
+        val=0
+        all_Player.each do |user|
+            if Formazioni.where('user_id =?',user.id).count > 0
+                f=Formazioni.where('user_id =?',user.id)
+                f.each do |x|
+                    val = val + x.punteggio
+            end
+        end
+        @formazioni << [User.find(user.id).username,val]
+		end
+  end
 end

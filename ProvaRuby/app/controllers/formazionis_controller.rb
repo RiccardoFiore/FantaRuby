@@ -1,6 +1,6 @@
 class FormazionisController < ApplicationController
- 
-  def new	
+
+  def new
 		lega = League.find(current_user.league_id)
 		rosa = current_user.rose
 		#creazione array con tutti i giocatori della rosa, poiche nella rosa ho solo
@@ -55,7 +55,7 @@ class FormazionisController < ApplicationController
 	  @b[14] = @formazione.riservaatt
 		#controllo se arrivo alla new per laprimavoltaoppure è il refresh per l'inserimento
 		#del giocatore
-		if(!params[:id]) 
+		if(!params[:id])
 			return
 		end
 		#cerco nell'array sopra crato il giocatore che devo inserire e che mi è stato
@@ -65,7 +65,7 @@ class FormazionisController < ApplicationController
 				player = @rose[i]
 			end
 		end
-		#controlli sul giocatore da inserire: ruolo, posizione 
+		#controlli sul giocatore da inserire: ruolo, posizione
 		#con successivo inserimento(salvataggio nel db)
 		#cotrollo per portiere
 		if(player.ruolo == "portiere")
@@ -90,7 +90,7 @@ class FormazionisController < ApplicationController
 			elsif(@formazione.riservadif == nil)
 				@formazione.riservadif = player.id
 			else
-				flash[:danger] = "ATTENZIONE!!! hai già inserito  tutti i difensori"	
+				flash[:danger] = "ATTENZIONE!!! hai già inserito  tutti i difensori"
 			end
 			@formazione.save
 			redirect_to '/formazionis/new'
@@ -175,7 +175,7 @@ class FormazionisController < ApplicationController
 	  formazione.save
 	  redirect_to '/formazionis/new'
 	end
-	
+
 	def index
 		@lega = League.find(current_user.league_id)
 		if(params[:id])
@@ -183,12 +183,16 @@ class FormazionisController < ApplicationController
 		else
 			@giornata = @lega.current_day
 		end
+
+
+        @daily_score=Formazioni.where('user_id = ? and giornata = ?',current_user.id,@giornata).first.punteggio
+
 		allPlayer = SoccersPlayer.all
 		arrayPlayer = [[]]
 		i = 0
 		n = 0
 		allPlayer.each do |x|
-			arrayPlayer[i] = [x.id, x.cognome, x.ruolo] 
+			arrayPlayer[i] = [x.id, x.cognome, x.ruolo]
 			i += 1
 		end
 		leghisti = @lega.users
@@ -206,7 +210,7 @@ class FormazionisController < ApplicationController
 						@arrayFormazioni[n][1][0] = arrayPlayer[k][0]
 						@arrayFormazioni[n][1][1] = arrayPlayer[k][1]
 						@arrayFormazioni[n][1][2] = arrayPlayer[k][2]
-						@arrayFormazioni[n][1][3] = "Difensore1"					
+						@arrayFormazioni[n][1][3] = "Difensore1"
 					elsif( arrayPlayer[k][0]==fg.difensore2 )
 						@arrayFormazioni[n][2][0] = arrayPlayer[k][0]
 						@arrayFormazioni[n][2][1] = arrayPlayer[k][1]
@@ -285,5 +289,5 @@ class FormazionisController < ApplicationController
 			n += 1
 		end
 	end
-	
+
 end

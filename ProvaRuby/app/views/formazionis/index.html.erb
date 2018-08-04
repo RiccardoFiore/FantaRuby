@@ -7,13 +7,13 @@
 <br/>
 <br/>
 <% if(@giornata>1) %>
-	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata-1).to_s %> <= 
+	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata-1).to_s %> <=
 <% else %>
-	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata).to_s %> <= 
+	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata).to_s %> <=
 <% end %>
 <% for j in (1..(@lega.current_day)) %>
 	<%= link_to j.to_s,  '/formazionis/day/'+j.to_s %>
-<% end %> => 
+<% end %> =>
 <% if(@giornata<@lega.current_day) %>
 	<%= link_to 'Giornata successiva', '/formazionis/day/'+(@giornata+1).to_s %>
 <% else %>
@@ -22,7 +22,7 @@
 <% i=0 %>
 <% for k in (0..(@arrayFormazioni.length-1)) %>
 	<table id="tabella">
-		<caption><h2> <%= @lega.users[i].username %> </h2></caption>
+		<caption><h2> <%= @lega.users[i].username %> &nbsp &nbsp &nbsp&nbsp DAILY SCORE: <%= @daily_score %> </h2></caption>
 		<thead>
 			<tr id="col" >
 				<th>Posizione</th>
@@ -49,13 +49,13 @@
 <br/>
 <br/>
 <% if(@giornata>1) %>
-	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata-1).to_s %> <= 
+	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata-1).to_s %> <=
 <% else %>
-	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata).to_s %> <= 
+	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata).to_s %> <=
 <% end %>
 <% for j in (1..(@lega.current_day)) %>
 	<%= link_to j.to_s,  '/formazionis/day/'+j.to_s %>
-<% end %> => 
+<% end %> =>
 <% if(@giornata<@lega.current_day) %>
 	<%= link_to 'Giornata successiva', '/formazionis/day/'+(@giornata+1).to_s %>
 <% else %>

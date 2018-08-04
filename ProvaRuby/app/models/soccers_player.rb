@@ -17,6 +17,17 @@ class SoccersPlayer < ApplicationRecord
         end
     end
 
+    def self.import_score(file)
+        spreadsheet = open_spreadsheet(file)
+        SoccersPlayer.update_all(:daily_score => 0)
+        (3..spreadsheet.last_row).each do |i|
+        if spreadsheet.row(i)[4] != nil
+            play=SoccersPlayer.where('cod = ?',spreadsheet.row(i)[3]).first
+            play.update_attributes!(:daily_score => spreadsheet.row(i)[4])
+        end
+        end
+    end
+
     def self.open_spreadsheet(file)
         case File.extname(file.original_filename)
             when '.csv' then Roo::Csv.new(file.path, nil, :ignore)
