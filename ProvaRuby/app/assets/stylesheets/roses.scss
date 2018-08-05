@@ -1,0 +1,40 @@
+table#tabella_giocatori {
+  margin: 10px;
+  border-collapse: collapse;
+  width: 55%;
+  border: 4px solid black;
+  float: left;
+  margin-top: 5%;
+}
+
+table#tabella_rosa{
+  margin: 10px;
+  border-collapse: collapse;
+  width: 40%;
+  border: 4px solid black;
+  margin-top: 5%;
+}
+
+a{
+    color: black
+}
+
+td#p{
+  border: 4px solid black;
+    background-color: #FFBF18
+}
+
+td#d{
+  border: 4px solid black;
+    background-color: #008000
+}
+
+td#c{
+  border: 4px solid black;
+    background-color: #0041C2
+}
+
+td#a{
+  border: 4px solid black;
+    background-color: #9F000F
+}

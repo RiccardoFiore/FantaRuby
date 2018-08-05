@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_01_110243) do
+ActiveRecord::Schema.define(version: 2018_08_05_135431) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2018_08_01_110243) do
     t.integer "attaccante4"
     t.integer "attaccante5"
     t.integer "attaccante6"
+    t.integer "inseriti", default: 0
   end
 
   create_table "soccers_players", force: :cascade do |t|

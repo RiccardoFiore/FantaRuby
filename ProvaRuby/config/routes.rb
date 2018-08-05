@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
 
-  get 'formazionis/new'
-    resources :admins
+    get 'formazionis/new'
 
     devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", registrations: 'users/registrations' }
 
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+    resources :admins
     resources :homes
     resources :leagues
     resources :users
     resources :roses
-    resources :soccers_players do
-    collection { post :import,:import_score}
-    end
     resources :formazionis
+    resources :soccers_players do
+        collection { post :import,:import_score}
+    end
     root :to => redirect('/users/sign_in')
     get 'about'   => 'static_pages#about'
     get 'contact' => 'static_pages#contact'
@@ -31,12 +31,13 @@ Rails.application.routes.draw do
 
     #routes per l'inserimento dei giocatori in formazione
     get '/formazionis/new/:id' => 'formazionis#new'
+    #routes per l'inserimento dei giocatori in rosa
+    get '/roses/new/:id/ruolo/:ruolo' => 'roses#new'
+    get '/roses/new/:ruolo' => 'roses#new'
 
     get '/admins/delete/users' => 'admins#delete_users'
     post '/admins/delete/users' => 'admins#delete_users'
 
-    #routes per l'inserimento dei giocatori in formazione
-    get '/formazionis/new/:id' => 'formazionis#new'
     #routes per la visualizzazioni di tutte le formazioni
     get '/formazionis/day/:id' => 'formazionis#index'
 end
