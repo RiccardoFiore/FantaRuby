@@ -7,17 +7,18 @@
 
 -if current_user.president?
   #{link_to 'Impostazioni lega', edit_league_path(@lega.id)}
-%br
+  %br
 -if current_user.president?
   #{link_to 'Calcola punteggi giornalieri', leagues_score_rate_path}
-%br
+  %br
 #{link_to 'Inserisci/modifica formazione', new_formazioni_path}
 %br
 #{link_to 'Visualizza tutte le formazioni', formazionis_path}
 %br
 %br
+
 Informazione della lega:
-%h4= @lega.description
+%h4=  @lega.description
 %br
 %br
 

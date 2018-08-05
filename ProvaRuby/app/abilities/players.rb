@@ -1,5 +1,10 @@
 Canard::Abilities.for(:player) do
   can :index, League
+  can :show, Rose
+  can :ranking, User
+  can :new, Formazioni
+  can :destroy, Formazioni
+  can :index, Formazioni
   # Define abilities for the user role here. For example:
   #
   #   if user.admin?

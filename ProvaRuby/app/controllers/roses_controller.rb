@@ -1,16 +1,13 @@
 class RosesController < ApplicationController
     before_action :authenticate_user!
-	 def index
-
+    def index
         id = current_user.id
         @rose = Rose.find(id)
-
-	@socce= SoccersPlayer.all
-
-
-         end
+        @socce= SoccersPlayer.all
+    end
 	def show
-          id = params[:id]
+        authorize! :show, Rose, :message => "Non hai i permessi per accedere alla rosa"
+        id = params[:id]
 		@rose = Rose.all
                 @socce= @socce = SoccersPlayer.all
 		@rose=@rose.find_by_user_id(id)
