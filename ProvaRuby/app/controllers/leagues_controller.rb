@@ -28,13 +28,12 @@ class LeaguesController < ApplicationController
         if current_user.roles_mask == 1                                         #notdefined
             if @league.save!
                  flash[:notice] = "#{@league.name} was successfully created."
-                 current_user.update_attributes!(:roles_mask => 2)               #diventa presidente
                  current_user.update_attributes!(:league_id => @league.id)
             else
                 render new_league_path
             end
         end
-		redirect_to leagues_path
+		redirect_to new_rose_path + '/portiere'
 	end
 
     def edit
@@ -76,8 +75,8 @@ class LeaguesController < ApplicationController
 		#@stringaBonus/Malus servono per far riapparire i bonus/malus precedentemente
 		#messi nella tabella, se no ritornerebbero a 0
 		def rate_score
-			
-			
+
+
 			league = League.find(current_user.league_id)
 			@currentDay = league.current_day
 			@allLeagueUsers = league.users

@@ -4,6 +4,8 @@ Canard::Abilities.for(:loggedin) do
   can :update, Home
   can :show, Home
   can :create, League
+  can :new, Rose
+  can :destroy, Rose
   # Define abilities for the user role here. For example:
   #
   #   if user.admin?

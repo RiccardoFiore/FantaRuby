@@ -57,6 +57,7 @@ end
 	end
 
 	def new
+      authorize! :new, Rose, :message => "Hai già creato la tua rosa o non hai i diritti per farlo"
       if( !@rosa = current_user.rose)
         @rosa = Rose.new(:user_id => current_user.id)
         @rosa.save
@@ -217,6 +218,12 @@ end
           end
           if @rosa.inseriti == 24
               current_user.update_attributes(:budget => current_user.budget - player.quotazione)
+              lega = League.find_by(:id => current_user.league_id)
+              if lega.president_id == current_user.id
+                 current_user.update_attributes!(:roles_mask => 2)               #diventa presidente
+              else
+                 current_user.update_attributes!(:roles_mask => 4)               #diventa player
+              end
               redirect_to leagues_path
           else
               current_user.update_attributes(:budget => current_user.budget - player.quotazione)
@@ -227,17 +234,13 @@ end
         return
       end
     end
-	def create
 
-	end
-	def update
-
-	end
     def delete_d
         redirect_to rose_path(@rose.user_id)
     end
 
 	def destroy
+      authorize! :destroy, Rose, :message => "La rosa non può essere più modificata"
       rosa = current_user.rose
       r = []
       id = []

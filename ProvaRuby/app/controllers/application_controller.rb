@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
         if current_user.roles_mask == 4 || current_user.roles_mask == 2
             leagues_path
         elsif current_user.roles_mask == 1
-            homes_path
+            if current_user.league_id != nil
+                new_rose_path + '/portiere'
+            else
+                homes_path
+            end
         else
             id = current_user.id
             admin_path(id)
