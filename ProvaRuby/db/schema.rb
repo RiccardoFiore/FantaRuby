@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_145323) do
+ActiveRecord::Schema.define(version: 2018_08_05_184032) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2018_08_05_145323) do
     t.string "status"
     t.integer "players"
     t.integer "current_day", default: 1
+    t.integer "votes_day", default: 0
   end
 
   create_table "roses", force: :cascade do |t|

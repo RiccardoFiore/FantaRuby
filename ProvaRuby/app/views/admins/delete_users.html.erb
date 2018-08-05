@@ -104,14 +104,23 @@
 </table>
 
 <% if @players.count == 0 %>
-<p>
+  <p>
     Download:
 
     <%= form_tag import_soccers_players_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag "Import" %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import" %>
     <% end %>
-</p>
+  </p>
+<%elsif @players.count >= 1 %>
 
+  <p>
+    Download daily score:
+
+    <%= form_tag import_score_soccers_players_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import" %>
+    <% end %>
+  </p>
 <% end %>
 

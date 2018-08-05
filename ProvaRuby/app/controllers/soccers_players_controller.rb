@@ -9,13 +9,15 @@ class SoccersPlayersController < ApplicationController
 
     def import
         SoccersPlayer.import(params[:file])
-        redirect_to admins_path, notice: "Products imported."
+        redirect_to '/admins/delete/users', notice: "Products imported."
     end
 
 
     def import_score
         SoccersPlayer.import_score(params[:file])
-        redirect_to admins_path, notice: "Products imported."
+        votes_day = League.first.votes_day
+        League.update_all(:votes_day => votes_day + 1)
+        redirect_to '/admins/delete/users', notice: "Products imported."
     end
 
 

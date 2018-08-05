@@ -12,14 +12,14 @@
   = submit_tag 'Cerca'
 
 %br
-%br
 %table
   %thead
     %tr
       %th Nome
       %th Status
       %th Presidente
-
+      %th Num_Players
+      %th Info
   %tbody
     - @leghe.each do |lega|
       %tr
@@ -27,10 +27,15 @@
         %td= lega.status
         - u = User.find_by_id(lega.president_id)
         %td= u.email
+        - players = lega.users
+        - num_players = players.size.to_s + '/' + lega.players.to_s
+        %td= num_players
         %td= link_to "Details", home_path(lega)
 %br
 %br
 #{link_to 'Crea lega', new_league_path}
+%br
+%br
 
 
 
