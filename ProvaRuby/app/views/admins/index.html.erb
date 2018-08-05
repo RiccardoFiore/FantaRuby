@@ -1,6 +1,18 @@
 <h1>FantaRuby</h1>
 <br/>
 <br/>
+
+<h3>Cerca lega</h3>
+<%= form_tag homes_path, :method => :post do %>
+  <%= label :league, :name, 'Nome' %>
+  <br/>
+  <%= text_field :league, :name %>
+  <br/>
+  <%= submit_tag 'Cerca' %>
+<% end %>
+<br/>
+<br/>
+
 <table id="tabella">
   <thead>
     <tr id="col">
