@@ -1,11 +1,16 @@
 class AdminsController < ApplicationController
     #load_and_authorize_resource
-    def index
-
+    def delete_users
         @players = SoccersPlayer
-        authorize! :index, Admin, :message => "Non hai i permessi per accedere come admin"
-        @users=User.all
+        authorize! :delete_users, Admin, :message => "Non hai i permessi per accedere come admin"
+        username = params[:username]
+        if username == nil || username == ""
+            @users =User.all
+        else
+            @user = User.find_by_username(username)
+        end
     end
+
 
     def show
 

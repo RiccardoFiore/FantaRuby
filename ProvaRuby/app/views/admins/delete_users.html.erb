@@ -2,14 +2,14 @@
 <br/>
 <br/>
 
+
 <h3>Cerca lega</h3>
-<%= form_tag homes_path, :method => :post do %>
-  <%= label :league, :name, 'Nome' %>
-  <br/>
-  <%= text_field :league, :name %>
+<%= form_tag '/admins/delete/users', :method => :get do -%>
+  <%= label_tag 'username' %>
+  <%= text_field_tag 'username' %>
   <br/>
   <%= submit_tag 'Cerca' %>
-<% end %>
+<% end -%>
 <br/>
 <br/>
 
@@ -21,9 +21,46 @@
       <th>President</th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
+  <% if @user != nil %>
+    <tr>
+        <td id="t">
+            <%= link_to @user.username, '/users/'+@user.id.to_s %>
+        </td>
+        <% if @user.league_id != nil %>
+            <% l=League.find_by_id(@user.league_id) %>
+            <td id= "t">
+                <%= l.name %>
+            </td>
+            <% u = User.find_by_id(l.president_id) %>
+            <td id="t">
+                <%= link_to u.username, '/users/'+u.id.to_s %>
+            </td>
+            <td id="t">
+                <%= link_to 'Delete', '/users/'+@user.id.to_s+'/delete', method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+            <td id="t">
+                <%= link_to 'Change President', edit_league_path(l.id) %>
+            </td>
+        <% else %>
+            <td id= "t">
+                "empty"
+            </td>
+            <td id= "t">
+                "empty"
+            </td>
+            <td id="t">
+                <%= link_to 'Delete', '/users/'+@user.id.to_s+'/delete', method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+            <td id= "t">
+                "empty"
+            </td>
+        <% end %>
+    </tr>
+  <% else %>
     <% @users.each do |user| %>
         <% if user.roles_mask != 8 %>
       <tr>
@@ -37,7 +74,7 @@
             </td>
             <% u = User.find_by_id(l.president_id) %>
             <td id="t">
-                <%= link_to u.username, '/users/'+u.id.to_s %>
+                <%= link_to u.username, '/users/'+user.id.to_s %>
             </td>
             <td id="t">
                 <%= link_to 'Delete', '/users/'+user.id.to_s+'/delete', method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -62,6 +99,7 @@
       </tr>
     <% end %>
     <% end %>
+    <% end %>
   </tbody>
 </table>
 
@@ -74,20 +112,6 @@
     <%= submit_tag "Import" %>
     <% end %>
 </p>
-
-<%elsif @players.count > 1 %>
-
-    <p>
-    Download daily score:
-
-    <%= form_tag import_score_soccers_players_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag "Import" %>
-    <% end %>
-</p>
-
-
-
 
 <% end %>
 
