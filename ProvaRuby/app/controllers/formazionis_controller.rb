@@ -75,9 +75,9 @@ class FormazionisController < ApplicationController
 				@formazione.riservapor = player.id
 			else
 				flash[:danger] = "ATTENZIONE!!! hai già inserito  tutti i portieri"
-				redirect_to '/formazionis/new'
 			end
 			@formazione.save
+			redirect_to '/formazionis/new'
 		end
 		#cotrollo per difensore
 		if(player.ruolo == "difensore")
