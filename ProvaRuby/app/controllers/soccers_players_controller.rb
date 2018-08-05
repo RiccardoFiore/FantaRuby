@@ -13,6 +13,11 @@ class SoccersPlayersController < ApplicationController
     end
 
 
+    def import_score
+        SoccersPlayer.import_score(params[:file])
+        redirect_to admins_path, notice: "Products imported."
+    end
+
 
 
 

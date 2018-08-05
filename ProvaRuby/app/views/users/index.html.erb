@@ -13,6 +13,11 @@
 	<h3>League name: </h3><%= @league.name %>
 <% end %>
 
+<% if current_user.president? || current_user.player? %>
+    <%= form_tag user_path(current_user.id), :method => :put, data: {confirm: 'Are you sure?'} do %>
+      <%= submit_tag 'Esci dalla lega' %>
+    <% end %>
+<% end %>
 <br/>
 <br/>
 <%= link_to "Settings", '/users/edit' %>

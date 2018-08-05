@@ -1,21 +1,10 @@
 %h2 controllo lega
-%td=@rose.portiere1
--u=0
 
--@socce.each do |socce|
-  -if ((socce.cod==@rose.portiere1 || socce.cod==@rose.portiere2|| socce.cod==@rose.portiere3)&&socce.ruolo!="portiere")||((socce.cod==@rose.difensore1||socce.cod==@rose.difensore2||socce.cod==@rose.difensore3||socce.cod==@rose.difensore4||socce.cod==@rose.difensore5||socce.cod==@rose.difensore6||socce.cod==@rose.difensore7)&&socce.ruolo!="difensore")||((socce.cod==@rose.centrocampista1||socce.cod==@rose.centrocampista2||socce.cod==@rose.centrocampista3||socce.cod==@rose.centrocampista4||socce.cod==@rose.centrocampista5||socce.cod==@rose.centrocampista6||socce.cod==@rose.centrocampista7||socce.cod==@rose.centrocampista8)&&socce.ruolo!="centrocampista")||((socce.cod==@rose.attaccante1||socce.cod==@rose.attaccante2||socce.cod==@rose.attaccante3||socce.cod==@rose.attaccante4||socce.cod==@rose.attaccante5||socce.cod==@rose.attaccante6)&&socce.ruolo!="attaccante")
-    -u=1
-  -if(@rose.portiere1==@rose.portiere2)||(@rose.portiere1==@rose.portiere3)|| (@rose.portiere2==@rose.portiere3)||(@rose.difensore1==@rose.difensore2)||(@rose.difensore1==@rose.difensore3)||(@rose.difensore1==@rose.difensore4)||(@rose.difensore1==@rose.difensore5)||(@rose.difensore1==@rose.difensore6)||(@rose.difensore1==@rose.difensore7)||(@rose.difensore2==@rose.difensore3)||(@rose.difensore2==@rose.difensore4)||(@rose.difensore2==@rose.difensore5)||(@rose.difensore2==@rose.difensore6)||(@rose.difensore2==@rose.difensore7)||(@rose.difensore3==@rose.difensore4)||(@rose.difensore3==@rose.difensore5)||(@rose.difensore3==@rose.difensore6)||(@rose.difensore3==@rose.difensore7)||(@rose.difensore4==@rose.difensore5)||(@rose.difensore4==@rose.difensore6)||(@rose.difensore4==@rose.difensore7)||(@rose.difensore5==@rose.difensore6)||  (@rose.difensore5==@rose.difensore7)||(@rose.difensore6==@rose.difensore7)||(@rose.centrocampista1==@rose.centrocampista2)||(@rose.centrocampista1==@rose.centrocampista3)||(@rose.centrocampista1==@rose.centrocampista4)||(@rose.centrocampista1==@rose.centrocampista5)||(@rose.centrocampista1==@rose.centrocampista6)||(@rose.centrocampista1==@rose.centrocampista7)||(@rose.centrocampista1==@rose.centrocampista8)||(@rose.centrocampista2==@rose.centrocampista3)||(@rose.centrocampista2==@rose.centrocampista4)||(@rose.centrocampista2==@rose.centrocampista5)||(@rose.centrocampista2==@rose.centrocampista6)||(@rose.centrocampista2==@rose.centrocampista7)||(@rose.centrocampista2==@rose.centrocampista8)||(@rose.centrocampista3==@rose.centrocampista4)||(@rose.centrocampista3==@rose.centrocampista5)||(@rose.centrocampista3==@rose.centrocampista6)||(@rose.centrocampista3==@rose.centrocampista7)||(@rose.centrocampista3==@rose.centrocampista8)||(@rose.centrocampista4==@rose.centrocampista5)||(@rose.centrocampista4==@rose.centrocampista6)||(@rose.centrocampista4==@rose.centrocampista7)||(@rose.centrocampista4==@rose.centrocampista8)||(@rose.centrocampista5==@rose.centrocampista6)||(@rose.centrocampista5==@rose.centrocampista7)||(@rose.centrocampista5==@rose.centrocampista8)||(@rose.centrocampista6==@rose.centrocampista7)||(@rose.centrocampista6==@rose.centrocampista8)||(@rose.centrocampista7==@rose.centrocampista8)||(@rose.attaccante1==@rose.attaccante2)||(@rose.attaccante1==@rose.attaccante3)||(@rose.attaccante1==@rose.attaccante4)||(@rose.attaccante1==@rose.attaccante5)||(@rose.attaccante1==@rose.attaccante6)||(@rose.attaccante2==@rose.attaccante3)||(@rose.attaccante2==@rose.attaccante4)||(@rose.attaccante2==@rose.attaccante5)||(@rose.attaccante2==@rose.attaccante6)||(@rose.attaccante3==@rose.attaccante4)||(@rose.attaccante3==@rose.attaccante5)||(@rose.attaccante3==@rose.attaccante6)||(@rose.attaccante4==@rose.attaccante5)||(@rose.attaccante4==@rose.attaccante6)||(@rose.attaccante5==@rose.attaccante6)||  
-    -u=1
-
-
--if u==1
-  ATTENZIONE LA TUA ROSA INSERITA È SBAGLIATA
-  = form_tag rose_path(@rose.user_id), :method => :delete do  
-    = submit_tag 'clicca per tornare indietro'
+-if Rose.find_by_user_id(current_user.id)==nil
+ rosa creata con errore clicca qua per ricreare la tua rosa
+ #{link_to 'crea il tuo team', leagues_path}
 -else
-  
-  team creato correttamente
+ team creato correttamente
   
   
 %br
