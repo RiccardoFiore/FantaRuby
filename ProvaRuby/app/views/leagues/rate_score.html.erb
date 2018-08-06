@@ -1,6 +1,5 @@
-<h1> Rate daily players score</h1>
-<br/>
-
+<h1> Calcola i punteggi giornalieri dei giocatori</h1>
+<h3>I voti presenti nel database sono della gionata <%= @league.votes_day %> </h3>
 <% flash.each do |key, value| %>
 	<div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
@@ -10,13 +9,13 @@
 	<input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
 
 	<table id="tabella">
-		<caption><h2> Day <%= @currentDay %> </h2></caption>
+		<caption><h3> Calcola i voti per la giornata <%= @currentDay %> </h3></caption>
 		<thead>
 			<tr id="col">
-				<th>League Player</th>
-				<th>Add Bonus</th>
-				<th>Add Malus</th>
-				<th>Daily Score</th>
+				<th>Giocatori</th>
+				<th>Bonus</th>
+				<th>Malus</th>
+				<th>Punteggio</th>
 			</tr>
 		</thead>
 		<tbody>

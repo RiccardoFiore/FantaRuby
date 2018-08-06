@@ -22,9 +22,16 @@ class LeaguesController < ApplicationController
     def create
         authorize! :create, League, :message => "Fai già parte di una lega"
         @user = current_user
-		@league = League.new(params[:league].permit(:name, :players, :status, :description, :user))
+				@league = League.new(params[:league].permit(:name, :players, :status, :description, :user, :current_day, :votes_day))
         @league.president_id = @user.id
         @league.status = "Aperta"
+        #se crei una lega a campionato iniziato la gioornata sarà setatta alla
+        #alla giornata corrente del campionatoù
+        if(giornataCorrente = League.first.votes_day)
+					@league.current_day = giornataCorrente
+					@league.votes_day = giornataCorrente
+				end
+        
         if current_user.roles_mask == 1                                         #notdefined
             if @league.save!
                  flash[:notice] = "#{@league.name} was successfully created."
@@ -78,9 +85,9 @@ class LeaguesController < ApplicationController
     #messi nella tabella, se no ritornerebbero a 0
     def rate_score
       authorize! :rate_score, League, :message => "Non sei autorizzato a calcolare i voti"
-      league = League.find(current_user.league_id)
-      @currentDay = league.current_day
-      @allLeagueUsers = league.users
+      @league = League.find(current_user.league_id)
+      @currentDay = @league.current_day
+      @allLeagueUsers = @league.users
       @stringaBonus = ""
       @stringaMalus = ""
 
@@ -99,8 +106,19 @@ class LeaguesController < ApplicationController
           if !f
               next
           end
-          f.punteggio = players_daily_score(user.id, @currentDay)
-          f.save
+          #controllo sela giornata corrente della lega è la stesadei voti nel databese
+          #nel caso in cui la giornata della lega sia minore della giornata dei voti
+          #tutti i votiverranno settati a 0 senza l'aggiunta di bonuso malus
+          if( @currentDay < @league.votes_day )
+							f.punteggio = 0
+							f.save
+							flash[:danger] = "Attenzione: poichè la giornata corrente è precedente alle votazioni, i punteggi verranno settati a 0"
+					else
+							#prima dell'aggiunta del votes_day c'era solo questo
+							f.punteggio = players_daily_score(user.id, @currentDay)
+							f.save
+					end
+					
 
       end
       @stringaBonus = @stringaBonus.split(",")
@@ -115,12 +133,12 @@ class LeaguesController < ApplicationController
         #controllo solo per evitare il doppio click su go next day, controlla
         #che la differenza tra il giorno successivo e il giorno dell'ultima formazione
         #creata dagli utenti non sia maggiore di uno
-        if( (lega.current_day + 1)-(Formazioni.last.giornata) > 1)
-            flash[:danger] = "Warning u can't skip more than 2 days"
+        if( lega.current_day <= lega.votes_day )
+						lega.current_day += 1
+            lega.save
             redirect_to '/leagues/score/rate'
         else
-            lega.current_day += 1
-            lega.save
+            flash[:danger] = "Attenzione: non puoi calcolare i punteggi della giornata corrente se i voti non sono  della medesima giornata"
             redirect_to '/leagues/score/rate'
         end
     end
@@ -134,7 +152,7 @@ class LeaguesController < ApplicationController
         if(formazione.portiere)
             sp 	= SoccersPlayer.find(formazione.portiere).daily_score
         else
-            so = 0
+            sp = 0
         end
         if(formazione.difensore1)
             sd1 = SoccersPlayer.find(formazione.difensore1).daily_score
