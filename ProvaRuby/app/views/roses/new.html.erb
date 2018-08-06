@@ -16,7 +16,28 @@
   <br/>
   <br/>
   <%= label_tag :role %>
-  <%= select_tag(:role,  options_for_select(["Portiere", "Difensore", "Centrocampista", "Attaccante"], @ruolo ) ) %>
+  <select name="role" id="role">
+		<% if(@soc_plyrs.first.ruolo == "portiere") %>
+			<option selected value="Portiere">Portiere</option>
+		<% else %>
+			<option value="Portiere">Portiere</option>
+		<% end %>
+		<% if(@soc_plyrs.first.ruolo == "difensore") %>
+			<option selected value="Difensore">Difensore</option>
+		<% else %>
+			<option value="Difensore">Difensore</option>
+		<% end %>
+		<% if(@soc_plyrs.first.ruolo == "centrocampista") %>	
+			<option selected value="Centrocampista">Centrocampista</option>
+		<% else %>
+			<option value="Centrocampista">Centrocampista</option>
+		<% end %>
+		<% if(@soc_plyrs.first.ruolo == "attaccante") %>	
+			<option selected value="Attaccante">Attaccante</option>
+		<% else %>
+			<option value="Attaccante">Attaccante</option>
+		<% end %>
+	</select>
   <br/>
   <br/>
   <%= submit_tag 'Filtra' %>
