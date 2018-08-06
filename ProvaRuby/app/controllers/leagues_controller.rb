@@ -27,9 +27,11 @@ class LeaguesController < ApplicationController
         @league.status = "Aperta"
         #se crei una lega a campionato iniziato la gioornata sarà setatta alla
         #alla giornata corrente del campionatoù
-        if(giornataCorrente = League.first.votes_day)
-					@league.current_day = giornataCorrente
-					@league.votes_day = giornataCorrente
+        if(League.first)
+					if(giornataCorrente = League.first.votes_day)
+						@league.current_day = giornataCorrente
+						@league.votes_day = giornataCorrente
+					end
 				end
         
         if current_user.roles_mask == 1                                         #notdefined
