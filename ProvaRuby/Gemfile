@@ -12,6 +12,8 @@ gem 'roo-xls'
 #Added devise and canard gems to manage authentication and app roles
 gem 'devise'
 
+#Added gogole api gem for calendar
+gem 'google-api-client', require: 'google/apis/calendar_v3'
 
 gem 'omniauth-facebook'
 

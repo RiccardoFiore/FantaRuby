@@ -1,0 +1,14 @@
+<h1> Eventi del calendario </h1>
+<br/>
+<br/>
+<ul>
+  <% @event_list.items.each do |event| %>
+    <li><%= event.summary %> (<%= event.end.date_time %>)</li>
+  <% end %>
+</ul>
+
+<br/>
+<br/>
+<%= link_to 'Torna alla home della lega', '/leagues' %>
+<br/>
+<br/>
