@@ -1,4 +1,4 @@
-<h1>Ranking</h1>
+<h1>Daily Ranking</h1>
 
 <table id="players">
   <thead>
@@ -12,22 +12,24 @@
 
 
 
-    <% for i in (0..(@formazioni.length-1)) %>
+    <% for i in (0..(@list.length-1)) %>
         <tr>
-         <td id="t">
+        <td id="t">
             <%= i+1 %>
         </td>
         <td id="t">
-            <%= link_to @formazioni[i][0].username,user_path(@formazioni[i][0].id) %>
+           <%= link_to @list[i][0].username,user_path(@list[i][0].id) %>
         </td>
         <td id="t">
-            <%= @formazioni[i][1] %>
+            <%= @list[i][1] %>
         </td>
         </tr>
     <% end %>
   </tbody>
 
+
 </table>
+
 
 </br>
 </br>

@@ -4,6 +4,8 @@
 
 #{link_to 'Ranking', ranking_path}
 %br
+#{link_to 'Daily Ranking', daily_ranking_path}
+%br
 
 -if current_user.president?
   #{link_to 'Impostazioni lega', edit_league_path(@lega.id)}

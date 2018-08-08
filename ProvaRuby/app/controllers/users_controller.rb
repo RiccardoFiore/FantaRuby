@@ -58,18 +58,37 @@ class UsersController < ApplicationController
 
   def ranking
     authorize! :ranking, User, :message => 'Non hai i permessi per accedere alla classifica'
+    @lega=current_user.league_id
     all_Player=User.where('league_id = ?',current_user.league_id)
     @formazioni = []
     val=0
     all_Player.each do |user|
+        val=0
         if Formazioni.where('user_id =?',user.id).count > 0
             f=Formazioni.where('user_id =?',user.id)
             f.each do |x|
                 val = val + x.punteggio
         end
     end
-    @formazioni << [User.find(user.id).username,val]
+    @formazioni << [User.find(user.id),val]
+    @formazioni.sort!{|a,b| b[1]<=>a[1]}
     end
+  end
+
+
+  def daily_ranking
+
+        authorize! :ranking, User, :message => 'Non hai i permessi per accedere alla classifica'
+        @lega=current_user.league_id
+        last_day=Formazioni.last.giornata
+        @list=[]
+        formazioni=Formazioni.where('giornata =?',last_day)
+        formazioni.each do |f|
+            @list << [User.find(f.user_id),f.punteggio]
+        end
+
+        @list.sort!{|a,b| b[1]<=>a[1]}
+
   end
 
 end
