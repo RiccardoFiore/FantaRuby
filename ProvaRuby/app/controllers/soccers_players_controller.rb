@@ -15,8 +15,12 @@ class SoccersPlayersController < ApplicationController
 
     def import_score
         SoccersPlayer.import_score(params[:file])
-        votes_day = League.first.votes_day
-        League.update_all(:votes_day => votes_day + 1)
+        if League.first == nil
+            votes_day=0
+        else
+            votes_day = League.first.votes_day
+            League.update_all(:votes_day => votes_day + 1)
+        end
         redirect_to '/admins/delete/users', notice: "Products imported."
     end
 
