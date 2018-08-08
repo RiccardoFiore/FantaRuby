@@ -8,6 +8,9 @@ class AdminsController < ApplicationController
             @users =User.all
         else
             @user = User.find_by_username(username)
+            if @user == nil
+                @users =User.all
+            end
         end
     end
 

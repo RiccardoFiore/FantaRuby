@@ -21,7 +21,15 @@
     <br/>
     <br/>
 
-
+    <% if @ultima_giornata != -1 %>
+        <%= form_tag '/users/' + current_user.id.to_s, :method => :post do %>
+            Il tuo punteggio della  <b><%= @ultima_giornata %>°</b> giornata è: <b><%= @punteggio_giornata %></b>
+            <input name="punteggio" type="text" value=<%= @punteggio_giornata %> readonly  style="width: 20px;visibility: hidden;" >
+            <%= submit_tag 'Twitta il tuo risultato' %>
+        <% end %>
+    <% end %>
+    <br/>
+    <br/>
     <%= link_to "Settings", '/users/edit' %>
 
     <br/>

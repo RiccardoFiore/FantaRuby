@@ -12,9 +12,10 @@ gem 'roo-xls'
 #Added devise and canard gems to manage authentication and app roles
 gem 'devise'
 
-
+gem 'omniauth'
 gem 'omniauth-facebook'
-
+gem 'omniauth-twitter'
+gem 'twitter'
 gem 'canard', '~> 0.5.0.pre'
 
 #We'll use haml template

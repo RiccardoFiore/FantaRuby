@@ -22,16 +22,16 @@ class LeaguesController < ApplicationController
     def create
         authorize! :create, League, :message => "Fai già parte di una lega"
         @user = current_user
-				@league = League.new(params[:league].permit(:name, :players, :status, :description, :user, :current_day, :votes_day))
+        @league = League.new(params[:league].permit(:name, :players, :status, :description, :user, :current_day, :votes_day))
         @league.president_id = @user.id
         @league.status = "Aperta"
-        #se crei una lega a campionato iniziato la gioornata sarà setatta alla
+        #se crei una lega a campionato iniziato la giornata sarà settata alla
         #alla giornata corrente del campionatoù
         if(giornataCorrente = League.first.votes_day)
-					@league.current_day = giornataCorrente
-					@league.votes_day = giornataCorrente
-				end
-        
+            @league.current_day = giornataCorrente
+            @league.votes_day = giornataCorrente
+        end
+
         if current_user.roles_mask == 1                                         #notdefined
             if @league.save!
                  flash[:notice] = "#{@league.name} was successfully created."
@@ -62,7 +62,7 @@ class LeaguesController < ApplicationController
             new_president = User.find(params[:league][:president_id])
             new_president.update_attributes!(:roles_mask => 2)
             old_president.update_attributes!(:roles_mask => 4)
-            redirect_to admins_path
+            redirect_to admins_path + '/delete/users'
          elsif @user.president?
             new_president = User.find(params[:league][:president_id])
             if new_president.id != current_user.id
@@ -118,7 +118,7 @@ class LeaguesController < ApplicationController
 							f.punteggio = players_daily_score(user.id, @currentDay)
 							f.save
 					end
-					
+
 
       end
       @stringaBonus = @stringaBonus.split(",")

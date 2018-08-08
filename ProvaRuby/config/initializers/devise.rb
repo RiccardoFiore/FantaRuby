@@ -259,6 +259,7 @@ Devise.setup do |config|
 
 
   config.omniauth :facebook, '524000551349833', '08731ce9933e7b64c9ccd05233addd97'
+  config.omniauth :twitter, 'r9RnKDR38WNSsUrTtngUhapVG', 'FJ9cv4bZRuUYF3VXLNwBfTWboq2V8Z82Tnp6kXVewvBxkZoAbD'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
