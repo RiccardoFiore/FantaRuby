@@ -1,0 +1,31 @@
+<br/>
+<br/>
+<table id="tabella_eventi">
+	<caption><h1> Eventi del calendario </h1></caption>
+	<tr id="tr_eventi">
+		<th id="th_eventi">Nome Evento</th>
+		<th id="th_eventi">Giorno</th>
+		<th id="th_eventi">Ora</th>
+	</tr>
+	
+	<% @event_list.items.each do |event| %>
+		<tr id="tr_eventi">
+			<td id="td_eventi_nome"><%= event.summary %></td>
+			<td id="td_eventi_giorno"><% y=""
+						 event.end.date_time.inspect.split[0,4].map{ |x| y+=x } 
+					%>
+					<%= y %>
+			</td>
+			<td id="td_eventi_ora">
+				<%= event.end.date_time.inspect.split[4][0,5] %>
+			</td>
+		</tr>
+  <% end %>
+</table>
+<br/>
+<br/>
+<br/>
+<br/>
+<%= link_to 'Torna alla home della lega', '/leagues' %>
+<br/>
+<br/>

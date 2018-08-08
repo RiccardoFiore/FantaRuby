@@ -13,6 +13,9 @@ gem 'roo-xls'
 gem 'devise'
 
 gem 'omniauth'
+#Added gogole api gem for calendar
+gem 'google-api-client', require: 'google/apis/calendar_v3'
+
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'twitter'

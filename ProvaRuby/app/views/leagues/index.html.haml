@@ -4,6 +4,8 @@
 
 #{link_to 'Ranking', ranking_path}
 %br
+#{link_to 'Daily Ranking', daily_ranking_path}
+%br
 
 -if current_user.president?
   #{link_to 'Impostazioni lega', edit_league_path(@lega.id)}
@@ -14,6 +16,8 @@
 #{link_to 'Inserisci/modifica formazione', new_formazioni_path}
 %br
 #{link_to 'Visualizza tutte le formazioni', formazionis_path}
+%br
+#{link_to 'Visualizza gli eventi in programma', '/leagues/calendar/events/studenti.uniroma1.it_h2vvrd3lfsc5t09f7pm1a55h2c@group.calendar.google.com'}
 %br
 %br
 

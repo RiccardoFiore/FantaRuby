@@ -30,20 +30,23 @@
     <% end %>
     <br/>
     <br/>
-    <%= link_to "Settings", '/users/edit' %>
+    <% if current_user.id == @user.id %>
 
-    <br/>
-    <br/>
+        <%= link_to "Settings", '/users/edit' %>
 
-    <%= form_tag user_path(current_user.id), :method => :put do %>
-    <%= submit_tag 'Esci dalla lega' %>
+        <br/>
+        <br/>
 
-    <br/>
-    <br/>
-    <%= link_to "Torna all'home page della lega", leagues_path(@league.id) %>
-
+        <%= form_tag user_path(current_user.id), :method => :put do %>
+            <%= submit_tag 'Esci dalla lega' %>
+        <% end %>
     <% end %>
 
+
+        <br/>
+        <br/>
+
+        <%= link_to "Torna all'home page della lega", leagues_path(@league.id) %>
 
 <% elsif current_user.roles_mask == 8 %>
 

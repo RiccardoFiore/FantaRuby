@@ -20,3 +20,33 @@ tr#tr{
 td#t{
     border: 1px solid black;
 }
+
+table#tabella_eventi{
+    margin: 10px;
+    border-collapse: collapse;
+    width: 50%;
+    text-align:center;
+    border: 2px solid black;
+}
+tr#tr_eventi{
+    border: 3px solid black;
+}
+
+th#th_eventi{
+    border: 1px solid black;
+}
+
+td#td_eventi_nome{
+    border: 1px solid black;
+    background-color: coral;
+}
+
+td#td_eventi_giorno{
+    border: 1px solid black;
+    background-color: gold;
+}
+
+td#td_eventi_ora{
+    border: 1px solid black;
+    background-color: darkcyan;
+}

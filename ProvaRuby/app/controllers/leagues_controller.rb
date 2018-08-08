@@ -1,5 +1,6 @@
 class LeaguesController < ApplicationController
     before_action :authenticate_user!
+		require 'net/http'
 
     def index
         @uid=current_user.id
@@ -27,11 +28,13 @@ class LeaguesController < ApplicationController
         @league.status = "Aperta"
         #se crei una lega a campionato iniziato la giornata sarà settata alla
         #alla giornata corrente del campionatoù
-        if(giornataCorrente = League.first.votes_day)
-            @league.current_day = giornataCorrente
-            @league.votes_day = giornataCorrente
-        end
 
+        if(League.first)
+            if(giornataCorrente = League.first.votes_day)
+                @league.current_day = giornataCorrente
+                @league.votes_day = giornataCorrente
+            end
+        end
         if current_user.roles_mask == 1                                         #notdefined
             if @league.save!
                  flash[:notice] = "#{@league.name} was successfully created."
@@ -142,6 +145,53 @@ class LeaguesController < ApplicationController
             redirect_to '/leagues/score/rate'
         end
     end
+		#funzione per il  calendar degli utenti
+		#viene richiamata dopo il log in di google
+		def callback
+				client = Signet::OAuth2::Client.new(client_options)
+				client.code = params[:code]
+
+				response = client.fetch_access_token!
+
+				session[:authorization] = response
+				redirect_to '/leagues/calendar/events/studenti.uniroma1.it_h2vvrd3lfsc5t09f7pm1a55h2c@group.calendar.google.com'
+		end
+		#funzione per il  calendar degli utenti
+		#va sulla pagina eventi e li visualizza
+		def events
+				client = Signet::OAuth2::Client.new(client_options)
+				client.update!(session[:authorization])
+
+				service = Google::Apis::CalendarV3::CalendarService.new
+				service.authorization = client
+				#controllo se non ho mai loggato con google
+				if(!session[:authorization])
+					client = Signet::OAuth2::Client.new(client_options)
+					redirect_to client.authorization_uri.to_s
+				else
+					#controllo se il token è scaduto
+					response = Net::HTTP.get(URI.parse('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token='+(session[:authorization].first[1])))
+					if(response.split[2][1,13] == "invalid_token")
+						client = Signet::OAuth2::Client.new(client_options)
+						redirect_to client.authorization_uri.to_s
+					else
+						@event_list = service.list_events(params[:calendar_id])
+					end
+				end
+		end
+
+		def authenticate_google_OAuthtoken(token)
+			url = URI.parse('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token='+token)
+			req = Net::HTTP::Get.new(url.to_s)
+			res = Net::HTTP.start(url.host, url.port) {|http| http.request(req)}
+			prova = res.body
+			debugger
+			#if(isset(response->issued_to))
+			#		return true
+			#elsif(isset(response->error))
+			#		return false
+			#end
+    end
 
     private
 
@@ -233,5 +283,18 @@ class LeaguesController < ApplicationController
         end
         punteggio
     end
+
+		#funzione per il  calendar degli utenti
+		#crea le credenziali per google
+		def client_options
+				{
+					client_id: Rails.application.secrets.google_client_id,
+					client_secret: Rails.application.secrets.google_client_secret,
+					authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
+					token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+					scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
+					redirect_uri: callback_url
+				}
+		end
 
 end
