@@ -19,8 +19,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         @user = current_user
         @user.update_attributes!(:twitter_user_token => request.env["omniauth.auth"]["extra"]["access_token"].token)
         @user.update_attributes!(:twitter_user_secret => request.env["omniauth.auth"]["extra"]["access_token"].secret)
-        @user.update_attributes!(:provider => request.env["omniauth.auth"].provider)
-        @user.update_attributes!(:uid => request.env["omniauth.auth"].uid)
+        @user.update_attributes!(:t_provider => request.env["omniauth.auth"].provider)
+        @user.update_attributes!(:t_uid => request.env["omniauth.auth"].uid)
         set_flash_message(:notice, :success, :kind => "Twitter") if is_navigational_format?
         redirect_to user_path(current_user.id)
     end

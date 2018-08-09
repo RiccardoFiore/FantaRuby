@@ -21,12 +21,12 @@ class LeaguesController < ApplicationController
         current_day = @lega.current_day
         @days_matches = []
         for i in (0..9)
-						if(current_day == 1)
-								@days_matches[i] = all_matches[(9045 - (10 - i)).to_s]
+            if(current_day == 1)
+                @days_matches[i] = all_matches[(9045 - (10 - i)).to_s]
             else
-							@days_matches[i] = all_matches[(9045 - ((current_day - 1)*10 - i)).to_s]
-						end
-				end
+                @days_matches[i] = all_matches[(9045 - ((current_day - 1)*10 - i)).to_s]
+            end
+        end
     end
 
     def show

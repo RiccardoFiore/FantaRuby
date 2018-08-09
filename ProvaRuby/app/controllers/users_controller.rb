@@ -19,7 +19,12 @@ class UsersController < ApplicationController
     lega = League.find_by(:id => @user.league_id)
     if lega.current_day != 1
         @ultima_giornata = lega.current_day - 1
-        @punteggio_giornata = Formazioni.find_by(:user_id => @user.id, :giornata => @ultima_giornata).punteggio || 0
+        @punteggio_giornata = Formazioni.find_by(:user_id => @user.id, :giornata => @ultima_giornata)
+        if @punteggio_giornata == nil
+            @punteggio_giornata = 0
+        else
+            @punteggio_giornata = @punteggio_giornata.punteggio
+        end
     else
         @ultima_giornata = - 1
     end
@@ -34,7 +39,7 @@ class UsersController < ApplicationController
     punteggio_giornata = params[:punteggio]
     lega = League.find_by(:id => current_user.league_id)
     ultima_giornata = lega.current_day - 1
-    if current_user.provider == 'twitter'
+    if current_user.t_provider == 'twitter'
         require 'twitter'
         client = Twitter::REST::Client.new do |config|
             config.consumer_key = Rails.application.secrets.twitter_key
