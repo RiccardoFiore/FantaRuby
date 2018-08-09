@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :soccers_players do
         collection { post :import,:import_score}
     end
+    resources :soccer_infos
     root :to => redirect('/users/sign_in')
     get 'about'   => 'static_pages#about'
     get 'contact' => 'static_pages#contact'

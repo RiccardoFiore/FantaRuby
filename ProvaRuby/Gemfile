@@ -7,15 +7,19 @@ ruby '2.4.1'
 
 gem "iconv", "~> 1.0.3"
 
+#Gem used to convert and read file xslx
 gem 'roo'
 gem 'roo-xls'
 #Added devise and canard gems to manage authentication and app roles
 gem 'devise'
 
-gem 'omniauth'
+#Added to manage soccer's info and results
+gem 'unirest', "~> 1.1.2"
+
 #Added gogole api gem for calendar
 gem 'google-api-client', require: 'google/apis/calendar_v3'
 
+gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'twitter'

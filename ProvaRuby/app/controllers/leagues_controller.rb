@@ -1,13 +1,28 @@
 class LeaguesController < ApplicationController
     before_action :authenticate_user!
-		require 'net/http'
+    require 'net/http'
 
     def index
+        require 'unirest'
+        @response = Unirest.get "https://api-football-v1.p.mashape.com/fixtures/league/28",         #28 è l'id corrispondente alla Serie A
+            headers:{
+              "X-Mashape-Key" => "gbTXi7A4LSmsh5ViprmXBGWmESpdp1XQfzZjsn2h4H1iyTzpS3",
+              "Accept" => "application/json"
+            }
+        all_matches = @response.body["api"]["fixtures"]                                             #tutti i match di tutta la Serie A
+                                                                                                    #gli id partono da 9045 e arrivano 8666 (infatti sono 380 partite)
+                                                                                                    #ogni 10 numeri è una giornata completa
+
+        @richieste_rimanenti = @response.headers[:x_ratelimit_requests_remaining] + "/" + @response.headers[:x_ratelimit_requests_limit]
         @uid=current_user.id
         authorize! :index, League, :message => "Non fai ancora parte di una lega"
         id = current_user.league_id
         @lega = League.find(id)
-        #debugger
+        current_day = @lega.current_day
+        @days_matches = []
+        for i in (0..9)
+            @days_matches[i] = all_matches[(9045 - ((current_day - 1)*10 - i)).to_s]
+        end
     end
 
     def show
@@ -284,17 +299,17 @@ class LeaguesController < ApplicationController
         punteggio
     end
 
-		#funzione per il  calendar degli utenti
-		#crea le credenziali per google
-		def client_options
-				{
-					client_id: Rails.application.secrets.google_client_id,
-					client_secret: Rails.application.secrets.google_client_secret,
-					authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
-					token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
-					scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
-					redirect_uri: callback_url
-				}
-		end
+    #funzione per il  calendar degli utenti
+    #crea le credenziali per google
+    def client_options
+        {
+            client_id: Rails.application.secrets.google_client_id,
+            client_secret: Rails.application.secrets.google_client_secret,
+            authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
+            token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+            scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
+            redirect_uri: callback_url
+        }
+    end
 
 end
