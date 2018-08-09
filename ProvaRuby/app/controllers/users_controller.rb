@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     lega = League.find_by(:id => @user.league_id)
     if lega.current_day != 1
         @ultima_giornata = lega.current_day - 1
-        @punteggio_giornata = Formazioni.find_by(:user_id => @user.id, :giornata => @ultima_giornata) || 0
+        @punteggio_giornata = Formazioni.find_by(:user_id => @user.id, :giornata => @ultima_giornata).punteggio || 0
     else
         @ultima_giornata = - 1
     end
