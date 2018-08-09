@@ -2,7 +2,7 @@ class SoccerInfosController < ApplicationController
     def index
       @response = Unirest.get "https://sportsop-soccer-sports-open-data-v1.p.mashape.com/v1/leagues/serie-a/seasons/17-18/teams",
           headers:{
-            "X-Mashape-Key" => "gbTXi7A4LSmsh5ViprmXBGWmESpdp1XQfzZjsn2h4H1iyTzpS3",
+            "X-Mashape-Key" => Rails.application.secrets.mashape_key,
             "Accept" => "application/json"
           }
       teams = @response.body["data"]["teams"]

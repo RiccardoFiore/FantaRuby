@@ -37,8 +37,8 @@ class UsersController < ApplicationController
     if current_user.provider == 'twitter'
         require 'twitter'
         client = Twitter::REST::Client.new do |config|
-            config.consumer_key = "r9RnKDR38WNSsUrTtngUhapVG"
-            config.consumer_secret = "FJ9cv4bZRuUYF3VXLNwBfTWboq2V8Z82Tnp6kXVewvBxkZoAbD"
+            config.consumer_key = Rails.application.secrets.twitter_key
+            config.consumer_secret = Rails.application.secrets.twitter_secret
             config.access_token = current_user.twitter_user_token
             config.access_token_secret = current_user.twitter_user_secret
         end

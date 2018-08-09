@@ -258,8 +258,8 @@ Devise.setup do |config|
   # up on your models and hooks.
 
 
-  config.omniauth :facebook, '524000551349833', '08731ce9933e7b64c9ccd05233addd97'
-  config.omniauth :twitter, 'r9RnKDR38WNSsUrTtngUhapVG', 'FJ9cv4bZRuUYF3VXLNwBfTWboq2V8Z82Tnp6kXVewvBxkZoAbD'
+  config.omniauth :facebook, Rails.application.secrets.facebook_key, Rails.application.secrets.facebook_secret
+  config.omniauth :twitter, Rails.application.secrets.twitter_key, Rails.application.secrets.twitter_secret
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
