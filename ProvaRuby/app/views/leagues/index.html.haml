@@ -27,26 +27,26 @@ Informazione della lega:
 %br
 
 
-%h1 IMPORTANTE!!!
-%h1 Richieste rimanenti:
-%h1= @richieste_rimanenti
+-#%h1 IMPORTANTE!!!
+-#%h1 Richieste rimanenti:
+-#%h1= @richieste_rimanenti
 
-%br
-%h3 Info Risultati
-%table
-  %thead
-    %tr
-      %th Casa
-      %th Trasferta
-      %th Gol Casa
-      %th Gol Trasferta
-  %tbody
-    - @days_matches.each do |days_match|
-      %tr
-        %td= days_match["homeTeam"]
-        %td= days_match["awayTeam"]
-        %td= days_match["goalsHomeTeam"]
-        %td= days_match["goalsAwayTeam"]
+-#%br
+-#%h3 Info Risultati
+-#%table
+-#  %thead
+-#    %tr
+-#      %th Casa
+-#      %th Trasferta
+-#      %th Gol Casa
+-#      %th Gol Trasferta
+-#  %tbody
+-#    - @days_matches.each do |days_match|
+-#      %tr
+-#        %td= days_match["homeTeam"]
+-#        %td= days_match["awayTeam"]
+-#        %td= days_match["goalsHomeTeam"]
+-#        %td= days_match["goalsAwayTeam"]
 
 %br
 %br
