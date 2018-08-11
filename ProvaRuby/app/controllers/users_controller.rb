@@ -59,6 +59,8 @@ class UsersController < ApplicationController
     user = User.find(current_user.id)
     lega = League.find(user.league_id)
     user.update_attributes!(:league_id => nil)
+    @rosa = Rose.find_by(:user_id => user.id)
+    @rosa.delete
     if (user.president?)
         if lega.users.size == 0
             League.delete(lega.id)
@@ -69,6 +71,7 @@ class UsersController < ApplicationController
         end
     end
     user.update_attributes!(:roles_mask => 1)
+    user.update_attributes!(:budget => 300)
     redirect_to homes_path
   end
 
@@ -80,7 +83,7 @@ class UsersController < ApplicationController
     lega = League.find(user.league_id)
     user.update_attributes!(:league_id => nil)
     if (user.president?)
-      if lega.users.size == 0
+      if lega.users.size == 1
           League.delete(lega.id)
       else
           next_president = lega.users.first
@@ -90,7 +93,7 @@ class UsersController < ApplicationController
     end
     user.destroy
     flash[:success] = "User destroyed."
-	redirect_to '/admins'
+	redirect_to '/admins/delete/users'
   end
 
 

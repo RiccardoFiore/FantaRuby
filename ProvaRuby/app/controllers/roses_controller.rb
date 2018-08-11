@@ -55,7 +55,7 @@ class RosesController < ApplicationController
 
 	def new
       authorize! :new, Rose, :message => "Hai già creato la tua rosa o non hai i diritti per farlo"
-      if( !@rosa = current_user.rose)
+      if(!@rosa = current_user.rose)
         @rosa = Rose.new(:user_id => current_user.id)
         @rosa.save
       end

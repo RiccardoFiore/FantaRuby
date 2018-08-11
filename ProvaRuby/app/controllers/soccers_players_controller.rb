@@ -24,7 +24,20 @@ class SoccersPlayersController < ApplicationController
         redirect_to '/admins/delete/users', notice: "Products imported."
     end
 
+    def edit
+        authorize! :edit, SoccersPlayer, :message => "Non hai i permessi per modificare un soccers_player"
+        if params[:SoccerPlayers]
+            @s_p = SoccersPlayer.find_by(:cognome => params[:SoccerPlayers].upcase)
+        end
+    end
 
+    def update
+        authorize! :update, SoccersPlayer, :message => "Non hai i permessi per modificare un soccers_player"
+        new_q = params[:quotazione].to_i
+        player = SoccersPlayer.find_by(:cod => params[:id])
+        player.update_attributes!(:quotazione => new_q)
+        redirect_to edit_soccers_player_path
+    end
 
 
 end
