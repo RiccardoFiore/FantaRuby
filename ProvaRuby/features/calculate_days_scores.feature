@@ -11,3 +11,4 @@ Scenario: Calculate Days Scores
 	And I filled the form
 	When I click on "Salva cambiamenti"
 	Then I should be on rate score page again
+    And I have to see player's day score increased for the bonus and decreased for the malus
