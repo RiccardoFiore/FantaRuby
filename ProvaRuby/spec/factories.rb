@@ -37,14 +37,22 @@ FactoryBot.define do
         password "password"
         roles_mask "2"
         favourite_team "Roma"
-        username "president1"
+        username "president1_a"
+    end
+
+    factory :player1_a, class: User do
+        email "playeremail@random.com"
+        password "password"
+        roles_mask "4"
+        favourite_team "Roma"
+        username "player1_a"
     end
 
     factory :league1_a, class: League do
         status "Aperta"
         name "league1"
         description "league1"
-        players "1"
+        players "2"
         votes_day "1"
     end
 
