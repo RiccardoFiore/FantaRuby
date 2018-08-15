@@ -27,12 +27,12 @@
 		<% else %>
 			<option value="Difensore">Difensore</option>
 		<% end %>
-		<% if(@soc_plyrs.first.ruolo == "centrocampista") %>	
+		<% if(@soc_plyrs.first.ruolo == "centrocampista") %>
 			<option selected value="Centrocampista">Centrocampista</option>
 		<% else %>
 			<option value="Centrocampista">Centrocampista</option>
 		<% end %>
-		<% if(@soc_plyrs.first.ruolo == "attaccante") %>	
+		<% if(@soc_plyrs.first.ruolo == "attaccante") %>
 			<option selected value="Attaccante">Attaccante</option>
 		<% else %>
 			<option value="Attaccante">Attaccante</option>
@@ -324,3 +324,9 @@
 
 <% end -%>
 
+<%= form_tag roses_path , :method => :get do -%>
+    <%= submit_tag 'Salva rosa' %>
+<% end -%>
+<br/>
+<br/>
+<br/>

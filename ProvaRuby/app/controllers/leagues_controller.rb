@@ -3,49 +3,49 @@ class LeaguesController < ApplicationController
     require 'net/http'
 
 
-def new_event
-  
-   
-  title=params.fetch(:match1).fetch(:title)
-anno=params.fetch(:match).fetch(:"data(1i)")
-mese=params.fetch(:match).fetch(:"data(2i)")
-giorno=params.fetch(:match).fetch(:"data(3i)")
-ora=params.fetch(:match).fetch(:"data(4i)")
-minuti=params.fetch(:match).fetch(:"data(5i)")
+    def new_event
 
-if giorno.size<2
-  giorno="0"+giorno
-end
-if mese.size<2
-  mese="0"+mese
-end
-h=anno+mese+giorno+ora+minuti
-g=h.to_datetime
-k=g.to_s
 
-client = Signet::OAuth2::Client.new(client_options)
-  client.update!(session[:authorization])
-  service = Google::Apis::CalendarV3::CalendarService.new
+      title=params.fetch(:match1).fetch(:title)
+    anno=params.fetch(:match).fetch(:"data(1i)")
+    mese=params.fetch(:match).fetch(:"data(2i)")
+    giorno=params.fetch(:match).fetch(:"data(3i)")
+    ora=params.fetch(:match).fetch(:"data(4i)")
+    minuti=params.fetch(:match).fetch(:"data(5i)")
 
-  service.authorization = client
-  start=DateTime.new(anno.to_i,mese.to_i,giorno.to_i,ora.to_i-2,minuti.to_i,0)
-  ende=DateTime.new(anno.to_i,mese.to_i,giorno.to_i,ora.to_i-2,minuti.to_i,0)
-  event = Google::Apis::CalendarV3::Event.new(
-    summary: title,
-    
-    start:  { date_time: start.to_datetime },
-    end:    { date_time: ende.to_datetime }
-)
+    if giorno.size<2
+      giorno="0"+giorno
+    end
+    if mese.size<2
+      mese="0"+mese
+    end
+    h=anno+mese+giorno+ora+minuti
+    g=h.to_datetime
+    k=g.to_s
 
- 
+    client = Signet::OAuth2::Client.new(client_options)
+      client.update!(session[:authorization])
+      service = Google::Apis::CalendarV3::CalendarService.new
 
-  service.insert_event(params[:calendar_id], event)
-  redirect_to admin_path(params[:calendar_id])
+      service.authorization = client
+      start=DateTime.new(anno.to_i,mese.to_i,giorno.to_i,ora.to_i-2,minuti.to_i,0)
+      ende=DateTime.new(anno.to_i,mese.to_i,giorno.to_i,ora.to_i-2,minuti.to_i,0)
+      event = Google::Apis::CalendarV3::Event.new(
+        summary: title,
+
+        start:  { date_time: start.to_datetime },
+        end:    { date_time: ende.to_datetime }
+    )
 
 
 
+      service.insert_event(params[:calendar_id], event)
+      redirect_to admin_path(params[:calendar_id])
 
-  end
+
+
+
+      end
 
     def index
 #        require 'unirest'
@@ -141,7 +141,7 @@ client = Signet::OAuth2::Client.new(client_options)
         @lega.update_attributes!(params[:league].permit(:president_id))
         ##
         #gestione cambio status lega
-        @lega.update_attributes!(params[:league].permit(:status))
+        @lega.update_attributes!(:status => params[:radio])
         ##
         #gestione descrizione lega
         @lega.update_attributes!(params[:league].permit(:description))
@@ -349,6 +349,10 @@ client = Signet::OAuth2::Client.new(client_options)
         punteggio
     end
 
+
+    def save_rose
+
+    end
 
 
     #funzione per il  calendar degli utenti
