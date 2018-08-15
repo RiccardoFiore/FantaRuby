@@ -96,7 +96,7 @@ class LeaguesController < ApplicationController
         @lega.update_attributes!(params[:league].permit(:president_id))
         ##
         #gestione cambio status lega
-        @lega.update_attributes!(params[:league].permit(:status))
+        @lega.update_attributes!(:status => params[:radio])
         ##
         #gestione descrizione lega
         @lega.update_attributes!(params[:league].permit(:description))
