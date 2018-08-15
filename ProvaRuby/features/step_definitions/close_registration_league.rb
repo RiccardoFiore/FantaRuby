@@ -52,27 +52,6 @@ Given ("I am authenticated as president") do
                                 attaccante4: @attaccante4.id,
                                 attaccante5: @attaccante5.id,
                                 attaccante6: @attaccante6.id )
-    @formazioni1=create(:formazioni1_a, user_id: @president1.id,
-                                        giornata: "1",
-                                        portiere: @rose1.portiere2,
-                                        difensore1: @rose1.difensore3,
-                                        difensore2: @rose1.difensore4,
-                                        difensore3: @rose1.difensore7,
-                                        centrocampista1: @rose1.centrocampista4,
-                                        centrocampista2: @rose1.centrocampista6,
-                                        centrocampista3: @rose1.centrocampista8,
-                                        centrocampista4: @rose1.centrocampista2,
-                                        attaccante1: @rose1.attaccante3,
-                                        attaccante2: @rose1.attaccante1,
-                                        attaccante3: @rose1.attaccante6,
-                                        riservapor: @rose1.portiere1,
-                                        riservadif: @rose1.difensore6,
-                                        riservacen: @rose1.centrocampista1,
-                                        riservaatt: @rose1.attaccante2 )
-    @punteggio = (  @portiere2.daily_score+@difensore3.daily_score+@difensore4.daily_score+@difensore7.daily_score+
-                    @centrocampista4.daily_score+@centrocampista6.daily_score+@centrocampista8.daily_score+
-                    @centrocampista2.daily_score+@attaccante3.daily_score+@attaccante1.daily_score+
-                    @attaccante6.daily_score)
     visit new_user_session_path
     fill_in "Email", :with => @president1.email
     fill_in "Password", :with => @president1.password

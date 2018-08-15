@@ -1,0 +1,11 @@
+Feature: I want to get details about a league
+        As a User
+        I want to have a page
+        So that I can get details about a league.
+
+Scenario: Get League Details
+	Given I am authenticated as user
+	And I am on the home page
+	When I click on "Details"
+	Given I am on the league's details page
+	Then I should see league's details
