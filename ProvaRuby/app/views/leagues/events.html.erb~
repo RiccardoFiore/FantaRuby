@@ -17,7 +17,7 @@
 					<%= y %>
 			</td>
 			<td id="td_eventi_ora">
-<% if event.end.date_time!=nil %>
+<% if event.end.date_time.inspect.split[4][0,5]!=nil %>
 				<%= 
 
 event.end.date_time.inspect.split[4][0,5] 

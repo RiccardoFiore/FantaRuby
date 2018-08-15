@@ -1,0 +1,11 @@
+= form_tag new_event_path('studenti.uniroma1.it_h2vvrd3lfsc5t09f7pm1a55h2c@group.calendar.google.com'), :method => :post do
+  = label :match, :title, 'Title'
+  = text_field :match1, :title
+  %br/
+  %br/
+  = label :match, :data, 'Date'
+  = date_select :match, :data
+  %br/
+  %br/
+  = submit_tag 'crea evento'
+  

@@ -2,6 +2,51 @@ class LeaguesController < ApplicationController
     before_action :authenticate_user!
     require 'net/http'
 
+
+def new_event
+  
+   
+  title=params.fetch(:match1).fetch(:title)
+anno=params.fetch(:match).fetch(:"data(1i)")
+mese=params.fetch(:match).fetch(:"data(2i)")
+giorno=params.fetch(:match).fetch(:"data(3i)")
+ora=params.fetch(:match).fetch(:"data(4i)")
+minuti=params.fetch(:match).fetch(:"data(5i)")
+
+if giorno.size<2
+  giorno="0"+giorno
+end
+if mese.size<2
+  mese="0"+mese
+end
+h=anno+mese+giorno+ora+minuti
+g=h.to_datetime
+k=g.to_s
+
+client = Signet::OAuth2::Client.new(client_options)
+  client.update!(session[:authorization])
+  service = Google::Apis::CalendarV3::CalendarService.new
+
+  service.authorization = client
+  start=DateTime.new(anno.to_i,mese.to_i,giorno.to_i,ora.to_i-2,minuti.to_i,0)
+  ende=DateTime.new(anno.to_i,mese.to_i,giorno.to_i,ora.to_i-2,minuti.to_i,0)
+  event = Google::Apis::CalendarV3::Event.new(
+    summary: title,
+    
+    start:  { date_time: start.to_datetime },
+    end:    { date_time: ende.to_datetime }
+)
+
+ 
+
+  service.insert_event(params[:calendar_id], event)
+  redirect_to admin_path(params[:calendar_id])
+
+
+
+
+  end
+
     def index
 #        require 'unirest'
 #        @response = Unirest.get "https://api-football-v1.p.mashape.com/fixtures/league/28",         #28 è l'id corrispondente alla Serie A
@@ -96,7 +141,7 @@ class LeaguesController < ApplicationController
         @lega.update_attributes!(params[:league].permit(:president_id))
         ##
         #gestione cambio status lega
-        @lega.update_attributes!(:status => params[:radio])
+        @lega.update_attributes!(params[:league].permit(:status))
         ##
         #gestione descrizione lega
         @lega.update_attributes!(params[:league].permit(:description))
@@ -153,7 +198,7 @@ class LeaguesController < ApplicationController
         authorize! :go_next, League, :message => "Non puoi modificare le impostazioni della lega"
         lega = League.find(current_user.league_id)
         #controllo solo per evitare il doppio click su go next day, controlla
-        #che la differenza tra il giorno successivo e il giorno dell'ultima formazione
+        #che la differenza il giorno tra successivo e il giorno dell'ultima formazione
         #creata dagli utenti non sia maggiore di uno
         if( lega.current_day <= lega.votes_day )
 						lega.current_day += 1
@@ -167,13 +212,14 @@ class LeaguesController < ApplicationController
 		#funzione per il  calendar degli utenti
 		#viene richiamata dopo il log in di google
 		def callback
+
 				client = Signet::OAuth2::Client.new(client_options)
 				client.code = params[:code]
 
 				response = client.fetch_access_token!
 
 				session[:authorization] = response
-				redirect_to '/leagues/calendar/events/studenti.uniroma1.it_h2vvrd3lfsc5t09f7pm1a55h2c@group.calendar.google.com'
+				redirect_to '/leagues/calendar/events/federicobucci504@gmail.com'
 		end
 		#funzione per il  calendar degli utenti
 		#va sulla pagina eventi e li visualizza
@@ -191,7 +237,7 @@ class LeaguesController < ApplicationController
 					#controllo se il token è scaduto
 					response = Net::HTTP.get(URI.parse('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token='+(session[:authorization].first[1])))
 					if(response.split[2][1,13] == "invalid_token")
-						client = Signet::OAuth2::Client.new(client_options)
+						client =●●●●●● Signet::OAuth2::Client.new(client_options)
 						redirect_to client.authorization_uri.to_s
 					else
 						@event_list = service.list_events(params[:calendar_id])
@@ -302,6 +348,8 @@ class LeaguesController < ApplicationController
         end
         punteggio
     end
+
+
 
     #funzione per il  calendar degli utenti
     #crea le credenziali per google

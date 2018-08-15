@@ -44,6 +44,10 @@ Rails.application.routes.draw do
     get '/formazionis/day/:id' => 'formazionis#index'
 
     #routes per il google calendar degli utenti
+
+
     get '/leagues/calendar/callback', to: 'leagues#callback', as: 'callback'
     get '/leagues/calendar/events/:calendar_id', to: 'leagues#events', as: 'events', calendar_id: /[^\/]+/
+
+post "/leagues/calendar/new_event/:calendar_id", to: "leagues#new_event", as: "new_event", calendar_id: /[^\/]+/
 end

@@ -15,21 +15,21 @@
       <br/>
       <% if @lega.status == "Aperta" %>
         <%= f.label :status %>
-        <input id="radio" name="radio" type="radio" value="Aperta" checked>
+        <%= f.radio_button :status, "Aperta", checked: true %>
         Aperta
-        <input id="radio" name="radio" type="radio" value="Chiusa">
+        <%= f.radio_button :status, "Chiusa" %>
         Chiusa
       <% else %>
         <%= f.label :status %>
-        <input id="radio" name="radio" type="radio" value="Aperta" >
+        <%= f.radio_button :status, "Aperta" %>
         Aperta
-        <input id="radio" name="radio" type="radio" value="Chiusa" checked>
+        <%= f.radio_button :status, "Chiusa", checked: true %>
         Chiusa
       <% end %>
     <% end %>
   </div>
   <br/>
-  <%= submit_tag 'Salva cambiamenti' %>
+  <%= submit_tag 'Save Changes' %>
 <% end %>
 <br/>
 <br/>
