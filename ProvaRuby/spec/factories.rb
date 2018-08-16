@@ -116,7 +116,7 @@ FactoryBot.define do
     end
     factory :s_p_d4, class: SoccersPlayer do
         cod "0400"
-        cognome "DIFENSORE1"
+        cognome "DIFENSORE4"
         ruolo "difensore"
         quotazione "1"
         daily_score "5"
