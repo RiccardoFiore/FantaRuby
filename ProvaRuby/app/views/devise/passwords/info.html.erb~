@@ -1,5 +1,0 @@
-<%= form_for(resource url: info_path, html: { method: :get }) do |f| %>
-  <%= devise_error_messages! %>
-
-  dddd
-<% end %>

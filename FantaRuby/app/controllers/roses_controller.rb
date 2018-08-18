@@ -16,8 +16,6 @@ class RosesController < ApplicationController
           redirect_to '/roses/new/portiere'
       end
 	end
-	def shows
-	end
 
 	def new
       authorize! :new, Rose, :message => "Hai già creato la tua rosa o non hai i diritti per farlo"

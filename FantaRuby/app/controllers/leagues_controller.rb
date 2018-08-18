@@ -108,8 +108,9 @@ class LeaguesController < ApplicationController
         @league = League.new(params[:league].permit(:name, :players, :status, :description, :user, :current_day, :votes_day))
         @league.president_id = @user.id
         @league.status = "Aperta"
+        @league.players = 1
         #se crei una lega a campionato iniziato la giornata sarà settata alla
-        #alla giornata corrente del campionatoù
+        #alla giornata corrente del campionato
 
         if(League.first)
             if(giornataCorrente = League.first.votes_day)

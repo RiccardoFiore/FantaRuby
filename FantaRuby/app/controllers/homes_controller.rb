@@ -25,6 +25,7 @@ class HomesController < ApplicationController
         id = params[:id]
 		@lega = League.find(id)
         if current_user.league_id == nil
+            @lega.update_attributes!(:players => @lega.players + 1)
             current_user.update_attributes!(:league_id => @lega.id)
         end
         redirect_to new_rose_path + '/portiere'

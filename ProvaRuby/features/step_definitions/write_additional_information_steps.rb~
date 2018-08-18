@@ -36,7 +36,8 @@ end
 
 Then ("I should be on impostazioni lega page again") do
    
-     expect(page).to have_text("Settings of")
-        expect(page).to have_text(@league1.name)
+    expect(page).to have_text("Settings of")
+
+    expect(page).to have_text("info di lega ")
 end
 
