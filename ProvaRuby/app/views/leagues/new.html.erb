@@ -1,5 +1,12 @@
 <h1>Crea nuova lega</h1>
-<h3>completa tutti i campi</h3>
+<br/>
+<h3>Completa tutti i campi</h3>
+<br/>
+
+<% flash.each do |key, value| %>
+	<div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
 <%= form_tag leagues_path, :method => :post do %>
   <%= render 'shared/error_messages' %>
   <%= label :league, :name, 'Nome' %>

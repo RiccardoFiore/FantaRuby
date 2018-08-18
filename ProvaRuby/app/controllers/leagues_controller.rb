@@ -86,28 +86,24 @@ class LeaguesController < ApplicationController
 
     def create
         authorize! :create, League, :message => "Fai già parte di una lega"
-@u=0
-@n=""
-      nameLeague=params.fetch(:league).fetch(:name)
-        @leag=League.all
-        @leag.each do |l|
-         @u=@u+1
-@n=l.name
-if nameLeague==""
-flash[:notice] = "campo nome lega vuoto!"
-redirect_to new_league_path and return
+        nameLeague=params.fetch(:league).fetch(:name)
+        if nameLeague == ""
+            flash[:notice] = "Campo nome lega vuoto!"
+            redirect_to new_league_path and return
 
-end
-            if nameLeague==l.name
-                       flash[:notice] = "la lega esiste gia con questo nome!"
-redirect_to new_league_path and return
-
+        end
+        if params.fetch(:league).fetch(:description) == ""
+            flash[:notice] = "Campo info lega vuoto!"
+            redirect_to new_league_path and return
+        end
+        leag=League.all
+        leag.each do |l|
+            if nameLeague == l.name
+                flash[:notice] = "La lega esiste gia con questo nome!"
+                redirect_to new_league_path and return
             end
         end
-        if params.fetch(:league).fetch(:description)==""
-	                  flash[:notice] = "campo info lega vuoto!"
-redirect_to new_league_path and return
-        end
+
         @user = current_user
         @league = League.new(params[:league].permit(:name, :players, :status, :description, :user, :current_day, :votes_day))
         @league.president_id = @user.id
