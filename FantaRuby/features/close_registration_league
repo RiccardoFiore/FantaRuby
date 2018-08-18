@@ -1,0 +1,14 @@
+Feature: I want to close registrations to my league
+		As president
+		I want to have special settings
+		So that I can close registrations to the leagues
+
+Scenario: Close Registration League
+	Given I am authenticated as president
+	And I am on the league's home page
+	When I click on "Impostazioni lega"
+	Given I am on the league's settings page
+	And I change league status
+	When I click on "Salva cambiamenti" button
+	Then I should be on league's settings page again
+    And I have to see league status changed

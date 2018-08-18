@@ -1,0 +1,59 @@
+<h1> Calcola i punteggi giornalieri dei giocatori</h1>
+<h3>I voti presenti nel database sono della gionata <%= @league.votes_day %> </h3>
+<% flash.each do |key, value| %>
+	<div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
+<form accept-charset="UTF-8" action="/leagues/score/rate" method="post">
+	<input name="utf8" type="hidden" value="&#x2713;" />
+	<input name="authenticity_token" type="hidden" value=<%= form_authenticity_token %> />
+
+	<table id="tabella">
+		<caption><h3> Calcola i voti per la giornata <%= @currentDay %> </h3></caption>
+		<thead>
+			<tr id="col">
+				<th>Giocatori</th>
+				<th>Bonus</th>
+				<th>Malus</th>
+				<th>Punteggio</th>
+			</tr>
+		</thead>
+		<tbody>
+
+		<% i=0 %>
+		<% @allLeagueUsers.each do |user| %>
+			<tr>
+				<td id="t">
+					<%= user.username %>
+				</td>
+				<td id="t">
+					<input id= <%= "b"+user.id.to_s %> name=<%= "b"+user.id.to_s %> type="text" value=<%= @stringaBonus[i] %> size="1"/>
+				</td>
+				<td id="t">
+					<input id= <%= "m"+user.id.to_s %> name=<%= "m"+user.id.to_s %> type="text" value=<%= @stringaMalus[i] %> size="1"/>
+				</td>
+				<td id="t">
+					<% if Formazioni.where( user_id: user.id, giornata: @currentDay).first %>
+						<%= Formazioni.where( user_id: user.id, giornata: @currentDay).first.punteggio %>
+					<% else %>
+						0
+					<% end %>
+				</td>
+			</tr>
+			<% i+=1 %>
+		<% end %>
+
+		</tbody>
+	</table>
+	<br/>
+
+	<input name="aggiungi" type="submit" value="Salva cambiamenti" /> -
+	<%= link_to "Vai alla prossima giornata", '/leagues/go/next' %>
+</form>
+
+<br/>
+<%= link_to "Torna all' home page della lega", '/leagues' %>
+
+<br/>
+<br/>
+<br/>

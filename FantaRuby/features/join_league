@@ -1,0 +1,17 @@
+Feature: I want to join a league
+        As a User
+        I want to join a league
+        So that I can become a player.
+
+Scenario: Join League
+	Given I am authenticated as a user
+	And I am on the app's home page
+	When I click on "Details" link
+	Given I am on the league's details page
+    Then I should see league's details
+	When I click on "Partecipa"
+	Then I should be on create rose page
+    Given I have list of all soccer player and I choose 24 players
+    When I click on "Salva rosa"
+    Then I should be redirected to league's home page
+    And I should be a player

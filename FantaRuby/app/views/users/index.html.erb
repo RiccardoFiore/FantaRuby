@@ -1,0 +1,29 @@
+<h1>Profile</h1>
+
+<h3>Email: </h3><%= @user.email %>
+
+<h3>Username: </h3><%= @user.username %>
+
+<h3>Favourite team: </h3><%= @user.favourite_team %>
+
+<% if @league == -1 %>
+	<h3>League name: </h3>
+	"Non fai parte di nessuna lega"
+<% else %>
+	<h3>League name: </h3><%= @league.name %>
+<% end %>
+
+<% if current_user.president? || current_user.player? %>
+    <%= form_tag user_path(current_user.id), :method => :put, data: {confirm: 'Are you sure?'} do %>
+      <%= submit_tag 'Esci dalla lega' %>
+    <% end %>
+<% end %>
+<br/>
+<br/>
+<%= link_to "Settings", '/users/edit' %>
+<br/>
+<%= link_to "Torna alla home page della lega", leagues_path %>
+<br/>
+<br/>
+<br/>
+<br/>

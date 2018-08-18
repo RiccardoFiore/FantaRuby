@@ -1,0 +1,71 @@
+<h1>Tutte le formazioni della lega <%= @lega.name %> nella giornata <%= @giornata %></h1>
+<br/>
+<%= link_to 'Go to league home', '/leagues' %>
+<br/>
+<br/>
+<%= link_to 'Modifica formazione', '/formazionis/new' %>
+<br/>
+<br/>
+<% if(@giornata>1) %>
+	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata-1).to_s %> <=
+<% else %>
+	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata).to_s %> <=
+<% end %>
+<% for j in (1..(@lega.current_day)) %>
+	<%= link_to j.to_s,  '/formazionis/day/'+j.to_s %>
+<% end %> =>
+<% if(@giornata<@lega.current_day) %>
+	<%= link_to 'Giornata successiva', '/formazionis/day/'+(@giornata+1).to_s %>
+<% else %>
+	<%= link_to 'Giornata successiva', '/formazionis/day/'+(@giornata).to_s %>
+<% end %>
+<% i=0 %>
+<% for k in (0..(@arrayFormazioni.length-1)) %>
+	<table id="tabella">
+		<caption><h2> USERNAME: <%= @lega.users[i].username %> &nbsp &nbsp &nbsp&nbsp DAILY SCORE: <%= @daily_score[k] %> </h2></caption>
+		<thead>
+			<tr id="col" >
+				<th width=50%>Posizione</th>
+				<th width=50%>Giocatore</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for n in (0..(@arrayFormazioni[k].length-1)) %>
+				<tr>
+					<td id="t">
+						<%= @arrayFormazioni[k][n][3] %>
+					</td>
+					<td id="t">
+						<%= @arrayFormazioni[k][n][1] %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<% i+=1 %>
+<% end %>
+
+
+<br/>
+<br/>
+<% if(@giornata>1) %>
+	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata-1).to_s %> <=
+<% else %>
+	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata).to_s %> <=
+<% end %>
+<% for j in (1..(@lega.current_day)) %>
+	<%= link_to j.to_s,  '/formazionis/day/'+j.to_s %>
+<% end %> =>
+<% if(@giornata<@lega.current_day) %>
+	<%= link_to 'Giornata successiva', '/formazionis/day/'+(@giornata+1).to_s %>
+<% else %>
+	<%= link_to 'Giornata successiva', '/formazionis/day/'+(@giornata).to_s %>
+<% end %>
+<br/>
+<br/>
+<%= link_to 'Modifica formazione', '/formazionis/new' %>
+<br/>
+<br/>
+<%= link_to 'Go to league home', '/leagues' %>
+<br/>
+<br/>

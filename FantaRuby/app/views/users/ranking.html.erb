@@ -1,0 +1,36 @@
+<h1>Ranking</h1>
+
+<table id="players">
+  <thead>
+    <tr id="tr">
+      <th>Pos</th>
+      <th>Users</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+
+    <% for i in (0..(@formazioni.length-1)) %>
+        <tr>
+         <td id="t">
+            <%= i+1 %>
+        </td>
+        <td id="t">
+            <%= link_to @formazioni[i][0].username,user_path(@formazioni[i][0].id) %>
+        </td>
+        <td id="t">
+            <%= @formazioni[i][1] %>
+        </td>
+        </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+</br>
+</br>
+  <%= link_to "Torna all'home page della lega", leagues_path(@lega) %>
+</br>
+</br>

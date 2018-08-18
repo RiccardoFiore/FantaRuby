@@ -1,0 +1,332 @@
+<h2>Crea rosa</h2>
+
+<h4><%= current_user.username %>, budget: <%= current_user.budget %></h4>
+<h4><%= @rosa.inseriti %>
+
+<br/>
+
+<% flash.each do |key, value| %>
+	<div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
+<br/>
+<%= form_tag new_rose_path , :method => :get do -%>
+  <%= label_tag 'SoccerPlayers' %>
+  <%= text_field_tag 'SoccerPlayers' %>
+  <br/>
+  <br/>
+  <%= label_tag :role %>
+  <select name="role" id="role">
+		<% if(@soc_plyrs.first.ruolo == "portiere") %>
+			<option selected value="Portiere">Portiere</option>
+		<% else %>
+			<option value="Portiere">Portiere</option>
+		<% end %>
+		<% if(@soc_plyrs.first.ruolo == "difensore") %>
+			<option selected value="Difensore">Difensore</option>
+		<% else %>
+			<option value="Difensore">Difensore</option>
+		<% end %>
+		<% if(@soc_plyrs.first.ruolo == "centrocampista") %>
+			<option selected value="Centrocampista">Centrocampista</option>
+		<% else %>
+			<option value="Centrocampista">Centrocampista</option>
+		<% end %>
+		<% if(@soc_plyrs.first.ruolo == "attaccante") %>
+			<option selected value="Attaccante">Attaccante</option>
+		<% else %>
+			<option value="Attaccante">Attaccante</option>
+		<% end %>
+	</select>
+  <br/>
+  <br/>
+  <%= submit_tag 'Filtra' %>
+  <br/>
+  <br/>
+
+
+  <table id="tabella_giocatori">
+  	<caption><h2> Giocatori</h2><h3></caption>
+    <thead>
+      <tr id="col" >
+        <th>Giocatore</th>
+        <th>Ruolo</th>
+        <th>Quotazione</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @soc_plyrs.each do |soc_plyr| %>
+  				<tr>
+  					<td id="t">
+  							<%= link_to soc_plyr.cognome, '/roses/new/'+ soc_plyr.id.to_s + '/ruolo/' + soc_plyr.ruolo.to_s %>
+  					</td>
+  					<td id="t">
+  							<%= soc_plyr.ruolo %>
+  					</td>
+  					<td id="t">
+  							<%= soc_plyr.quotazione %>
+  					</td>
+  				</tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+
+  <table id="tabella_rosa">
+  	<caption><h2> Rosa </h2></caption>
+    <thead>
+      <tr id="col">
+        <th>Ruolo</th>
+        <th>Giocatore</th>
+      </tr>
+    </thead>
+    <tbody>
+  		<tr>
+  			<td id="p">
+  					P1
+  			</td>
+  			<td id="p">
+  				<% if @rosa.portiere1 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.portiere1 }[0].cognome, '/roses/'+@rosa.portiere1.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+          <tr>
+  			<td id="p">
+  					P2
+  			</td>
+  			<td id="p">
+  				<% if @rosa.portiere2 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.portiere2 }[0].cognome, '/roses/'+@rosa.portiere2.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+          <tr>
+  			<td id="p">
+  					P3
+  			</td>
+  			<td id="p">
+  				<% if @rosa.portiere3 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.portiere3 }[0].cognome, '/roses/'+@rosa.portiere3.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="d">
+  					D1
+  			</td>
+  			<td id="d">
+  				<% if @rosa.difensore1 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.difensore1 }[0].cognome, '/roses/'+@rosa.difensore1.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="d">
+  					D2
+  			</td>
+  			<td id="d">
+  				<% if @rosa.difensore2 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.difensore2 }[0].cognome, '/roses/'+@rosa.difensore2.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="d">
+  					D3
+  			</td>
+  			<td id="d">
+  				<% if @rosa.difensore3 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.difensore3 }[0].cognome, '/roses/'+@rosa.difensore3.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+          <tr>
+  			<td id="d">
+  					D4
+  			</td>
+  			<td id="d">
+  				<% if @rosa.difensore4 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.difensore4 }[0].cognome, '/roses/'+@rosa.difensore4.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+          <tr>
+  			<td id="d">
+  					D5
+  			</td>
+  			<td id="d">
+  				<% if @rosa.difensore5 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.difensore5 }[0].cognome, '/roses/'+@rosa.difensore4.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+          <tr>
+  			<td id="d">
+  					D6
+  			</td>
+  			<td id="d">
+  				<% if @rosa.difensore6 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.difensore6 }[0].cognome, '/roses/'+@rosa.difensore5.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+          <tr>
+  			<td id="d">
+  					D7
+  			</td>
+  			<td id="d">
+  				<% if @rosa.difensore7 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.difensore7 }[0].cognome, '/roses/'+@rosa.difensore6.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="c">
+  					C1
+  			</td>
+  			<td id="c">
+  				<% if @rosa.centrocampista1 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.centrocampista1 }[0].cognome, '/roses/'+@rosa.centrocampista1.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="c">
+  					C2
+  			</td>
+  			<td id="c">
+  				<% if @rosa.centrocampista2 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.centrocampista2 }[0].cognome, '/roses/'+@rosa.centrocampista2.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="c">
+  					C3
+  			</td>
+  			<td id="c">
+  				<% if @rosa.centrocampista3 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.centrocampista3 }[0].cognome, '/roses/'+@rosa.centrocampista3.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="c">
+  					C4
+  			</td>
+  			<td id="c">
+  				<% if @rosa.centrocampista4 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.centrocampista4 }[0].cognome, '/roses/'+@rosa.centrocampista4.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+          <tr>
+  			<td id="c">
+  					C5
+  			</td>
+  			<td id="c">
+  				<% if @rosa.centrocampista5 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.centrocampista5 }[0].cognome, '/roses/'+@rosa.centrocampista5.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr><tr>
+  			<td id="c">
+  					C6
+  			</td>
+  			<td id="c">
+  				<% if @rosa.centrocampista6 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.centrocampista6 }[0].cognome, '/roses/'+@rosa.centrocampista6.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr><tr>
+  			<td id="c">
+  					C7
+  			</td>
+  			<td id="c">
+  				<% if @rosa.centrocampista7 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.centrocampista7 }[0].cognome, '/roses/'+@rosa.centrocampista7.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr><tr>
+  			<td id="c">
+  					C8
+  			</td>
+  			<td id="c">
+  				<% if @rosa.centrocampista8 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.centrocampista8 }[0].cognome, '/roses/'+@rosa.centrocampista8.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="a">
+  					A1
+  			</td>
+  			<td id="a">
+  				<% if @rosa.attaccante1 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.attaccante1 }[0].cognome, '/roses/'+@rosa.attaccante1.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="a">
+  					A2
+  			</td>
+  			<td id="a">
+  				<% if @rosa.attaccante2 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.attaccante2 }[0].cognome, '/roses/'+@rosa.attaccante2.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+  		<tr>
+  			<td id="a">
+  					A3
+  			</td>
+  			<td id="a">
+  				<% if @rosa.attaccante3 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.attaccante3 }[0].cognome, '/roses/'+@rosa.attaccante3.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+          <tr>
+  			<td id="a">
+  					A4
+  			</td>
+  			<td id="a">
+  				<% if @rosa.attaccante4 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.attaccante4 }[0].cognome, '/roses/'+@rosa.attaccante4.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+          <tr>
+  			<td id="a">
+  					A5
+  			</td>
+  			<td id="a">
+  				<% if @rosa.attaccante5 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.attaccante5 }[0].cognome, '/roses/'+@rosa.attaccante5.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+          <tr>
+  			<td id="a">
+  					A6
+  			</td>
+  			<td id="a">
+  				<% if @rosa.attaccante6 %>
+  					<%= link_to  @all_s_p.select { |v| v.id == @rosa.attaccante6 }[0].cognome, '/roses/'+@rosa.attaccante6.to_s, method: :delete %>
+  				<% end %>
+  			</td>
+  		</tr>
+    </tbody>
+  </table>
+
+<% end -%>
+
+<%= form_tag roses_path , :method => :get do -%>
+    <%= submit_tag 'Salva rosa' %>
+<% end -%>
+<br/>
+<br/>
+<br/>

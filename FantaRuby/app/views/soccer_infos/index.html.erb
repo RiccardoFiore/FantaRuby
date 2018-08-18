@@ -1,0 +1,23 @@
+<h1> FantaRuby </h1>
+<h1>IMPORTANTE!!!, Richieste rimanenti: <%= @richieste_rimanenti %></h1>
+<h2> Info sulle squadre della Serie A </h2>
+
+<table>
+    <th>Squadra</th>
+    <th>Anno fondazione</th>
+    <th>Sito web</th>
+    <th>Giocatori</th>
+    <tbody>
+        <% for i in (0..19) %>
+            <tr>
+                <td><%= @team_name[i] %></td>
+                <td><%= @team_foundation[i] %></td>
+                <td><a href = "<%= @team_website[i] %>" target = "_blank"/><%= @team_website[i] %></td>
+                <td><%= link_to "Visualizza rosa", soccer_info_path(@team_name[i]) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+
+<%= link_to "Torna al Log in", root_path %>

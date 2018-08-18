@@ -1,0 +1,52 @@
+// Place all the styles related to the leagues controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+table#players{
+    margin: 10px;
+    border-collapse: collapse;
+    width: 50%;
+    text-align:center;
+    border: 4px solid black;
+}
+
+tr#tr{
+    background-color:blue;
+    border: 3px solid black;
+}
+
+
+td#t{
+    border: 1px solid black;
+}
+
+table#tabella_eventi{
+    margin: 10px;
+    border-collapse: collapse;
+    width: 50%;
+    text-align:center;
+    border: 2px solid black;
+}
+tr#tr_eventi{
+    border: 3px solid black;
+}
+
+th#th_eventi{
+    border: 1px solid black;
+}
+
+td#td_eventi_nome{
+    border: 1px solid black;
+    background-color: coral;
+}
+
+td#td_eventi_giorno{
+    border: 1px solid black;
+    background-color: gold;
+}
+
+td#td_eventi_ora{
+    border: 1px solid black;
+    background-color: darkcyan;
+}

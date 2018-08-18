@@ -1,0 +1,54 @@
+
+%h1 Home Page Lega
+#{link_to 'Profilo utente', user_path(current_user.id)}
+%br
+
+#{link_to 'Ranking', ranking_path}
+%br
+#{link_to 'Daily Ranking', daily_ranking_path}
+%br
+
+-if current_user.president?
+  #{link_to 'Impostazioni lega', edit_league_path(@lega.id)}
+  %br
+-if current_user.president?
+  #{link_to 'Calcola punteggi giornalieri', leagues_score_rate_path}
+  %br
+#{link_to 'Inserisci/modifica formazione', new_formazioni_path}
+%br
+#{link_to 'Visualizza tutte le formazioni', formazionis_path}
+%br
+#{link_to 'Visualizza gli eventi in programma', '/leagues/calendar/events/federicobucci504@gmail.com'}
+%br
+%br
+
+Informazione della lega:
+%h4=  @lega.description
+%br
+%br
+
+
+-#%h1 IMPORTANTE!!!
+-#%h1 Richieste rimanenti:
+-#%h1= @richieste_rimanenti
+
+-#%br
+-#%h3 Info Risultati
+-#%table
+-#  %thead
+-#    %tr
+-#      %th Casa
+-#      %th Trasferta
+-#      %th Gol Casa
+-#      %th Gol Trasferta
+-#  %tbody
+-#    - @days_matches.each do |days_match|
+-#      %tr
+-#        %td= days_match["homeTeam"]
+-#        %td= days_match["awayTeam"]
+-#        %td= days_match["goalsHomeTeam"]
+-#        %td= days_match["goalsAwayTeam"]
+
+%br
+%br
+

@@ -1,0 +1,25 @@
+<h1> FantaRuby </h1>
+<h1>IMPORTANTE!!!, Richieste rimanenti: <%= @richieste_rimanenti %></h1>
+<h2> Team: <%= @team %> </h2>
+
+<table>
+    <th>Nome</th>
+    <th>Cognome</th>
+    <th>Data di Nascita</th>
+    <th>Nazionalita</th>
+    <th>Ruolo</th>
+    <tbody>
+        <% for i in (0..@rose_size-1) %>
+            <tr>
+                <td><%= @player_name[i] %></td>
+                <td><%= @player_surname[i] %></td>
+                <td><%= @player_birthday[i] %></td>
+                <td><%= @player_nationality[i] %></td>
+                <td><%= @player_position[i] %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+
+<%= link_to "Torna a Info Squadre", soccer_infos_path %>
