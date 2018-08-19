@@ -1,0 +1,59 @@
+<h1>FantaRuby</h1>
+<br/>
+<% flash.each do |key, value| %>
+	<div class="alert alert-<%= key %>"><%= value %></div>
+    <br/>
+    <br/>
+<% end %>
+
+<h3>Cerca lega</h3>
+<%= form_tag homes_path, :method => :post do %>
+  <%= label :league, :name, 'Nome' %>
+  <br/>
+  <%= text_field :league, :name %>
+  <%= submit_tag 'Cerca' %>
+<% end %>
+<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Status</th>
+      <th>Presidente</th>
+      <th>Num_Players</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @leghe.each do |lega| %>
+      <tr>
+        <td>
+          <%= lega.name %>
+        </td>
+        <td>
+          <%= lega.status %>
+        </td>
+        <% u = User.find_by_id(lega.president_id) %>
+        <td>
+          <%= u.email %>
+        </td>
+        <% players = lega.users %>
+        <% num_players = players.size.to_s + '/' + lega.players.to_s %>
+        <td>
+          <%= num_players %>
+        </td>
+        <td>
+          <%= link_to "Details", home_path(lega) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br/>
+<br/>
+<%= link_to "Crea lega", new_league_path %>
+<br/>
+<br/>
+
+

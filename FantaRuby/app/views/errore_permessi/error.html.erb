@@ -1,5 +1,10 @@
 <h1>Attenzione!</h1>
 <h2>Non hai i permessi per accedere alla pagina o alla funzione selezionata</h2>
+
+<% flash.each do |key, value| %>
+	<div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+
 <a href="javascript:history.back()">Torna indietro</a>
 <br/>
 <br/>
