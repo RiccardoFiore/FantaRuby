@@ -6,38 +6,38 @@ class LeaguesController < ApplicationController
     def new_event
 
 
-    title=params.fetch(:match1).fetch(:title)
-    anno=params.fetch(:match).fetch(:"data(1i)")
-    mese=params.fetch(:match).fetch(:"data(2i)")
-    giorno=params.fetch(:match).fetch(:"data(3i)")
-    ora=params.fetch(:match).fetch(:"data(4i)")
-    minuti=params.fetch(:match).fetch(:"data(5i)")
+        title=params.fetch(:match1).fetch(:title)
+        anno=params.fetch(:match).fetch(:"data(1i)")
+        mese=params.fetch(:match).fetch(:"data(2i)")
+        giorno=params.fetch(:match).fetch(:"data(3i)")
+        ora=params.fetch(:match).fetch(:"data(4i)")
+        minuti=params.fetch(:match).fetch(:"data(5i)")
 
-    if giorno.size<2
-        giorno="0"+giorno
-    end
-    if mese.size<2
-        mese="0"+mese
-    end
-    h=anno+mese+giorno+ora+minuti
-    g=h.to_datetime
-    k=g.to_s
+        if giorno.size<2
+            giorno="0"+giorno
+        end
+        if mese.size<2
+            mese="0"+mese
+        end
+        h=anno+mese+giorno+ora+minuti
+        g=h.to_datetime
+        k=g.to_s
 
-    client = Signet::OAuth2::Client.new(client_options)
-    client.update!(session[:authorization])
-    service = Google::Apis::CalendarV3::CalendarService.new
+        client = Signet::OAuth2::Client.new(client_options)
+        client.update!(session[:authorization])
+        service = Google::Apis::CalendarV3::CalendarService.new
 
-    service.authorization = client
-    start=DateTime.new(anno.to_i,mese.to_i,giorno.to_i,ora.to_i-2,minuti.to_i,0)
-    ende=DateTime.new(anno.to_i,mese.to_i,giorno.to_i,ora.to_i-2,minuti.to_i,0)
-    event = Google::Apis::CalendarV3::Event.new(
-        summary: title,
+        service.authorization = client
+        start=DateTime.new(anno.to_i,mese.to_i,giorno.to_i,ora.to_i-2,minuti.to_i,0)
+        ende=DateTime.new(anno.to_i,mese.to_i,giorno.to_i,ora.to_i-2,minuti.to_i,0)
+        event = Google::Apis::CalendarV3::Event.new(
+            summary: title,
 
-        start:  { date_time: start.to_datetime },
-        end:    { date_time: ende.to_datetime }
-    )
-    service.insert_event(params[:calendar_id], event)
-    redirect_to admin_path(params[:calendar_id])
+            start:  { date_time: start.to_datetime },
+            end:    { date_time: ende.to_datetime }
+        )
+        service.insert_event(params[:calendar_id], event)
+        redirect_to admin_path(params[:calendar_id])
 
     end
 
