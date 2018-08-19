@@ -10,7 +10,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :twitter]
 
-  validates :username, uniqueness: { case_sensitive: false }
+
+  validates_uniqueness_of :username
+  validates :username, :case_sensitive => false
 
   #Canard roles:
 

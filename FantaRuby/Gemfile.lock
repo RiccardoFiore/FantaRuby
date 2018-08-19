@@ -316,6 +316,8 @@ GEM
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    shoulda-matchers (3.1.2)
+      activesupport (>= 4.0.0)
     signet (0.8.1)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -416,6 +418,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
+  shoulda-matchers
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
