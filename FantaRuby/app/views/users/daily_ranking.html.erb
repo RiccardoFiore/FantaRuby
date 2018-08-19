@@ -1,34 +1,38 @@
 <h1>Daily Ranking</h1>
+<% if @last_day != 0 %>
+    <% if @last_day != -1 %>
+        <table id="players">
+          <thead>
+            <tr id="tr">
+              <th>Pos</th>
+              <th>Users</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
 
-<table id="players">
-  <thead>
-    <tr id="tr">
-      <th>Pos</th>
-      <th>Users</th>
-      <th>Score</th>
-    </tr>
-  </thead>
-  <tbody>
 
-
-
-    <% for i in (0..(@list.length-1)) %>
-        <tr>
-        <td id="t">
-            <%= i+1 %>
-        </td>
-        <td id="t">
-           <%= link_to @list[i][0].username,user_path(@list[i][0].id) %>
-        </td>
-        <td id="t">
-            <%= @list[i][1] %>
-        </td>
-        </tr>
+            <% for i in (0..(@list.length-1)) %>
+                <tr>
+                <td id="t">
+                    <%= i+1 %>
+                </td>
+                <td id="t">
+                   <%= link_to @list[i][0].username,user_path(@list[i][0].id) %>
+                </td>
+                <td id="t">
+                    <%= @list[i][1] %>
+                </td>
+                </tr>
+            <% end %>
+          </tbody>
+        </table>
+    <% else %>
+        <h2>Non è stata inserita alcuna formazione</h2>
     <% end %>
-  </tbody>
-
-
-</table>
+<% else %>
+    <h2>Non sono ancora stati calcolati voti </h2>
+<% end %>
 
 
 </br>

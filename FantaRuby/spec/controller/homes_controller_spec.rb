@@ -42,7 +42,7 @@ describe HomesController, :type => :controller do
             expect(response.status).to eq(302)
         end
 
-        it "render update league" do
+        it "redirect update league" do
             params = { id: @league1.id }
             get :update, params:params
             expect(response).to redirect_to('/roses/new/portiere')

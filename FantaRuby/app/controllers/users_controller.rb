@@ -96,36 +96,40 @@ class UsersController < ApplicationController
 
 
   def ranking
-    authorize! :ranking, User, :message => 'Non hai i permessi per accedere alla classifica'
-    @lega=current_user.league_id
-    all_Player=User.where('league_id = ?',current_user.league_id)
-    @formazioni = []
-    val=0
-    all_Player.each do |user|
+        authorize! :ranking, User, :message => 'Non hai i permessi per accedere alla classifica'
+        @lega=current_user.league_id
+        all_Player=User.where('league_id = ?',current_user.league_id)
+        @formazioni = []
         val=0
-        if Formazioni.where('user_id =?',user.id).count > 0
-            f=Formazioni.where('user_id =?',user.id)
-            f.each do |x|
-                val = val + x.punteggio
+        all_Player.each do |user|
+            val=0
+            if Formazioni.where('user_id =?',user.id).count > 0
+                f=Formazioni.where('user_id =?',user.id)
+                f.each do |x|
+                    val = val + x.punteggio
+            end
         end
-    end
-    @formazioni << [User.find(user.id),val]
-    @formazioni.sort!{|a,b| b[1]<=>a[1]}
-    end
+        @formazioni << [User.find(user.id),val]
+        @formazioni.sort!{|a,b| b[1]<=>a[1]}
+        end
   end
 
 
   def daily_ranking
-
         authorize! :ranking, User, :message => 'Non hai i permessi per accedere alla classifica'
         @lega=current_user.league_id
-        last_day=Formazioni.last.giornata
+        @last_day = League.find_by(:id => @lega).votes_day
         @list=[]
-        formazioni=Formazioni.where('giornata =?',last_day)
-        formazioni.each do |f|
-            @list << [User.find(f.user_id),f.punteggio]
+        if @last_day != 0
+            formazioni=Formazioni.where('giornata =?', @last_day)
+            if formazioni.size > 0
+                formazioni.each do |f|
+                    @list << [User.find(f.user_id),f.punteggio]
+                end
+            else
+                @last_day = -1
+            end
         end
-
         @list.sort!{|a,b| b[1]<=>a[1]}
 
   end
