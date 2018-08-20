@@ -4,17 +4,19 @@ Rails.application.routes.draw do
     devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", registrations: 'users/registrations' }
 
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-    resources :admins
-    resources :homes
-    resources :leagues
-    resources :users
-    resources :roses
-    resources :formazionis
-    resources :soccers_players do
+    resources :admins , only: [:show]
+    resources :homes , only: [:index, :show, :create, :update]
+    resources :leagues , only: [:index, :show, :new, :create, :edit, :update]
+    resources :users , only: [:index, :show, :destroy, :update]
+    resources :roses , only: [:index, :new, :destroy]
+    resources :formazionis , only: [:index, :new, :destroy]
+    resources :soccers_players , only: [:index, :edit, :update] do
         collection { post :import,:import_score}
     end
-    resources :soccer_infos
+    resources :soccer_infos , only: [:index, :show]
+
     root :to => redirect('/users/sign_in')
+
     get 'about'   => 'static_pages#about'
     get 'contact' => 'static_pages#contact'
     get 'error' => 'errore_permessi#error'
