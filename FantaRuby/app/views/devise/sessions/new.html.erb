@@ -1,4 +1,10 @@
 <h2>Log in</h2>
+
+<% flash.each do |key, value| %>
+	<div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<br/>
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
@@ -21,7 +27,8 @@
     <%= f.submit "Log in" %>
   </div>
 <% end %>
-
+<br/>
+<br/>
 <%= render "devise/shared/links" %>
 
 <footer class="footer">
@@ -29,7 +36,7 @@
   <nav>
     <ul>
       <li><%= link_to "About", about_path  %></li>
-     <li><%= link_to "contact", contact_path %></li>
+      <li><%= link_to "contact", contact_path %></li>
       <li><%= link_to "Info Squadre", soccer_infos_path %></li>
     </ul>
   </nav>
