@@ -6,11 +6,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   # def new
+  #   flash = {}
   #   super
   # end
 
   # POST /resource
    def create
+    test =  User.find_by_username(params[:user][:username])
+    if(test)
+      flash.now[:danger] = "Attenzione: Username già in uso"
+      redirect_to '/users/sign_up'
+      return
+    end
     super do |resource|
       params.require(:user).permit(:username, :roles_mask, :favourite_team)
       resource.roles_mask = 1
@@ -20,7 +27,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       else
         resource.username = params[:user][:email].split("@")[0]+ "_" + params[:authenticity_token][14..16]
       end
-
     end
    end
 
@@ -33,15 +39,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
 	def update
 			@user = User.find(resource.id)
-			fakeUserE = User.new(id: @user.id, email: @user.email, roles_mask: @user.roles_mask, created_at: @user.created_at, updated_at: @user.updated_at, provider: @user.provider, uid: @user.uid, league_id: @user.league_id, favourite_team: @user.favourite_team, username: @user.username, budget: @user.budget)
+			fakeUserE = User.new(id: @user.id, email: @user.email, roles_mask: @user.roles_mask, created_at: @user.created_at, updated_at: @user.updated_at, provider: @user.provider, uid: @user.uid, league_id: @user.league_id, favourite_team: @user.favourite_team, username: "rest", budget: @user.budget)
 			fakeUserU = User.new(id: @user.id, email: @user.email, roles_mask: @user.roles_mask, created_at: @user.created_at, updated_at: @user.updated_at, provider: @user.provider, uid: @user.uid, league_id: @user.league_id, favourite_team: @user.favourite_team, username: @user.username, budget: @user.budget)
 			@user.email = params[:user][:email]
 			fakeUserE.email = params[:user][:email]
 			@user.favourite_team = params[:user][:favourite_team]
-			if !params[:user][:username].blank?											
+			if !params[:user][:username].blank?
 				@user.username = params[:user][:username]
 				fakeUserU.username = params[:user][:username]
-			end																								
+			end
 			if(!@user.save)
 				if( (!fakeUserU.validate) && (!fakeUserE.validate) && (fakeUserE.email != fakeUserU.email) && (fakeUserE.username != fakeUserU.username) )
 					flash[:danger] = "Attenzione: Username e Email gia in uso!"
@@ -56,13 +62,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 					redirect_to '/users/edit'
 					return
 				end
-			end											
+			end
 			if(!@user.provider)
 				super
 			else
 				redirect_to '/users'
-			end																																																								
-	end																													
+			end
+	end
 
   # DELETE /resource
   def destroy
