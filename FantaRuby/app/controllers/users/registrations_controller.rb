@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -38,10 +38,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 			@user.email = params[:user][:email]
 			fakeUserE.email = params[:user][:email]
 			@user.favourite_team = params[:user][:favourite_team]
-			if !params[:user][:username].blank?											
+			if !params[:user][:username].blank?
 				@user.username = params[:user][:username]
 				fakeUserU.username = params[:user][:username]
-			end																								
+			end
 			if(!@user.save)
 				if( (!fakeUserU.validate) && (!fakeUserE.validate) && (fakeUserE.email != fakeUserU.email) && (fakeUserE.username != fakeUserU.username) )
 					flash[:danger] = "Attenzione: Username e Email gia in uso!"
@@ -56,13 +56,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 					redirect_to '/users/edit'
 					return
 				end
-			end											
+			end
 			if(!@user.provider)
 				super
 			else
 				redirect_to '/users'
-			end																																																								
-	end																													
+			end
+	end
 
   # DELETE /resource
   def destroy
@@ -121,9 +121,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+   def configure_sign_up_params
+     devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :favourite_team, :email, :password])
+   end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
