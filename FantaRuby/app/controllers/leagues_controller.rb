@@ -81,7 +81,7 @@ class LeaguesController < ApplicationController
         @league = League.new
         authorize! :new, @league, :message => "Fai già parte di una lega"
     end
-    
+
 
     def create
         authorize! :create, League, :message => "Fai già parte di una lega"
@@ -128,13 +128,13 @@ class LeaguesController < ApplicationController
         end
 		redirect_to new_rose_path + '/portiere'
 	end
-	
+
 
     def edit
         authorize! :edit, League, :message => "Non puoi modificare le impostazioni della lega"
         lid=params[:id]
         @lega=League.find(lid)
-        @users=User.where("league_id = ? and league_id != ?",lid,8)
+        @users=User.where("league_id = ? and roles_mask != ?",lid,8)
     end
 
      def update

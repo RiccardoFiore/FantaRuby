@@ -5,6 +5,9 @@ FactoryBot.define do
         roles_mask "2"
         favourite_team "Roma"
         username "president1_a"
+        confirmation_token "abc"
+        confirmed_at "2018-08-20 15:09:12"
+        confirmation_sent_at "2018-08-20 15:06:12"
     end
 
     factory :player1_a, class: User do
@@ -13,6 +16,9 @@ FactoryBot.define do
         roles_mask "4"
         favourite_team "Roma"
         username "player1_a"
+        confirmation_token "abc"
+        confirmed_at "2018-08-20 15:09:12"
+        confirmation_sent_at "2018-08-20 15:06:12"
     end
 
     factory :player2_a, class: User do
@@ -21,6 +27,9 @@ FactoryBot.define do
         roles_mask "1"
         favourite_team "Atalanta"
         username "player1_a"
+        confirmation_token "abc"
+        confirmed_at "2018-08-20 15:09:12"
+        confirmation_sent_at "2018-08-20 15:06:12"
     end
 
     factory :league1_a, class: League do

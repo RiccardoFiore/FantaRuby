@@ -3,7 +3,7 @@
 = form_for @lega do |f|
   .field
     = f.label :president_id
-    = f.collection_select :president_id,@users.order(:email),:id ,:email,include_blank: false
+    = f.collection_select :president_id, @users.order(:email),:id ,:email,include_blank: false
   %br/
   .field
     - if current_user.president?
