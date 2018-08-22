@@ -12,6 +12,10 @@ class LeaguesController < ApplicationController
         giorno=params.fetch(:match).fetch(:"data(3i)")
         ora=params.fetch(:match).fetch(:"data(4i)")
         minuti=params.fetch(:match).fetch(:"data(5i)")
+	if title==""
+ 	    flash[:notice] = "campo evento vuoto"
+ 	    redirect_to '/leagues/calendar/events/federicobucci504@gmail.com' and return
+	end
 
         if giorno.size<2
             giorno="0"+giorno
@@ -37,7 +41,7 @@ class LeaguesController < ApplicationController
             end:    { date_time: ende.to_datetime }
         )
         service.insert_event(params[:calendar_id], event)
-        redirect_to admin_path(params[:calendar_id])
+  	redirect_to '/leagues/calendar/events/federicobucci504@gmail.com'
 
     end
 
@@ -77,6 +81,7 @@ class LeaguesController < ApplicationController
         @league = League.new
         authorize! :new, @league, :message => "Fai già parte di una lega"
     end
+    
 
     def create
         authorize! :create, League, :message => "Fai già parte di una lega"
@@ -123,6 +128,7 @@ class LeaguesController < ApplicationController
         end
 		redirect_to new_rose_path + '/portiere'
 	end
+	
 
     def edit
         authorize! :edit, League, :message => "Non puoi modificare le impostazioni della lega"
@@ -160,6 +166,19 @@ class LeaguesController < ApplicationController
         #gestione descrizione lega
         @lega.update_attributes!(params[:league].permit(:description))
          ##
+    end
+
+    def destroy
+
+	client = Signet::OAuth2::Client.new(client_options)
+    	client.update!(session[:authorization])
+    	service = Google::Apis::CalendarV3::CalendarService.new
+
+    	service.authorization = client
+	x=params[:id]
+	service.delete_event('federicobucci504@gmail.com',x)
+
+  	redirect_to '/leagues/calendar/events/federicobucci504@gmail.com'
     end
 
     #@stringaBonus/Malus servono per far riapparire i bonus/malus precedentemente
