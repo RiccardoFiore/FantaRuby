@@ -30,7 +30,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         resource.username = params[:user][:email].split("@")[0]+ "_" + params[:authenticity_token][14..16]
       end
     end
-xx
+
    end
 
   # GET /resource/edit
