@@ -1,11 +1,18 @@
 <h1>Profile</h1>
-
+<%= @user.id %>
 <h3>Email: </h3><%= @user.email %>
 
 <h3>Username: </h3><%= @user.username %>
 
 <h3>Favourite team: </h3><%= @user.favourite_team %>
 
+<h3>informazioni personali: </h3>
+<%= form_tag user_path(@user.id), :method => :put do %>
+<%= text_area :users, :informazioni_personali, value: @user.e %>
+<br />
+<input type="submit" name='commit' value='Save'>
+<% end %>
+<br/>
 
 <% if current_user.roles_mask == 2 || current_user.roles_mask == 4 %>
 

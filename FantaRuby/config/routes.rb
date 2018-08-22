@@ -16,7 +16,8 @@ Rails.application.routes.draw do
     resources :soccer_infos , only: [:index, :show]
 
     root :to => redirect('/users/sign_in')
-
+    
+   
     get 'about'   => 'static_pages#about'
     get 'contact' => 'static_pages#contact'
     get 'error' => 'errore_permessi#error'

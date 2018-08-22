@@ -56,6 +56,23 @@ class UsersController < ApplicationController
 
 
   def update
+
+    #gestione informazioni utente
+   
+    id=params[:id]
+    @user=User.find(id)
+
+    if params[:commit]=="Save"
+        @info=params.fetch(:users).fetch(:informazioni_personali)
+     
+        @user.update_attributes!(:e => @info)
+        redirect_to user_path and return
+    end
+
+    
+    ##
+
+    #gestione user rosa lega
     user = User.find(current_user.id)
     lega = League.find(user.league_id)
     user.update_attributes!(:league_id => nil)
@@ -73,6 +90,7 @@ class UsersController < ApplicationController
     user.update_attributes!(:roles_mask => 1)
     user.update_attributes!(:budget => 300)
     redirect_to homes_path
+    ##
   end
 
 
@@ -133,5 +151,7 @@ class UsersController < ApplicationController
         @list.sort!{|a,b| b[1]<=>a[1]}
 
   end
+  
+ 
 
 end
