@@ -121,7 +121,7 @@ class UsersController < ApplicationController
         @last_day = League.find_by(:id => @lega).votes_day
         @list=[]
         if @last_day != 0
-            formazioni=Formazioni.where('giornata =?', @last_day)
+            formazioni=Formazioni.where('giornata =? and user_id =?', @last_day, current_user.id)
             if formazioni.size > 0
                 formazioni.each do |f|
                     @list << [User.find(f.user_id),f.punteggio]
