@@ -3,6 +3,37 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+ul.navbar_ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li.navbar_li {
+    float: left;
+}
+
+li.navbar_li a.navbar_a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li.navbar_li a.navbar_a:hover {
+    background-color: #5f9ea0;
+}
+
+#active {
+    background-color: #696969;
+}
+
+
+
+
 table#players{
     margin: 10px;
     border-collapse: collapse;
