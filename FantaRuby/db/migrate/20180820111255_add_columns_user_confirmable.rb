@@ -5,6 +5,6 @@ class AddColumnsUserConfirmable < ActiveRecord::Migration[5.2]
     add_column :users, :confirmed_at, :datetime
     add_column :users, :confirmation_sent_at, :datetime
     add_column :users, :unconfirmed_email, :string
-
+    
   end
 end
