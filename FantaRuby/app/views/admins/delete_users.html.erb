@@ -1,3 +1,21 @@
+<ul class='navbar_ul'>
+  <li class='navbar_li'>
+    <%= link_to 'Home', admin_path(@current_user.id), :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Impostazioni', '/admins/delete/users', :class=>"navbar_a" , :id=>"active"%>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Modifica calciatori', edit_soccers_player_path(@current_user.id), :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+  </li>
+
+</ul>
+<br>
+<br>
+
 <h1>FantaRuby</h1>
 <br/>
 
@@ -121,4 +139,3 @@
     <% end %>
   </p>
 <% end %>
-

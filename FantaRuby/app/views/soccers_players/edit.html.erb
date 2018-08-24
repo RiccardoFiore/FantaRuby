@@ -1,3 +1,20 @@
+<ul class='navbar_ul'>
+  <li class='navbar_li'>
+    <%= link_to 'Home', admin_path(@current_user.id), :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Impostazioni', '/admins/delete/users', :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Modifica calciatori', edit_soccers_player_path(@current_user.id), :class=>"navbar_a", :id=>"active" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+  </li>
+
+</ul>
+<br>
+<br>
 <h2>Modifica quotazioni calciatori</h2>
 
 <%= form_tag edit_soccers_player_path , :method => :get do -%>

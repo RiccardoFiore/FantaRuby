@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", registrations: 'users/registrations' }
 
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-    resources :admins , only: [:show]
+    resources :admins, only: [:show]
     resources :homes , only: [:index, :show, :create, :update]
     resources :leagues , only: [:index, :show, :new, :create, :edit, :update,:destroy]
     resources :users , only: [:index, :show, :destroy, :update]

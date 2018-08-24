@@ -1,3 +1,31 @@
+%ul{:class=> "navbar_li"}
+  %li{:class=> "navbar_ul"}
+    #{link_to 'Profilo', user_path(current_user.id)}
+    %br
+  %li{:class=> "navbar_li"}
+    #{link_to 'Ranking', ranking_path}
+    %br
+  %li{:class=> "navbar_li"}
+    #{link_to 'Daily Ranking', daily_ranking_path}
+    %br
+  %li{:class=> "navbar_li"}
+    -if current_user.president?
+      #{link_to 'Impostazioni lega', edit_league_path(@lega.id)}
+      %br
+  %li{:class=> "navbar_li"}
+    -if current_user.president?
+      #{link_to 'Calcola punteggi', leagues_score_rate_path}
+      %br
+  %li{:class=> "navbar_li"}
+    #{link_to 'Inserisci/Modifica Formazione', new_formazioni_path}
+    %br
+  %li{:class=> "navbar_li"}
+    #{link_to 'Formazioni in campo', formazionis_path}
+    %br
+  %li{:class=> "navbar_li"}
+    #{link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com'}
+%br
+%br
 %h2
   Settings of  #{@lega.name}
 = form_for @lega do |f|

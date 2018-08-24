@@ -1,4 +1,3 @@
-
 <ul class='navbar_ul'>
   <li class='navbar_li'>
     <%= link_to 'Home', admin_path, :class=>"navbar_a", :id=>"active" %>
@@ -10,9 +9,10 @@
     <%= link_to 'Modifica calciatori', edit_soccers_player_path, :class=>"navbar_a" %>
   </li>
   <li class='navbar_li'>
-    <%= link_to 'eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
   </li>
 
 </ul>
 <br>
 <br>
+<h5>Admin Username: <%= current_user.username %> </h5>

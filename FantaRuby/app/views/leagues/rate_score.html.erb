@@ -1,3 +1,36 @@
+<ul class='navbar_ul'>
+  <li class='navbar_li'>
+    <%= link_to 'Home', leagues_path, :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Profilo', user_path(current_user.id), :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Ranking', ranking_path, :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Daily Ranking', daily_ranking_path, :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+  </li>
+  <% if current_user.president? %>
+    <li class='navbar_li'>
+      <%= link_to 'Impostazioni lega', edit_league_path(@league.id), :class=>"navbar_a" %>
+    </li>
+  <% end %>
+  <% if current_user.president? %>
+    <li class='navbar_li'>
+      <%= link_to 'Calcola punteggi', leagues_score_rate_path, :class=>"navbar_a", :id=>"active" %>
+    </li>
+  <% end %>
+  <li class='navbar_li'>
+    <%= link_to 'Formazioni in campo', formazionis_path, :class=>"navbar_a" %>
+  </li>
+
+</ul>
+<br>
+<br>
 <h1> Calcola i punteggi giornalieri dei giocatori</h1>
 <h3>I voti presenti nel database sono della gionata <%= @league.votes_day %> </h3>
 <% flash.each do |key, value| %>
@@ -52,8 +85,4 @@
 </form>
 
 <br/>
-<%= link_to "Torna all' home page della lega", '/leagues' %>
 
-<br/>
-<br/>
-<br/>

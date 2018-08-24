@@ -1,3 +1,22 @@
+<ul class='navbar_ul'>
+  <li class='navbar_li'>
+    <%= link_to 'Home', leagues_path, :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Profilo', user_path(current_user.id), :class=>"navbar_a", :id=>"active" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Ranking', ranking_path, :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Formazioni in campo', formazionis_path, :class=>"navbar_a" %>
+  </li>
+  <li class='navbar_li'>
+    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+  </li>
+</ul>
+<br>
+<br>
 <h1>Profile</h1>
 <%= @user.id %>
 <h3>Email: </h3><%= @user.email %>
@@ -53,7 +72,7 @@
         <br/>
         <br/>
 
-        <%= link_to "Torna all'home page della lega", leagues_path(@league.id) %>
+        
 
 <% elsif current_user.roles_mask == 8 %>
 
@@ -65,9 +84,7 @@
     <% end %>
     <br/>
     <br/>
-    <%= link_to "Torna a impostazioni utenti", admins_path %>
-    <br/>
-    <br/>
+    
 <% end %>
 <br/>
 <br/>
