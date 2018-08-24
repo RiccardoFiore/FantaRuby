@@ -16,21 +16,14 @@
   </li>
 </ul>
 <br>
-<br>
 <h1>Profile</h1>
-<%= @user.id %>
 <h3>Email: </h3><%= @user.email %>
 
 <h3>Username: </h3><%= @user.username %>
 
-<h3>Favourite team: </h3><%= @user.favourite_team %>
+<h3>Favourite team: </h3><% if @user.favourite_team %><%= @user.favourite_team %><% else %>Non scelto <% end %>
 
-<h3>informazioni personali: </h3>
-<%= form_tag user_path(@user.id), :method => :put do %>
-<%= text_area :users, :informazioni_personali, value: @user.e %>
-<br />
-<input type="submit" name='commit' value='Save'>
-<% end %>
+<h3>Informazioni personali: </h3><% if @user.e %><%= @user.e %><% else %>Non inserito <% end %>
 <br/>
 
 <% if current_user.roles_mask == 2 || current_user.roles_mask == 4 %>
@@ -54,12 +47,11 @@
             <%= submit_tag 'Twitta il tuo risultato' %>
         <% end %>
     <% end %>
-    <br/>
-    <br/>
     <% if current_user.id == @user.id %>
 
         <%= link_to "Settings", '/users/edit' %>
 
+        <br/>
         <br/>
         <br/>
 
@@ -69,10 +61,7 @@
     <% end %>
 
 
-        <br/>
-        <br/>
 
-        
 
 <% elsif current_user.roles_mask == 8 %>
 
@@ -84,7 +73,7 @@
     <% end %>
     <br/>
     <br/>
-    
+
 <% end %>
 <br/>
 <br/>
