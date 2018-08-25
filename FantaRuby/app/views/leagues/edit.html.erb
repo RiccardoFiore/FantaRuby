@@ -11,9 +11,6 @@
   <li class='navbar_li'>
     <%= link_to 'Daily Ranking', daily_ranking_path, :class=>"navbar_a" %>
   </li>
-  <li class='navbar_li'>
-    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
-  </li>
   <% if current_user.president? %>
     <li class='navbar_li'>
       <%= link_to 'Impostazioni lega', edit_league_path(@lega.id), :class=>"navbar_a" %>
@@ -25,9 +22,12 @@
     </li>
   <% end %>
   <li class='navbar_li'>
-    <%= link_to 'Formazioni in campo', formazionis_path, :class=>"navbar_a" %>
+    <%= link_to 'Formazione', new_formazioni_path, :class=>"navbar_a" %>
   </li>
-  
+  <li class='navbar_li'>
+    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+  </li>
+
 </ul>
 <br>
 <br>

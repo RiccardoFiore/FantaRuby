@@ -10,7 +10,20 @@
     <%= link_to 'Ranking', ranking_path, :class=>"navbar_a" %>
   </li>
   <li class='navbar_li'>
-    <%= link_to 'Formazioni in campo', formazionis_path, :class=>"navbar_a" %>
+    <%= link_to 'Daily Ranking', ranking_path, :class=>"navbar_a" %>
+  </li>
+  <% if current_user.president? %>
+    <li class='navbar_li'>
+      <%= link_to 'Impostazioni lega', edit_league_path(current_user.league_id), :class=>"navbar_a" %>
+    </li>
+  <% end %>
+  <% if current_user.president? %>
+    <li class='navbar_li'>
+      <%= link_to 'Calcola punteggi', leagues_score_rate_path, :class=>"navbar_a" %>
+    </li>
+  <% end %>
+  <li class='navbar_li'>
+    <%= link_to 'Formazione', new_formazioni_path, :class=>"navbar_a" %>
   </li>
   <li class='navbar_li'>
     <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a", :id=>"active" %>
@@ -80,7 +93,7 @@
   <br/>
   <table id="tabella_eventi">
     <caption></caption>
-    <h4>seleziona l' evento da eliminare</h4>
+    <h4>(Clicca sull' evento per eliminare)</h4>
     <tr id="tr_eventi">
       <th id="th_eventi">Nome Evento</th>
       <th id="th_eventi">Giorno</th>
@@ -105,7 +118,7 @@
     <% end %>
   </table>
   <%= form_tag new_event_path('federicobucci504@gmail.com'), :method => :post do %>
-    <%= label :match, :title, 'NUOVO EVENTO' %>
+    <%= label :match, :title, 'Nuovo evento' %>
     <%= text_field :match1, :title %>
     <br/>
     <br/>
@@ -113,7 +126,7 @@
     <%= datetime_select :match, :data %>
     <br/>
     <br/>
-    <%= submit_tag 'crea evento' %>
+    <%= submit_tag 'Crea evento' %>
   <% end %>
 <% end %>
 <br/>

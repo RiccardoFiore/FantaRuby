@@ -1,4 +1,4 @@
-<h1>FantaRuby</h1>
+<h1 id="titolo">FantaRuby</h1>
 <br/>
 <% flash.each do |key, value| %>
 	<div class="alert alert-<%= key %>"><%= value %></div>
@@ -13,7 +13,6 @@
   <%= text_field :league, :name %>
   <%= submit_tag 'Cerca' %>
 <% end %>
-<br/>
 <table>
   <thead>
     <tr>

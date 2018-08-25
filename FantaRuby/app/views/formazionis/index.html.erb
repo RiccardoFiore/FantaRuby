@@ -1,24 +1,8 @@
 <h1>Tutte le formazioni della lega <%= @lega.name %> nella giornata <%= @giornata %></h1>
 <br/>
-<%= link_to 'Go to league home', '/leagues' %>
+<< <%= link_to 'Torna a Inserisci/Modifica formazione', '/formazionis/new' %>
 <br/>
 <br/>
-<%= link_to 'Modifica formazione', '/formazionis/new' %>
-<br/>
-<br/>
-<% if(@giornata>1) %>
-	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata-1).to_s %> <=
-<% else %>
-	<%= link_to 'Giornata precedente', '/formazionis/day/'+(@giornata).to_s %> <=
-<% end %>
-<% for j in (1..(@lega.current_day)) %>
-	<%= link_to j.to_s,  '/formazionis/day/'+j.to_s %>
-<% end %> =>
-<% if(@giornata<@lega.current_day) %>
-	<%= link_to 'Giornata successiva', '/formazionis/day/'+(@giornata+1).to_s %>
-<% else %>
-	<%= link_to 'Giornata successiva', '/formazionis/day/'+(@giornata).to_s %>
-<% end %>
 <% i=0 %>
 <% for k in (0..(@arrayFormazioni.length-1)) %>
 	<table id="tabella">
@@ -61,11 +45,5 @@
 <% else %>
 	<%= link_to 'Giornata successiva', '/formazionis/day/'+(@giornata).to_s %>
 <% end %>
-<br/>
-<br/>
-<%= link_to 'Modifica formazione', '/formazionis/new' %>
-<br/>
-<br/>
-<%= link_to 'Go to league home', '/leagues' %>
 <br/>
 <br/>

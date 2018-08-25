@@ -22,58 +22,60 @@
     </li>
   <% end %>
   <li class='navbar_li'>
-    <%= link_to 'Inserisci/Modifica Formazione', new_formazioni_path, :class=>"navbar_a" %>
+    <%= link_to 'Formazione', new_formazioni_path, :class=>"navbar_a" %>
   </li>
-  <li class='navbar_li'>
-    <%= link_to 'Formazioni in campo', formazionis_path, :class=>"navbar_a" %>
-  </li>
+
   <li class='navbar_li'>
     <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
   </li>
 </ul>
-<br>
-<br>
 <h1>Home Page Lega</h1>
-Informazione della lega:
-<h4><%= @lega.description %></h4>
+<% flash.each do |key, value| %>
+	<div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<div>
+    <h4>Informazione della lega:</h4>
+    <h5  id="info_league"><%= @lega.description %></h5>
+</div>
 <br>
 <br>
 <br>
 <br>
-
-
-<%#<h1>IMPORTANTE!!!</h1>                                   %>
-<%#<h1>Richieste rimanenti:</h1>                            %>
-<%#<h1>                                                     %>
+<%#<h1>IMPORTANTE!!!</h1> %>
+<%#<h1>Richieste rimanenti:</h1> %>
+<%#<h1> %>
 <%# <%= @richieste_rimanenti %>
-<%#</h1>                                                    %>
-<%#<br/>                                                    %>
-<%#<h3>Info Risultati</h3>                                  %>
-<%#<table>                                                  %>
-<%#  <thead>                                                %>
-<%#    <tr>                                                 %>
-<%#      <th>Casa</th>                                      %>
-<%#      <th>Trasferta</th>                                 %>
-<%#      <th>Gol Casa</th>                                  %>
-<%#      <th>Gol Trasferta</th>                             %>
-<%#    </tr>                                                %>
-<%#  </thead>                                               %>
-<%#  <tbody>                                                %>
+<%#</h1> %>
+<%#<br/> %>
+<%#<h3>Info Risultati</h3> %>
+<%#<table> %>
+<%#  <thead> %>
+<%#    <tr> %>
+<%#      <th>Casa</th> %>
+<%#      <th>Trasferta</th> %>
+<%#      <th>Gol Casa</th> %>
+<%#      <th>Gol Trasferta</th> %>
+<%#    </tr> %>
+<%#  </thead> %>
+<%#  <tbody> %>
 <%#    <% @days_matches.each do |days_match| %>
-<%#      <tr>                                               %>
-<%#        <td>                                             %>
+<%#      <tr> %>
+<%#        <td class="homeTeam"> %>
 <%#          <%= days_match["homeTeam"] %>
-<%#        </td>                                            %>
-<%#        <td>                                             %>
+<%#        </td> %>
+<%#        <td class="awayTeam"> %>
 <%#         <%= days_match["awayTeam"] %>
-<%#        </td>                                            %>
-<%#        <td>                                             %>
+<%#        </td> %>
+<%#        <td class="homeTeam"> %>
 <%#          <%= days_match["goalsHomeTeam"] %>
-<%#        </td>                                            %>
-<%#        <td>                                             %>
+<%#        </td> %>
+<%#        <td class="awayTeam"> %>
 <%#          <%= days_match["goalsAwayTeam"] %>
-<%#        </td>                                            %>
-<%#      </tr>                                              %>
+<%#        </td> %>
+<%#      </tr> %>
 <%#    <% end %>
-<%#  </tbody>                                               %>
-<%#</table>                                                 %>
+<%#  </tbody> %>
+<%#</table> %>
+<%#<br/><br/> %>
+
+

@@ -17,6 +17,10 @@ class HomesController < ApplicationController
 
     def create
         @lega = League.find_by(:name => params[:league][:name])
+        if !@lega
+            flash[:message] = "Nessuna lega trovata"
+            redirect_to homes_path and return
+        end
         redirect_to home_path(@lega.id)
     end
 
