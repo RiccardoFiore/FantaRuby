@@ -85,7 +85,7 @@ Given ("I am on the league home page") do
 end
 
 When /I click on "Calcola punteggi giornalieri"/ do
-    click_on("Calcola punteggi giornalieri")
+    click_on("Calcola punteggi")
 end
 
 Given ("I am on the rate score page") do

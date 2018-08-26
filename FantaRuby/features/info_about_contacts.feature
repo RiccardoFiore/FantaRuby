@@ -5,6 +5,6 @@ Feature: I want to get info about contacts
 
 Scenario: Info About Contacts
 	Given I am authenticated as Unregistered User
-	When I click on "contact"
+	When I click on "Contact"
 	Given I am on the contacts page
         Then I should see Contacts
