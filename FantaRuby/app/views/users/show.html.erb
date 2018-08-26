@@ -1,33 +1,35 @@
-<ul class='navbar_ul'>
-  <li class='navbar_li'>
-    <%= link_to 'Home', leagues_path, :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Profilo', user_path(current_user.id), :class=>"navbar_a", :id=>"active" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Ranking', ranking_path, :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Daily Ranking', ranking_path, :class=>"navbar_a" %>
-  </li>
-  <% if current_user.president? %>
-    <li class='navbar_li'>
-      <%= link_to 'Impostazioni lega', edit_league_path(current_user.league_id), :class=>"navbar_a" %>
-    </li>
-  <% end %>
-  <% if current_user.president? %>
-    <li class='navbar_li'>
-      <%= link_to 'Calcola punteggi', leagues_score_rate_path, :class=>"navbar_a" %>
-    </li>
-  <% end %>
-  <li class='navbar_li'>
-    <%= link_to 'Formazione', new_formazioni_path, :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
-  </li>
-</ul>
+<% if current_user.roles_mask == 2 || current_user.roles_mask == 4 %>
+    <ul class='navbar_ul'>
+      <li class='navbar_li'>
+        <%= link_to 'Home', leagues_path, :class=>"navbar_a" %>
+      </li>
+      <li class='navbar_li'>
+        <%= link_to 'Profilo', user_path(current_user.id), :class=>"navbar_a", :id=>"active" %>
+      </li>
+      <li class='navbar_li'>
+        <%= link_to 'Ranking', ranking_path, :class=>"navbar_a" %>
+      </li>
+      <li class='navbar_li'>
+        <%= link_to 'Daily Ranking', ranking_path, :class=>"navbar_a" %>
+      </li>
+      <% if current_user.president? %>
+        <li class='navbar_li'>
+          <%= link_to 'Impostazioni lega', edit_league_path(current_user.league_id), :class=>"navbar_a" %>
+        </li>
+      <% end %>
+      <% if current_user.president? %>
+        <li class='navbar_li'>
+          <%= link_to 'Calcola punteggi', leagues_score_rate_path, :class=>"navbar_a" %>
+        </li>
+      <% end %>
+      <li class='navbar_li'>
+        <%= link_to 'Formazione', new_formazioni_path, :class=>"navbar_a" %>
+      </li>
+      <li class='navbar_li'>
+        <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+      </li>
+    </ul>
+<% end %>
 <br>
 <h1>Profile</h1>
 <h3>Email: </h3><%= @user.email %>
@@ -36,7 +38,7 @@
 
 <h3>Favourite team: </h3><% if @user.favourite_team %><%= @user.favourite_team %><% else %>Non scelto <% end %>
 
-<h3>Informazioni personali: </h3><% if @user.e %><%= @user.e %><% else %>Non inserito <% end %>
+<h3>Informazioni personali: </h3><% if @user.description %><%= @user.description %><% else %>Non inserito <% end %>
 <br/>
 
 <% if current_user.roles_mask == 2 || current_user.roles_mask == 4 %>
@@ -90,6 +92,19 @@
     <br/>
     << <%= link_to 'Torna a impostazioni admin', '/admins/delete/users' %>
     <br/>
+
+<% elsif current_user.roles_mask == 1 %>
+    <br/>
+    <br/>
+    <% if current_user.id == @user.id %>
+
+        <%= link_to "Settings", '/users/edit' %>
+
+        <br/>
+        <br/>
+        <br/>
+    <% end %>
+    << <%= link_to 'Torna alla home', homes_path %>
 <% end %>
 <br/>
 <br/>

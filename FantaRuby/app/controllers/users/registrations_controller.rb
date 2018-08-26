@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       params.require(:user).permit(:username, :roles_mask, :favourite_team, :e)
       resource.roles_mask = 1
       resource.favourite_team = params[:user][:favourite_team]
-      resource.update_attributes!(:e => params[:user][:e])
+      resource.update_attributes!(:description => params[:user][:description])
 
        if !params[:user][:username].blank?
         resource.username = params[:user][:username]
@@ -47,7 +47,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 			@user.email = params[:user][:email]
 			fakeUserE.email = params[:user][:email]
 			@user.favourite_team = params[:user][:favourite_team]
-            @user.e = params[:user][:e]
+            @user.description = params[:user][:description]
 			if !params[:user][:username].blank?
 				@user.username = params[:user][:username]
 				fakeUserU.username = params[:user][:username]

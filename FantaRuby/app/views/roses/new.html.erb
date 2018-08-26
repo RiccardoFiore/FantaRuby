@@ -44,7 +44,7 @@
   <br/>
   <br/>
 
-
+<div id="rosa_sp">
   <table id="tabella_giocatori">
   	<caption><h2> Giocatori</h2><h3></caption>
     <thead>
@@ -70,9 +70,6 @@
       <% end %>
     </tbody>
   </table>
-
-
-
   <table id="tabella_rosa">
   	<caption><h2> Rosa </h2></caption>
     <thead>
@@ -321,12 +318,15 @@
   		</tr>
     </tbody>
   </table>
-
+</div>
 <% end -%>
-
-<%= form_tag roses_path , :method => :get do -%>
-    <%= submit_tag 'Salva rosa' %>
-<% end -%>
+<div id="rosa_form">
+    <%= form_tag roses_path , :method => :get do -%>
+        <%= submit_tag 'Salva rosa' %>
+    <% end -%>
+    <br/>
+    <br/>
+</div>
 <br/>
 <br/>
 <br/>
