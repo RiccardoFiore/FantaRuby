@@ -53,7 +53,7 @@
     <br/>
     <br/>
 
-    <% if @ultima_giornata != -1 %>
+    <% if @ultima_giornata != -1 && current_user.id == @user.id%>
         <%= form_tag '/users/' + current_user.id.to_s, :method => :post do %>
             Il tuo punteggio della  <b><%= @ultima_giornata %>°</b> giornata è: <b><%= @punteggio_giornata %></b>
             <input name="punteggio" type="text" value=<%= @punteggio_giornata %> readonly  style="width: 20px;visibility: hidden;" >
@@ -86,7 +86,10 @@
     <% end %>
     <br/>
     <br/>
-
+    <br/>
+    <br/>
+    << <%= link_to 'Torna a impostazioni admin', '/admins/delete/users' %>
+    <br/>
 <% end %>
 <br/>
 <br/>

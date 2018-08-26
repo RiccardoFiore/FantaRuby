@@ -16,17 +16,19 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    lega = League.find_by(:id => @user.league_id)
-    if lega.current_day != 1
-        @ultima_giornata = lega.current_day - 1
-        @punteggio_giornata = Formazioni.find_by(:user_id => @user.id, :giornata => @ultima_giornata)
-        if @punteggio_giornata == nil
-            @punteggio_giornata = 0
+    if @user.league_id
+        lega = League.find_by(:id => @user.league_id)
+        if lega.current_day != 1
+            @ultima_giornata = lega.current_day - 1
+            @punteggio_giornata = Formazioni.find_by(:user_id => @user.id, :giornata => @ultima_giornata)
+            if @punteggio_giornata == nil
+                @punteggio_giornata = 0
+            else
+                @punteggio_giornata = @punteggio_giornata.punteggio
+            end
         else
-            @punteggio_giornata = @punteggio_giornata.punteggio
+            @ultima_giornata = - 1
         end
-    else
-        @ultima_giornata = - 1
     end
     if @user.league_id
         @league = League.find(@user.league_id)
@@ -82,14 +84,18 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    lega = League.find(user.league_id)
-    user.update_attributes!(:league_id => nil)
-    if lega.players == 1
-        League.delete(lega.id)
-    elsif user.president?
-        next_president = lega.users.first
-        lega.update_attributes!(:president_id => next_president.id)
-        next_president.update_attributes!(:roles_mask => 2)
+    if user.league_id
+        lega = League.find(user.league_id)
+        user.update_attributes!(:league_id => nil)
+    end
+    if lega
+        if lega.players == 1
+            League.delete(lega.id)
+        elsif user.president?
+            next_president = lega.users.first
+            lega.update_attributes!(:president_id => next_president.id)
+            next_president.update_attributes!(:roles_mask => 2)
+        end
     end
     user.destroy
     flash[:success] = "User destroyed."

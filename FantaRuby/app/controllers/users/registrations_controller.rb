@@ -19,10 +19,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       return
     end
     super do |resource|
-      params.require(:user).permit(:username, :roles_mask, :favourite_team)
+      params.require(:user).permit(:username, :roles_mask, :favourite_team, :e)
       resource.roles_mask = 1
       resource.favourite_team = params[:user][:favourite_team]
-
+      resource.update_attributes!(:e => params[:user][:e])
 
        if !params[:user][:username].blank?
         resource.username = params[:user][:username]
@@ -103,11 +103,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     protected
 
     def after_update_path_for(resource)
-			if resource.validate
+      if resource.validate
         users_path
       else
-				edit_user_registration_path
-			end
+        edit_user_registration_path
+      end
     end
 
     protected
