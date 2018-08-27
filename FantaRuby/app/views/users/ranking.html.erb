@@ -33,28 +33,42 @@
 <h1>Ranking</h1>
 
 <table id="players">
-  <thead>
-    <tr>
-      <th>Pos</th>
-      <th>Users</th>
-      <th>Score</th>
-    </tr>
-  </thead>
-  <tbody>
+    <thead>
+        <tr>
+            <th>Pos</th>
+            <th>Utente</th>
+            <th>Punteggio</th>
+            <% if League.find_by(:id => @lega).current_day == 38 %>
+                <th>Premio</th>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
 
 
 
     <% for i in (0..(@formazioni.length-1)) %>
         <tr>
-         <td id="t">
-            <%= i+1 %>
-        </td>
-        <td id="t">
-            <%= link_to @formazioni[i][0].username,user_path(@formazioni[i][0].id) %>
-        </td>
-        <td id="t">
-            <%= @formazioni[i][1] %>
-        </td>
+            <td id="t">
+                <%= i+1 %>
+            </td>
+            <td id="t">
+                <%= link_to @formazioni[i][0].username,user_path(@formazioni[i][0].id) %>
+            </td>
+            <td id="t">
+                <%= @formazioni[i][1] %>
+            </td>
+            <% if League.find_by(:id => @lega).current_day == 38 %>
+                <% if i == 0 %>
+                    400$
+                <% elsif i == 1 %>
+                    200$
+                <% elsif i == 2 %>
+                    100$
+                <% else %>
+                    ---
+                <% end %>
+            <% end %>
         </tr>
     <% end %>
   </tbody>

@@ -12,10 +12,10 @@ class LeaguesController < ApplicationController
         giorno=params.fetch(:match).fetch(:"data(3i)")
         ora=params.fetch(:match).fetch(:"data(4i)")
         minuti=params.fetch(:match).fetch(:"data(5i)")
-	if title==""
- 	    flash[:notice] = "campo evento vuoto"
- 	    redirect_to '/leagues/calendar/events/federicobucci504@gmail.com' and return
-	end
+        if title==""
+            flash[:notice] = "campo evento vuoto"
+            redirect_to '/leagues/calendar/events/federicobucci504@gmail.com' and return
+        end
 
         if giorno.size<2
             giorno="0"+giorno
@@ -210,14 +210,14 @@ class LeaguesController < ApplicationController
           #nel caso in cui la giornata della lega sia minore della giornata dei voti
           #tutti i votiverranno settati a 0 senza l'aggiunta di bonuso malus
           if( @currentDay < @league.votes_day )
-							f.punteggio = 0
-							f.save
-							flash[:danger] = "Attenzione: poichè la giornata corrente è precedente alle votazioni, i punteggi verranno settati a 0"
-					else
-							#prima dell'aggiunta del votes_day c'era solo questo
-							f.punteggio = players_daily_score(user.id, @currentDay)
-							f.save
-					end
+              f.punteggio = 0
+              f.save
+              flash[:danger] = "Attenzione: poichè la giornata corrente è precedente alle votazioni, i punteggi verranno settati a 0"
+          else
+              #prima dell'aggiunta del votes_day c'era solo questo
+              f.punteggio = players_daily_score(user.id, @currentDay)
+              f.save
+          end
 
 
       end
@@ -234,7 +234,7 @@ class LeaguesController < ApplicationController
         #che la differenza il giorno tra successivo e il giorno dell'ultima formazione
         #creata dagli utenti non sia maggiore di uno
         if( lega.current_day <= lega.votes_day )
-						lega.current_day += 1
+            lega.current_day += 1
             lega.save
             redirect_to '/leagues/score/rate'
         else
