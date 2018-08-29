@@ -2,9 +2,6 @@ class UsersController < ApplicationController
 
   helper_method :help_formazioni
 
-
-
-
   def index
     @user = User.find(current_user.id)
     if @user.league_id

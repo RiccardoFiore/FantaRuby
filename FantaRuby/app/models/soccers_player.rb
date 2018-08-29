@@ -3,28 +3,50 @@ class SoccersPlayer < ApplicationRecord
     def self.import(file)
         spreadsheet = open_spreadsheet(file)
         (3..spreadsheet.last_row).each do |i|
-        role=""
-        if spreadsheet.row(i)[0] == "P"
-            role="portiere"
-        elsif spreadsheet.row(i)[0] == "D"
-            role="difensore"
-        elsif spreadsheet.row(i)[0] == "C"
-            role="centrocampista"
-        elsif spreadsheet.row(i)[0] == "A"
-            role="attaccante"
-        end
-        SoccersPlayer.create(cognome: spreadsheet.row(i)[1],ruolo: role, quotazione: spreadsheet.row(i)[2], cod: spreadsheet.row(i)[3])
+            role=""
+            if spreadsheet.row(i)[1] == "P"
+                role="portiere"
+            elsif spreadsheet.row(i)[1] == "D"
+                role="difensore"
+            elsif spreadsheet.row(i)[1] == "C"
+                role="centrocampista"
+            elsif spreadsheet.row(i)[1] == "A"
+                role="attaccante"
+            end
+            SoccersPlayer.create(cognome: spreadsheet.row(i)[2],ruolo: role, quotazione: spreadsheet.row(i)[5], cod: spreadsheet.row(i)[0])
         end
     end
 
     def self.import_score(file)
         spreadsheet = open_spreadsheet(file)
         SoccersPlayer.update_all(:daily_score => 0)
-        (3..spreadsheet.last_row).each do |i|
-        if spreadsheet.row(i)[4] != nil
-            play=SoccersPlayer.where('cod = ?',spreadsheet.row(i)[3]).first
-            play.update_attributes!(:daily_score => spreadsheet.row(i)[4])
-        end
+        (7..spreadsheet.last_row).each do |i|
+            if spreadsheet.row(i)[4] != nil
+                play=SoccersPlayer.where('cod = ?',spreadsheet.row(i)[0]).first
+                if play
+                    voto = spreadsheet.row(i)[3].to_f
+                    gol_fatti = spreadsheet.row(i)[4].to_f
+                    gol_subiti = spreadsheet.row(i)[5].to_f
+                    rig_fatti = spreadsheet.row(i)[8].to_f
+                    rig_subiti = spreadsheet.row(i)[7].to_f
+                    rig_parati = spreadsheet.row(i)[6].to_f
+                    autogol = spreadsheet.row(i)[9].to_f
+                    ammonizioni = spreadsheet.row(i)[10].to_f
+                    espulsioni = spreadsheet.row(i)[11].to_f
+                    assist = spreadsheet.row(i)[12] + spreadsheet.row(i)[13].to_f
+                    bonus_gol_fatti = 3
+                    bonus_gol_subiti = -1
+                    bonus_rig_fatti = 3
+                    bonus_rig_subiti = -1
+                    bonus_rig_parati = 3
+                    bonus_autogol = -2
+                    bonus_ammonizioni = -0.5
+                    bonus_espulsioni = -1
+                    bonus_assist = 1
+                    voto_tot = voto + bonus_gol_fatti*gol_fatti + bonus_gol_subiti*gol_subiti+rig_fatti*bonus_rig_fatti+bonus_rig_subiti*rig_subiti+bonus_rig_parati*rig_parati+bonus_autogol*autogol+bonus_ammonizioni*ammonizioni+bonus_espulsioni*espulsioni+bonus_assist*assist
+                    play.update_attributes!(:daily_score => voto_tot)
+                end
+            end
         end
     end
 

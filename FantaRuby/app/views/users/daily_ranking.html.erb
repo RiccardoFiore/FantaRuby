@@ -1,72 +1,76 @@
-<ul class='navbar_ul'>
-  <li class='navbar_li'>
-    <%= link_to 'Home', leagues_path, :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Profilo', user_path(current_user.id), :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Ranking', ranking_path, :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Daily Ranking', ranking_path, :class=>"navbar_a", :id=>"active" %>
-  </li>
-  <% if current_user.president? %>
-    <li class='navbar_li'>
-      <%= link_to 'Impostazioni lega', edit_league_path(current_user.league_id), :class=>"navbar_a" %>
-    </li>
-  <% end %>
-  <% if current_user.president? %>
-    <li class='navbar_li'>
-      <%= link_to 'Calcola punteggi', leagues_score_rate_path, :class=>"navbar_a" %>
-    </li>
-  <% end %>
-  <li class='navbar_li'>
-    <%= link_to 'Formazione', new_formazioni_path, :class=>"navbar_a"  %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
-  </li>
-</ul>
-<br>
-<br>
-<h1>Daily Ranking</h1>
-<% if @last_day != 0 %>
-    <% if @last_day != -1 %>
-        <table id="players">
-          <thead>
-            <tr>
-              <th>Pos</th>
-              <th>Users</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
+<html>
+    <body>
+        <div id="container">
+            <ul class='navbar_ul'>
+              <li class='navbar_li'>
+                <%= link_to 'Home', leagues_path, :class=>"navbar_a" %>
+              </li>
+              <li class='navbar_li'>
+                <%= link_to 'Profilo', user_path(current_user.id), :class=>"navbar_a" %>
+              </li>
+              <li class='navbar_li'>
+                <%= link_to 'Ranking', ranking_path, :class=>"navbar_a" %>
+              </li>
+              <li class='navbar_li'>
+                <%= link_to 'Daily Ranking', ranking_path, :class=>"navbar_a", :id=>"active" %>
+              </li>
+              <% if current_user.president? %>
+                <li class='navbar_li'>
+                  <%= link_to 'Impostazioni lega', edit_league_path(current_user.league_id), :class=>"navbar_a" %>
+                </li>
+              <% end %>
+              <% if current_user.president? %>
+                <li class='navbar_li'>
+                  <%= link_to 'Calcola punteggi', leagues_score_rate_path, :class=>"navbar_a" %>
+                </li>
+              <% end %>
+              <li class='navbar_li'>
+                <%= link_to 'Formazione', new_formazioni_path, :class=>"navbar_a"  %>
+              </li>
+              <li class='navbar_li'>
+                <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+              </li>
+            </ul>
+            <br>
+            <hr/>
+            <br>
+            <h1>Daily Ranking</h1>
+            <% if @last_day != 0 %>
+                <% if @last_day != -1 %>
+                    <table id="players">
+                      <thead>
+                        <tr>
+                          <th>Pos</th>
+                          <th>Users</th>
+                          <th>Score</th>
+                        </tr>
+                      </thead>
+                      <tbody>
 
 
-            <% for i in (0..(@list.length-1)) %>
-                <tr>
-                <td id="t">
-                    <%= i+1 %>
-                </td>
-                <td id="t">
-                   <%= link_to @list[i][0].username,user_path(@list[i][0].id) %>
-                </td>
-                <td id="t">
-                    <%= @list[i][1] %>
-                </td>
-                </tr>
+                        <% for i in (0..(@list.length-1)) %>
+                            <tr>
+                            <td id="t">
+                                <%= i+1 %>
+                            </td>
+                            <td id="t">
+                               <%= link_to @list[i][0].username,user_path(@list[i][0].id) %>
+                            </td>
+                            <td id="t">
+                                <%= @list[i][1] %>
+                            </td>
+                            </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                <% else %>
+                    <h2>Non è stata inserita alcuna formazione</h2>
+                <% end %>
+            <% else %>
+                <h2>Non sono ancora stati calcolati voti </h2>
             <% end %>
-          </tbody>
-        </table>
-    <% else %>
-        <h2>Non è stata inserita alcuna formazione</h2>
-    <% end %>
-<% else %>
-    <h2>Non sono ancora stati calcolati voti </h2>
-<% end %>
-
-
-</br>
-</br>
+            <div id="footer"></div>
+        </div>
+    </body>
+</html>
 

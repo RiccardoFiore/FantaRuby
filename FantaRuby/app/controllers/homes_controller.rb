@@ -4,8 +4,6 @@ class HomesController < ApplicationController
         authorize! :index, Home, :message => "Fai già parte di una lega"
         @utente = current_user.email
         @leghe = League.all
-
-        #debugger
     end
 
     def show

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_26_141011) do
+ActiveRecord::Schema.define(version: 2018_08_29_150046) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2018_08_26_141011) do
     t.integer "riservadif"
     t.integer "riservacen"
     t.integer "riservaatt"
-    t.integer "punteggio", default: 0
+    t.float "punteggio", default: 0.0
   end
 
   create_table "homes", force: :cascade do |t|
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2018_08_26_141011) do
     t.integer "quotazione"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "daily_score", default: 0
+    t.float "daily_score", default: 0.0
   end
 
   create_table "users", force: :cascade do |t|

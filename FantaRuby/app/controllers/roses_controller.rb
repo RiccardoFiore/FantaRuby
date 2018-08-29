@@ -1,6 +1,7 @@
 class RosesController < ApplicationController
   before_action :authenticate_user!
 	def index
+       authorize! :index, Rose, :message => "Hai già creato la tua rosa o non hai i diritti per farlo"
        if(!@rosa = current_user.rose)
            return
        end

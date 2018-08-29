@@ -1,50 +1,58 @@
-<ul class='navbar_ul'>
-  <li class='navbar_li'>
-    <%= link_to 'Home', admin_path(@current_user.id), :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Impostazioni', '/admins/delete/users', :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Modifica calciatori', edit_soccers_player_path(@current_user.id), :class=>"navbar_a", :id=>"active" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
-  </li>
+<html>
+    <body>
+        <div id="container">
+            <ul class='navbar_ul'>
+              <li class='navbar_li'>
+                <%= link_to 'Home', admin_path(@current_user.id), :class=>"navbar_a" %>
+              </li>
+              <li class='navbar_li'>
+                <%= link_to 'Impostazioni', '/admins/delete/users', :class=>"navbar_a" %>
+              </li>
+              <li class='navbar_li'>
+                <%= link_to 'Modifica calciatori', edit_soccers_player_path(@current_user.id), :class=>"navbar_a", :id=>"active" %>
+              </li>
+              <li class='navbar_li'>
+                <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+              </li>
 
-</ul>
-<br>
-<br>
-<h2>Modifica quotazioni calciatori</h2>
+            </ul>
+            <br>
+            <hr/>
+            <br>
+            <h2>Modifica quotazioni calciatori</h2>
 
-<%= form_tag edit_soccers_player_path , :method => :get do -%>
-  <%= label_tag 'SoccerPlayers' %>
-  <%= text_field_tag 'SoccerPlayers' %>
-  <%= submit_tag 'Cerca' %>
-<% end -%>
+            <%= form_tag edit_soccers_player_path , :method => :get do -%>
+              <%= label_tag 'SoccerPlayers' %>
+              <%= text_field_tag 'SoccerPlayers' %>
+              <%= submit_tag 'Cerca' %>
+            <% end -%>
 
-<% if @s_p %>
-    <%= form_tag soccers_player_path(@s_p.cod) , :method => :put do -%>
-      <table>
-        <th>
-            Giocatore
-        </th>
-        <th>
-            Ruolo
-        </th>
-        <th>
-            Quot.
-        </th>
-        <tbody>
-            <tr>
-                <td><%= @s_p.cognome %></td>
-                <td><%= @s_p.ruolo %></td>
-                <td><input name="quotazione" type="text" value=<%= @s_p.quotazione %> style="width: 50px;float:right"></td>
-                <td><%= submit_tag 'Modifica' %></td>
-            </tr>
-        </tbody>
-      </table>
-    <% end -%>
-<% end %>
-<br/>
-<br/>
+            <% if @s_p %>
+                <%= form_tag soccers_player_path(@s_p.cod) , :method => :put do -%>
+                  <table>
+                    <th>
+                        Giocatore
+                    </th>
+                    <th>
+                        Ruolo
+                    </th>
+                    <th>
+                        Quot.
+                    </th>
+                    <tbody>
+                        <tr>
+                            <td><%= @s_p.cognome %></td>
+                            <td><%= @s_p.ruolo %></td>
+                            <td><input name="quotazione" type="text" value=<%= @s_p.quotazione %> style="width: 50px;float:right"></td>
+                            <td><%= submit_tag 'Modifica' %></td>
+                        </tr>
+                    </tbody>
+                  </table>
+                <% end -%>
+            <% end %>
+            <br/>
+            <br/>
+            <div id="footer"></div>
+        </div>
+    </body>
+</html>

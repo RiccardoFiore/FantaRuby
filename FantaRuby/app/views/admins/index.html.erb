@@ -1,18 +1,29 @@
+<html>
+    <body>
+        <ul class='navbar_ul'>
+          <li class='navbar_li'>
+            <%= link_to 'Home', admin_path, :class=>"navbar_a", :id=>"active" %>
+          </li>
+          <li class='navbar_li'>
+            <%= link_to 'Impostazioni', '/admins/delete/users', :class=>"navbar_a" %>
+          </li>
+          <li class='navbar_li'>
+            <%= link_to 'Modifica calciatori', edit_soccers_player_path, :class=>"navbar_a" %>
+          </li>
+          <li class='navbar_li'>
+            <%= link_to 'eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+          </li>
 
-<ul class='navbar_ul'>
-  <li class='navbar_li'>
-    <%= link_to 'Home', admin_path, :class=>"navbar_a", :id=>"active" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Impostazioni', '/admins/delete/users', :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Modifica calciatori', edit_soccers_player_path, :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
-  </li>
-
-</ul>
-<br>
-<br>
+        </ul>
+        <br>
+        <hr/>
+        <br>
+        <div id="container">
+            <% flash.each do |key, value| %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% end %>
+            <div id="footer"></div>
+        </div>
+        <div>prova</div>
+    </body>
+</html>

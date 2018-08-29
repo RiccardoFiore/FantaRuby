@@ -1,76 +1,86 @@
-<% if current_user.roles_mask == 2 || current_user.roles_mask == 4 %>
-  <ul class='navbar_ul'>
-      <li class='navbar_li'>
-        <%= link_to 'Home', leagues_path, :class=>"navbar_a", :id=>"active" %>
-      </li>
-      <li class='navbar_li'>
-        <%= link_to 'Profilo', user_path(current_user.id), :class=>"navbar_a" %>
-      </li>
-      <li class='navbar_li'>
-        <%= link_to 'Ranking', ranking_path, :class=>"navbar_a" %>
-      </li>
-      <li class='navbar_li'>
-        <%= link_to 'Daily Ranking', daily_ranking_path, :class=>"navbar_a" %>
-      </li>
-      <% if current_user.president? %>
-        <li class='navbar_li'>
-          <%= link_to 'Impostazioni lega', edit_league_path(@lega.id), :class=>"navbar_a" %>
-        </li>
-      <% end %>
-      <% if current_user.president? %>
-        <li class='navbar_li'>
-          <%= link_to 'Calcola punteggi', leagues_score_rate_path, :class=>"navbar_a" %>
-        </li>
-      <% end %>
-      <li class='navbar_li'>
-        <%= link_to 'Formazione', new_formazioni_path, :class=>"navbar_a" %>
-      </li>
-      <li class='navbar_li'>
-        <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
-      </li>
-    </ul>
-    <br>
-    <br>
-<% end %>
-<h2>
-  Settings of <%= @lega.name %>
-</h2>
-<%= form_for @lega do |f| %>
-  <div class="field">
-    <%= f.label :president_id %>
-    <%= f.collection_select :president_id,@users.order(:email),:id ,:email,include_blank: false %>
-  </div>
-  <br/>
-  <div class="field">
-    <% if current_user.president? %>
-      <%= label :league, :description, 'Info di lega' %>
-      <br/>
-      <%= text_area :league, :description, value: @lega.description %>
-      <br/>
-      <% if @lega.status == "Aperta" %>
-        <%= f.label :status %>
-        <input id="radio" name="radio" type="radio" value="Aperta" checked>
-        Aperta
-        <input id="radio" name="radio" type="radio" value="Chiusa">
-        Chiusa
-      <% else %>
-        <%= f.label :status %>
-        <input id="radio" name="radio" type="radio" value="Aperta" >
-        Aperta
-        <input id="radio" name="radio" type="radio" value="Chiusa" checked>
-        Chiusa
-      <% end %>
-    <% end %>
-  </div>
-  <br/>
-  <%= submit_tag 'Salva cambiamenti' %>
-<% end %>
+<html>
+    <body>
+        <div id="container">
+            <% if current_user.roles_mask == 2 || current_user.roles_mask == 4 %>
+              <ul class='navbar_ul'>
+                  <li class='navbar_li'>
+                    <%= link_to 'Home', leagues_path, :class=>"navbar_a"%>
+                  </li>
+                  <li class='navbar_li'>
+                    <%= link_to 'Profilo', user_path(current_user.id), :class=>"navbar_a" %>
+                  </li>
+                  <li class='navbar_li'>
+                    <%= link_to 'Ranking', ranking_path, :class=>"navbar_a" %>
+                  </li>
+                  <li class='navbar_li'>
+                    <%= link_to 'Daily Ranking', daily_ranking_path, :class=>"navbar_a" %>
+                  </li>
+                  <% if current_user.president? %>
+                    <li class='navbar_li'>
+                      <%= link_to 'Impostazioni lega', edit_league_path(@lega.id), :class=>"navbar_a", :id=>"active"  %>
+                    </li>
+                  <% end %>
+                  <% if current_user.president? %>
+                    <li class='navbar_li'>
+                      <%= link_to 'Calcola punteggi', leagues_score_rate_path, :class=>"navbar_a" %>
+                    </li>
+                  <% end %>
+                  <li class='navbar_li'>
+                    <%= link_to 'Formazione', new_formazioni_path, :class=>"navbar_a" %>
+                  </li>
+                  <li class='navbar_li'>
+                    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+                  </li>
+                </ul>
+                <br>
+                <hr/>
+                <br>
+            <% end %>
+            <h2>
+              Settings of <%= @lega.name %>
+            </h2>
+            <%= form_for @lega do |f| %>
+              <div class="field">
+                <%= f.label :president_id %>
+                <br/>
+                <%= f.collection_select :president_id,@users.order(:email),:id ,:email,include_blank: false %>
+              </div>
+              <br/>
+              <div class="field">
+                <% if current_user.president? %>
+                  <%= label :league, :description, 'Info di lega' %>
+                  <br/>
+                  <%= text_area :league, :description, value: @lega.description %>
+                  <br/>
+                  <br/>
+                  <% if @lega.status == "Aperta" %>
+                    <%= f.label :status %>
+                    <input id="radio" name="radio" type="radio" value="Aperta" checked>
+                    Aperta
+                    <input id="radio" name="radio" type="radio" value="Chiusa">
+                    Chiusa
+                  <% else %>
+                    <%= f.label :status %>
+                    <input id="radio" name="radio" type="radio" value="Aperta" >
+                    Aperta
+                    <input id="radio" name="radio" type="radio" value="Chiusa" checked>
+                    Chiusa
+                  <% end %>
+                   <br/>
+                   <br/>
+                <% end %>
+              </div>
+              <br/>
+              <%= submit_tag 'Salva cambiamenti' %>
+            <% end %>
 
 
-<br/>
-<br/>
-<% if current_user.roles_mask == 8 %>
-    << <%= link_to 'Torna a impostazioni admin', '/admins/delete/users' %>
-<% end %>
-<br/>
-<br/>
+            <br/>
+            <br/>
+            <% if current_user.roles_mask == 8 %>
+                << <%= link_to 'Torna a impostazioni admin', '/admins/delete/users' %>
+            <% end %>
+            <div id="footer"></div>
+        </div>
+    </body>
+</html>

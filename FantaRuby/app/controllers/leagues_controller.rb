@@ -5,7 +5,7 @@ class LeaguesController < ApplicationController
 
     def new_event
 
-
+        authorize! :new_event, League, :message => "Non puoi accedere al calendario"
         title=params.fetch(:match1).fetch(:title)
         anno=params.fetch(:match).fetch(:"data(1i)")
         mese=params.fetch(:match).fetch(:"data(2i)")
@@ -41,7 +41,7 @@ class LeaguesController < ApplicationController
             end:    { date_time: ende.to_datetime }
         )
         service.insert_event(params[:calendar_id], event)
-  	redirect_to '/leagues/calendar/events/federicobucci504@gmail.com'
+        redirect_to '/leagues/calendar/events/federicobucci504@gmail.com'
 
     end
 
@@ -73,6 +73,7 @@ class LeaguesController < ApplicationController
     end
 
     def show
+        authorize! :show, League, :message => "Fai già parte di una lega"
 		id = params[:id]
 		@lega = League.find(id)
     end
@@ -169,16 +170,16 @@ class LeaguesController < ApplicationController
     end
 
     def destroy
+        authorize! :destroy, Home, :message => "Non puoi eliminare un evento dal calendario"
+        client = Signet::OAuth2::Client.new(client_options)
+            client.update!(session[:authorization])
+            service = Google::Apis::CalendarV3::CalendarService.new
 
-	client = Signet::OAuth2::Client.new(client_options)
-    	client.update!(session[:authorization])
-    	service = Google::Apis::CalendarV3::CalendarService.new
+            service.authorization = client
+        x=params[:id]
+        service.delete_event('federicobucci504@gmail.com',x)
 
-    	service.authorization = client
-	x=params[:id]
-	service.delete_event('federicobucci504@gmail.com',x)
-
-  	redirect_to '/leagues/calendar/events/federicobucci504@gmail.com'
+        redirect_to '/leagues/calendar/events/federicobucci504@gmail.com'
     end
 
     #@stringaBonus/Malus servono per far riapparire i bonus/malus precedentemente

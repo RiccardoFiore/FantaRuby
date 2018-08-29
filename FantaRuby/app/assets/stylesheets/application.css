@@ -14,7 +14,22 @@
  *= require_self
  */
 
+html, body {
+    height: 100%;
+}
+
 #titolo{
     color: #C20000;
 }
 
+#container{
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -50px;
+}
+
+#footer{
+    height: 50px;
+    clear: both;
+}

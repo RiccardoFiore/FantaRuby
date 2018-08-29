@@ -1,18 +1,29 @@
-<ul class='navbar_ul'>
-  <li class='navbar_li'>
-    <%= link_to 'Home', admin_path, :class=>"navbar_a", :id=>"active" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Impostazioni', '/admins/delete/users', :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Modifica calciatori', edit_soccers_player_path, :class=>"navbar_a" %>
-  </li>
-  <li class='navbar_li'>
-    <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
-  </li>
+<html>
+    <body>
+        <div id="container">
+            <ul class='navbar_ul'>
+              <li class='navbar_li'>
+                <%= link_to 'Home', admin_path, :class=>"navbar_a", :id=>"active" %>
+              </li>
+              <li class='navbar_li'>
+                <%= link_to 'Impostazioni', '/admins/delete/users', :class=>"navbar_a" %>
+              </li>
+              <li class='navbar_li'>
+                <%= link_to 'Modifica calciatori', edit_soccers_player_path, :class=>"navbar_a" %>
+              </li>
+              <li class='navbar_li'>
+                <%= link_to 'Eventi', '/leagues/calendar/events/federicobucci504@gmail.com', :class=>"navbar_a" %>
+              </li>
 
-</ul>
-<br>
-<br>
-<h3>Admin Username: <%= current_user.username %> </h3>
+            </ul>
+            <br>
+            <hr/>
+            <% flash.each do |key, value| %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% end %>
+            <br/>
+            <h3>Admin Username: <%= current_user.username %> </h3>
+            <div id="footer"></div>
+        </div>
+    </body>
+</html>
