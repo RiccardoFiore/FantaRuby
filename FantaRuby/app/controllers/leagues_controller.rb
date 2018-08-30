@@ -115,7 +115,7 @@ class LeaguesController < ApplicationController
 
         if(League.first)
             if(giornataCorrente = League.first.votes_day)
-                @league.current_day = giornataCorrente
+                @league.current_day = giornataCorrente+1
                 @league.votes_day = giornataCorrente
             end
         end
