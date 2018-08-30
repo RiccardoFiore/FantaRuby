@@ -15,8 +15,15 @@ table#tabella_rosa{
   margin-top: 5%;
 }
 
-a{
-    color: black
+a
+{
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover
+{
+    color: #0080FF;
 }
 
 td#p{

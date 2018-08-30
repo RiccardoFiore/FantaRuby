@@ -1,21 +1,19 @@
 <h2>Crea rosa</h2>
-
-<h4><%= current_user.username %>, budget: <%= current_user.budget %></h4>
-<h4><%= @rosa.inseriti %>
-
-<br/>
-
 <% flash.each do |key, value| %>
 	<div class="alert alert-<%= key %>"><%= value %></div>
+    <br/>
 <% end %>
 
+Username:<b> <%= current_user.username %></b><br/>
+Budget rimanente: <b><%= current_user.budget %></b><br/>
+Inseriti: <b><%= @rosa.inseriti %>/24</b></h4>
+<br/>
 <br/>
 <%= form_tag new_rose_path , :method => :get do -%>
-  <%= label_tag 'SoccerPlayers' %>
+  <%= label_tag 'Ricerca calciatore' %><br/>
   <%= text_field_tag 'SoccerPlayers' %>
   <br/>
-  <br/>
-  <%= label_tag :role %>
+  <%= label_tag :Ruolo %><br/>
   <select name="role" id="role">
 		<% if(@soc_plyrs.first.ruolo == "portiere") %>
 			<option selected value="Portiere">Portiere</option>
@@ -41,9 +39,6 @@
   <br/>
   <br/>
   <%= submit_tag 'Filtra' %>
-  <br/>
-  <br/>
-
 <div id="rosa_sp">
   <table id="tabella_giocatori">
   	<caption><h2> Giocatori</h2><h3></caption>
@@ -322,11 +317,9 @@
 <% end -%>
 <div id="rosa_form">
     <%= form_tag roses_path , :method => :get do -%>
-        <%= submit_tag 'Salva rosa' %>
+        <%= submit_tag 'Salva rosa', data: { confirm: "Confermi di salvare la rosa?\nNon potrai modificarla in seguito." } %>
     <% end -%>
     <br/>
     <br/>
 </div>
-<br/>
-<br/>
-<br/>
+

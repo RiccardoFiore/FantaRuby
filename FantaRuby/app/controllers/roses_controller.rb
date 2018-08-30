@@ -13,9 +13,10 @@ class RosesController < ApplicationController
              current_user.update_attributes!(:roles_mask => 4)               #diventa player
           end
           redirect_to leagues_path
-      else
+       else
+          flash[:message] = "Errore, la rosa deve avere necessariamente 24 calciatori: 3 portieri,7 difensori,8 centrocampisti, 6 attaccanti."
           redirect_to '/roses/new/portiere'
-      end
+       end
 	end
 
 	def new
@@ -29,16 +30,16 @@ class RosesController < ApplicationController
         @ruolo = params[:role]
         @ruolo = @ruolo.downcase
         if params[:SoccerPlayers] != nil && params[:SoccerPlayers] != ""
-            @soc_plyrs = SoccersPlayer.where(:ruolo => @ruolo, :cognome => params[:SoccerPlayers].upcase)
+            @soc_plyrs = SoccersPlayer.where(:ruolo => @ruolo, :cognome => params[:SoccerPlayers].upcase).sort_by{|sp| -sp[:quotazione]}
         else
-            @soc_plyrs = SoccersPlayer.where(:ruolo => @ruolo)
+            @soc_plyrs = SoccersPlayer.where(:ruolo => @ruolo).sort_by{|sp| -sp[:quotazione]}
         end
         @all_s_p = SoccersPlayer.all
         return
       end
       @ruolo = params[:ruolo]
       @all_s_p = SoccersPlayer.all
-      @soc_plyrs = SoccersPlayer.where(:ruolo => @ruolo)
+      @soc_plyrs = SoccersPlayer.where(:ruolo => @ruolo).sort_by{|sp| -sp[:quotazione]}
 
       #controllo se arrivo alla new per la prima volta oppure è il refresh per l'inserimento
       #del giocatore

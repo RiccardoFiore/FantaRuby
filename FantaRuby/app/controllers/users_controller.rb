@@ -112,10 +112,10 @@ class UsersController < ApplicationController
                 f=Formazioni.where('user_id =?',user.id)
                 f.each do |x|
                     val = val + x.punteggio
+                end
             end
-        end
-        @formazioni << [User.find(user.id),val]
-        @formazioni.sort!{|a,b| b[1]<=>a[1]}
+            @formazioni << [User.find(user.id),val]
+            @formazioni.sort!{|a,b| b[1]<=>a[1]}
         end
   end
 
