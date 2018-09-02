@@ -1,0 +1,22 @@
+<html>
+    <body>
+        <div id="container">
+            <h1>Completa la tua registrazione</h1>
+            <br/>
+            <%= form_tag '/users/'+current_user.id.to_s+'/update/fb', :method => :post do %>
+                <div>
+                    <%= label :user, :favourite_team %><br />
+                    <%= select :user, :favourite_team, [ "Atalanta", "Benevento", "Bologna", "Cagliari", "Chievo Verona", "Crotone", "Fiorentina", "Genoa", "Inter", "Juvenus", "Lazio", "Milan" , "Napoli", "Roma", "Sampdoria", "Sassuolo", "Spal", "Torino", "Udinese", "Verona"] %><br />
+                </div>
+                <br/>
+                <div >
+                    <%= label :user, :description %><br />
+                    <%= text_area :user, :description, :style => "width:350px;height:80px;" %><br />
+                </div>
+                <br/>
+                <%= submit_tag 'Salva' %>
+            <% end %>
+            <div id="footer"></div>
+        </div>
+    </body>
+</html>

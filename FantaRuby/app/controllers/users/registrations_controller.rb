@@ -19,9 +19,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
       return
     end
     super do |resource|
-      params.require(:user).permit(:username, :roles_mask, :favourite_team, :e)
+      params.require(:user).permit(:username, :roles_mask, :favourite_team, :description)
       resource.roles_mask = 1
-      resource.favourite_team = params[:user][:favourite_team]
+      resource.update_attributes!(:favourite_team => params[:user][:favourite_team])
       resource.update_attributes!(:description => params[:user][:description])
 
        if !params[:user][:username].blank?

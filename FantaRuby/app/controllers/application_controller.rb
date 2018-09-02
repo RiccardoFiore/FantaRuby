@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
         elsif current_user.roles_mask == 1
             if current_user.league_id != nil
                 new_rose_path + '/portiere'
+            elsif current_user.provider
+                '/users/'+current_user.id.to_s+'/update/fb'
             else
                 homes_path
             end

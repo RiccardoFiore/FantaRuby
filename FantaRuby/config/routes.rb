@@ -25,6 +25,10 @@ Rails.application.routes.draw do
     get 'ranking' => 'users#ranking'
     get 'daily_ranking' => 'users#daily_ranking'
 
+    #route per la gestion utente dopo sign in con Facebook
+    get '/users/:id/update/fb' => 'users#update_fb'
+    post '/users/:id/update/fb' => 'users#update_fb'
+
     #routes per la gestione dei playersda partedell'admin
     match '/users/:id/delete', :to => 'users#destroy', :as => :destroy_user, :via => :delete
     post '/users/:id' => 'users#tweet'

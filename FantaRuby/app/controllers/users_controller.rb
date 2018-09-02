@@ -34,6 +34,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_fb
+    if params[:user]
+        current_user.update_attributes!(:favourite_team => params[:user][:favourite_team])
+        current_user.update_attributes!(:description => params[:user][:description])
+        redirect_to homes_path
+    end
+  end
+
   def tweet
     punteggio_giornata = params[:punteggio]
     lega = League.find_by(:id => current_user.league_id)
