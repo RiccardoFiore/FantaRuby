@@ -150,6 +150,7 @@ class LeaguesController < ApplicationController
             new_president = User.find(params[:league][:president_id])
             new_president.update_attributes!(:roles_mask => 2)
             old_president.update_attributes!(:roles_mask => 4)
+            @lega.update_attributes!(:president_id => new_president.id)
             redirect_to '/admins/delete/users' and return
          elsif @user.president?
             new_president = User.find(params[:league][:president_id])
