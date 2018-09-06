@@ -171,7 +171,7 @@ class LeaguesController < ApplicationController
     end
 
     def destroy
-        authorize! :destroy, Home, :message => "Non puoi eliminare un evento dal calendario"
+        authorize! :destroy, League, :message => "Non puoi eliminare un evento dal calendario"
         client = Signet::OAuth2::Client.new(client_options)
             client.update!(session[:authorization])
             service = Google::Apis::CalendarV3::CalendarService.new
