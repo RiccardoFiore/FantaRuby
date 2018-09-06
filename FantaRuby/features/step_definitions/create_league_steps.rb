@@ -55,7 +55,7 @@ Given ("I filled the lega form") do
     fill_in "Nome", :with => "nomelega"
     find_field('Numero massimo di giocatori').find('option[2]').text
     fill_in "Info di lega",:with => "nuova lega"
-    
+
 end
 
 When /I click "Crea"/ do
@@ -65,7 +65,8 @@ end
 
 Then ("I should be redirected to Crea rosa page") do
      expect(page).to have_text("Crea rosa")
-    expect(page).to have_text(@player.username + ", budget: 300")
+    expect(page).to have_text("Username: " + @player.username)
+    expect(page).to have_text("Budget rimanente: " + @player.budget.to_s)
 end
 
 Then ("I should be a president") do

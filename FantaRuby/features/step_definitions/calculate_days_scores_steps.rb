@@ -101,7 +101,7 @@ Given ("I filled the form") do
 end
 
 When /I click on "Salva cambiamenti"/ do
-    click_on("Salva cambiamenti")
+    click_on("Applica cambiamenti provvisori.")
 end
 
 Then ("I should be on rate score page again") do
