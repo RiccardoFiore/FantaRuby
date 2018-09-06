@@ -46,30 +46,30 @@ class LeaguesController < ApplicationController
     end
 
     def index
-#        require 'unirest'
-#        @response = Unirest.get "https://api-football-v1.p.mashape.com/fixtures/league/28",         #28 è l'id corrispondente alla Serie A
-#            headers:{
-#              "X-Mashape-Key" => "gbTXi7A4LSmsh5ViprmXBGWmESpdp1XQfzZjsn2h4H1iyTzpS3",
-#              "Accept" => "application/json"
-#            }
-#        all_matches = @response.body["api"]["fixtures"]                                             #tutti i match di tutta la Serie A
+        require 'unirest'
+        @response = Unirest.get "https://api-football-v1.p.mashape.com/fixtures/league/28",         #28 è l'id corrispondente alla Serie A
+            headers:{
+              "X-Mashape-Key" => "gbTXi7A4LSmsh5ViprmXBGWmESpdp1XQfzZjsn2h4H1iyTzpS3",
+              "Accept" => "application/json"
+            }
+        all_matches = @response.body["api"]["fixtures"]                                             #tutti i match di tutta la Serie A
                                                                                                     #gli id partono da 9045 e arrivano 8666 (infatti sono 380 partite)
                                                                                                     #ogni 10 numeri è una giornata completa
 
-#        @richieste_rimanenti = @response.headers[:x_ratelimit_requests_remaining] + "/" + @response.headers[:x_ratelimit_requests_limit]
-#        @uid=current_user.id
+        @richieste_rimanenti = @response.headers[:x_ratelimit_requests_remaining] + "/" + @response.headers[:x_ratelimit_requests_limit]
+        @uid=current_user.id
         authorize! :index, League, :message => "Non fai ancora parte di una lega"
         id = current_user.league_id
         @lega = League.find(id)
         current_day = @lega.current_day
-#        @days_matches = []
-#        for i in (0..9)
-#            if(current_day == 1)
-#                @days_matches[i] = all_matches[(9045 - (10 - i)).to_s]
-#            else
-#                @days_matches[i] = all_matches[(9045 - ((current_day - 1)*10 - i)).to_s]
-#            end
-#        end
+        @days_matches = []
+        for i in (0..9)
+            if(current_day == 1)
+                @days_matches[i] = all_matches[(9045 - (10 - i)).to_s]
+            else
+                @days_matches[i] = all_matches[(9045 - ((current_day - 1)*10 - i)).to_s]
+            end
+        end
     end
 
     def show

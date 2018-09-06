@@ -46,42 +46,42 @@
             <br>
             <br>
             <br>
-            <%#<h1>IMPORTANTE!!!</h1> %>
-            <%#<h1>Richieste rimanenti:</h1> %>
-            <%#<h1> %>
-            <%# <%= @richieste_rimanenti %>
-            <%#</h1> %>
-            <%#<br/> %>
-            <%#<h3>Info Risultati</h3> %>
-            <%#<table> %>
-            <%#  <thead> %>
-            <%#    <tr> %>
-            <%#      <th>Casa</th> %>
-            <%#      <th>Trasferta</th> %>
-            <%#      <th>Gol Casa</th> %>
-            <%#      <th>Gol Trasferta</th> %>
-            <%#    </tr> %>
-            <%#  </thead> %>
-            <%#  <tbody> %>
-            <%#    <% @days_matches.each do |days_match| %>
-            <%#      <tr> %>
-            <%#        <td class="homeTeam"> %>
-            <%#          <%= days_match["homeTeam"] %>
-            <%#        </td> %>
-            <%#        <td class="awayTeam"> %>
-            <%#         <%= days_match["awayTeam"] %>
-            <%#        </td> %>
-            <%#        <td class="homeTeam"> %>
-            <%#          <%= days_match["goalsHomeTeam"] %>
-            <%#        </td> %>
-            <%#        <td class="awayTeam"> %>
-            <%#          <%= days_match["goalsAwayTeam"] %>
-            <%#        </td> %>
-            <%#      </tr> %>
-            <%#    <% end %>
-            <%#  </tbody> %>
-            <%#</table> %>
-            <%#<br/><br/> %>
+            <h1>IMPORTANTE!!!</h1>
+            <h1>Richieste rimanenti:</h1>
+            <h1>
+             <%= @richieste_rimanenti %>
+            </h1>
+            <br/>
+            <h3>Info Risultati</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Casa</th>
+                  <th>Trasferta</th>
+                  <th>Gol Casa</th>
+                  <th>Gol Trasferta</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @days_matches.each do |days_match| %>
+                  <tr>
+                    <td class="homeTeam">
+                      <%= days_match["homeTeam"] %>
+                    </td>
+                    <td class="awayTeam">
+                     <%= days_match["awayTeam"] %>
+                    </td>
+                    <td class="homeTeam">
+                      <%= days_match["goalsHomeTeam"] %>
+                    </td>
+                    <td class="awayTeam">
+                      <%= days_match["goalsAwayTeam"] %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <br/><br/>
             <div id="footer"></div>
         </div>
     </body>
