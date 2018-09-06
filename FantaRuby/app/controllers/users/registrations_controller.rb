@@ -12,6 +12,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
    def create
+    if ( params[:user][:password]=="" || params[:user][:password_confirmation]=="" || params[:user][:email]=="")
+        flash[:danger] = "Attenzione: non ci possono essere campi vuoti"
+        redirect_to '/users/sign_up'
+        return
+    end
     test =  User.find_by_username(params[:user][:username])
     if(test)
       flash.now[:danger] = "Attenzione: Username già in uso"
@@ -104,7 +109,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     def after_update_path_for(resource)
       if resource.validate
-        users_path
+        user_path(resource.id)
       else
         edit_user_registration_path
       end

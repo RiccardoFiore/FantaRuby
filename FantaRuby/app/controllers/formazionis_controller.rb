@@ -31,7 +31,7 @@ class FormazionisController < ApplicationController
     @rose[21] = SoccersPlayer.find(rosa.attaccante4)
     @rose[22] = SoccersPlayer.find(rosa.attaccante5)
     @rose[23] = SoccersPlayer.find(rosa.attaccante6)
-    @currentDay = lega.current_day
+    @currentDay = lega.votes_day+1
     #controllo se la formazioneè gia esistente oppure è laprimavolta che la si crea
     if( !@formazione = current_user.formazionis.find_by_giornata(@currentDay) )
         @formazione = Formazioni.new( user_id: current_user.id, giornata: @currentDay)
