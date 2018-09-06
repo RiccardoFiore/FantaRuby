@@ -18,5 +18,3 @@ admin = {
 
 
 User.create!(admin)
-#Formazioni.create!(formaz)
-#SoccersPlayer.create!(sp)
