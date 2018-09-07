@@ -22,7 +22,9 @@
 
             <h1>FantaRuby</h1>
             <br/>
-
+            <% flash.each do |key, value| %>
+                <div class="alert alert-<%= key %>"><%= value %></div>
+            <% end %>
             <%if User.all.size > 1 %>
                 <h3>Cerca User</h3>
                 <%= form_tag '/admins/delete/users', :method => :get do -%>
@@ -40,7 +42,6 @@
                       <th>Users</th>
                       <th>League</th>
                       <th>President</th>
-                      <th></th>
                       <th></th>
                       <th></th>
                     </tr>

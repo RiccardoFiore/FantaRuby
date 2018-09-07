@@ -52,7 +52,7 @@ Given ("I am on the league's details page") do
 end
 
 Then ("I should see league's details") do
-    expect(page).to have_text("Status lega " + @league1.status)
+    expect(page).to have_text("Status lega: " + @league1.status)
     expect(page).to have_text("Montepremi:")
     expect(page).to have_text(@president1.email)
     expect(@league1.users).not_to eq(nil)
@@ -64,7 +64,7 @@ end
 
 Then ("I should be on create rose page") do
     expect(page).to have_text("Crea rosa")
-    expect(page).to have_text(@player.username + ", budget: 300")
+    expect(page).to have_text("Budget rimanente: 250")
 end
 
 Given ("I have list of all soccer player and I choose 24 players") do

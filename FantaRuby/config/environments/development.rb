@@ -43,8 +43,8 @@ Rails.application.configure do
     user_name:      Rails.application.secrets.sender_email,
     password:       Rails.application.secrets.sender_password,
     domain:         'localhost:3000',
-    address:       'smtp.gmail.com',
-    port:          '587',
+    address:        'smtp.gmail.com',
+    port:           '587',
     authentication: :plain,
     enable_starttls_auto: true
   }

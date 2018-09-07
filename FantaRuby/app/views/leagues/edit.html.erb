@@ -43,7 +43,7 @@
               <div class="field">
                 <%= f.label :president_id %>
                 <br/>
-                <%= f.collection_select :president_id,@users.order(:email),:id ,:email,include_blank: false %>
+                <%= f.collection_select(:president_id,@users.order(:email),:id ,:email,{:prompt=>true},{:id => 'select_pres'}) %>
               </div>
               <br/>
               <div class="field">

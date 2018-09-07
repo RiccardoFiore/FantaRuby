@@ -8,20 +8,26 @@ class SoccersPlayersController < ApplicationController
     end
 
     def import
-        SoccersPlayer.import(params[:file])
-        redirect_to '/admins/delete/users', notice: "Products imported."
+        if  SoccersPlayer.import(params[:file])
+            redirect_to '/admins/delete/users', notice: "Products imported."
+        else
+            redirect_to '/admins/delete/users', notice: "Non hai selezionato un file corretto"
+        end
     end
 
 
     def import_score
-        SoccersPlayer.import_score(params[:file])
-        if League.first == nil
-            votes_day=0
+        if SoccersPlayer.import_score(params[:file])
+            if League.first == nil
+                votes_day=0
+            else
+                votes_day = League.first.votes_day
+                League.update_all(:votes_day => votes_day + 1)
+            end
+            redirect_to '/admins/delete/users', notice: "Products imported."
         else
-            votes_day = League.first.votes_day
-            League.update_all(:votes_day => votes_day + 1)
+            redirect_to '/admins/delete/users', notice: "Non hai selezionato un file corretto"
         end
-        redirect_to '/admins/delete/users', notice: "Products imported."
     end
 
     def edit

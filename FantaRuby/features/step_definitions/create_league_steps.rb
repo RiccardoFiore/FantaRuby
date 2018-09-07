@@ -64,7 +64,7 @@ When /I click "Crea"/ do
 end
 
 Then ("I should be redirected to Crea rosa page") do
-     expect(page).to have_text("Crea rosa")
+    expect(page).to have_text("Crea rosa")
     expect(page).to have_text("Username: " + @player.username)
     expect(page).to have_text("Budget rimanente: " + @player.budget.to_s)
 end

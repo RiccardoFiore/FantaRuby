@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_29_150046) do
+ActiveRecord::Schema.define(version: 2018_09_07_112918) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -115,7 +115,6 @@ ActiveRecord::Schema.define(version: 2018_08_29_150046) do
     t.integer "league_id"
     t.string "favourite_team"
     t.string "username"
-    t.integer "budget", default: 300
     t.string "twitter_user_token"
     t.string "twitter_user_secret"
     t.string "t_provider"
@@ -125,6 +124,7 @@ ActiveRecord::Schema.define(version: 2018_08_29_150046) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "description"
+    t.integer "budget", default: 250
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

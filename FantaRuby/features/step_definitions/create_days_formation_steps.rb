@@ -95,7 +95,7 @@ When("I click on soccer's player name") do
 end
 
 Then("I should be on new formation page again") do
-    expect(page).to have_text("Inserisci la formazione per la giornata "+@league1.current_day.to_s)
+    expect(page).to have_text("Inserisci la formazione per la giornata "+ (@league1.votes_day+1).to_s)
 end
 
 Then("I have to see this soccer's player disappear from my rose's player list") do
