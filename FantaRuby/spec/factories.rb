@@ -10,6 +10,17 @@ FactoryBot.define do
         confirmation_sent_at "2018-08-20 15:06:12"
     end
 
+    factory :admin, class: User do
+        email "admin@admin"
+        password "adminadmin"
+        roles_mask "8"
+        favourite_team "Roma"
+        username "admin_1a"
+        confirmation_token "abc"
+        confirmed_at "2018-08-20 15:09:12"
+        confirmation_sent_at "2018-08-20 15:06:12"
+    end
+
     factory :player1_a, class: User do
         email "playeremail@random.com"
         password "password"
