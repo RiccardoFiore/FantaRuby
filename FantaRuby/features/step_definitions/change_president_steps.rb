@@ -95,13 +95,23 @@ end
 
 When /I click on "Change President" link/ do
     click_link("Change President", :match => :first)
-    visit admins_delete_users_path
+    visit edit_league_path(@league1.id)
 end
 
 
-Then ("I should be on settings page again") do
-    expect(page).to have_text("Cerca User")
-    @league1.president_id=@player.id
-    @player.roles_mask=2
-    @president1.roles_mask=4
+Then ("I should be on edit page of league") do
+    expect(page).to have_text("Settings of")
+end
+
+
+When /I click on "Salva Cambiamenti"/ do
+    click_button "Salva cambiamenti"
+    @league1.update_attributes!(:president_id => @player.id)
+    @player.update_attributes!(:roles_mask => 2)
+    @president1.update_attributes!(:roles_mask => 4)
+end
+
+Then ("the president should be changed") do
+    new_president = User.find_by(:id => @player.id)
+    expect(@league1.president_id).to eq(new_president.id)
 end

@@ -7,6 +7,8 @@ Scenario: Change President
 	Given I am authenticated as Admin
     And I am on the settings page
 	When I click on "Change President" link
-	Then I should be on settings page again
+	Then I should be on edit page of league
+    When I click on "Salva Cambiamenti"
+    Then the president should be changed
 
 
