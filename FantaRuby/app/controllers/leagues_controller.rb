@@ -196,8 +196,16 @@ class LeaguesController < ApplicationController
       @allLeagueUsers.each do |user|
           f = user.formazionis.find_by_giornata(@currentDay)
           if params["b"+user.id.to_s]
-              @stringaBonus += params["b"+user.id.to_s]
-              @stringaMalus += params["m"+user.id.to_s]
+              if( params["b"+user.id.to_s]=="" )
+                  @stringaBonus += "0"
+              else
+                  @stringaBonus += params["b"+user.id.to_s]
+              end
+              if( params["m"+user.id.to_s]=="" )
+                  @stringaMalus += "0"
+              else
+                  @stringaMalus += params["m"+user.id.to_s]
+              end
           else
               @stringaBonus += "0"
               @stringaMalus += "0"
