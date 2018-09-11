@@ -117,7 +117,11 @@ class LeaguesController < ApplicationController
 
         if(League.first)
             if(giornataCorrente = League.first.votes_day)
-                @league.current_day = giornataCorrente
+                if(giornataCorrente==0)
+                    @league.current_day = giornataCorrente+1
+                else
+                    @league.current_day = giornataCorrente
+                end
                 @league.votes_day = giornataCorrente
             end
         end
@@ -221,10 +225,14 @@ class LeaguesController < ApplicationController
           #controllo sela giornata corrente della lega è la stesadei voti nel databese
           #nel caso in cui la giornata della lega sia minore della giornata dei voti
           #tutti i votiverranno settati a 0 senza l'aggiunta di bonuso malus
-          if( @currentDay < @league.votes_day )
+          if( @currentDay < @league.votes_day || @currentDay > @league.votes_day)
               f.punteggio = 0
               f.save
-              flash[:danger] = "Attenzione: poichè la giornata corrente è precedente alle votazioni, i punteggi verranno settati a 0"
+              if( @currentDay < @league.votes_day )
+                  flash[:danger] = "Attenzione: poichè la giornata corrente è precedente alle votazioni, i punteggi verranno settati a 0"
+              else
+                  flash[:danger] = "I voti della giornata corrente non sono ancora stati inseriti"
+              end
           else
               #prima dell'aggiunta del votes_day c'era solo questo
               f.punteggio = players_daily_score(user.id, @currentDay)

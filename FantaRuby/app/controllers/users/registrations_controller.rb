@@ -12,8 +12,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
    def create
-    if ( params[:user][:password]=="" || params[:user][:password_confirmation]=="" || params[:user][:email]=="")
+    if ( params[:user][:password]=="" || params[:user][:password_confirmation]=="" || params[:user][:email]=="" )
         flash[:danger] = "Attenzione: non ci possono essere campi vuoti"
+        redirect_to '/users/sign_up'
+        return
+    end
+    if ( params[:user][:password]!= params[:user][:password_confirmation] )
+        flash[:danger] = "Attenzione: le password inserite sono diverse, inserire la stessa password"
         redirect_to '/users/sign_up'
         return
     end
