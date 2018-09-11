@@ -79,7 +79,7 @@ class UsersController < ApplicationController
         end
     end
     user.update_attributes!(:roles_mask => 1)
-    user.update_attributes!(:budget => 300)
+    user.update_attributes!(:budget => 250)
     redirect_to homes_path
     ##
   end
